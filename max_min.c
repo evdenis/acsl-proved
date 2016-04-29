@@ -32,8 +32,7 @@ void max_min(int a[], unsigned size, int **max, int **min)
       for(i = 1; i < size; ++i) {
          if (**max < a[i]) {
             *max = &a[i];
-         }
-         if (**min > a[i]) {
+         } else if (**min > a[i]) {
             *min = &a[i];
          }
       }
