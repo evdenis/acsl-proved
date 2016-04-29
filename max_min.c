@@ -18,12 +18,14 @@
 void max_min(int a[], unsigned size, int **max, int **min)
 {
    if (size > 0) {
-      int i;
+      unsigned i;
       *max = &a[0];
       *min = *max;
       /*@ loop invariant 1 <= i <= size;
           loop invariant \exists integer j; 0 <= j < i && (a+j) == *max;
           loop invariant \exists integer j; 0 <= j < i && (a+j) == *min;
+          loop invariant **max >= **min;
+          loop invariant \forall integer j; 0 <= j < i ==> **max >= a[j] >= **min;
           loop assigns *max, *min;
           loop variant size - i;
        */

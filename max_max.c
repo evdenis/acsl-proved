@@ -14,7 +14,8 @@
        ensures **max1 >= **max2;
        ensures \forall integer i; 0 <= i < size ==> a[i] <= **max1;
        ensures \exists integer i; 0 <= i < size && a[i] >= **max2 && a[i] == **max1;
-       ensures ! \exists integer i,j; 0 <= i < size && 0 <= j < size && i != j && (a[i] > **max2 && a[j] > **max2);
+       ensures ! (\exists integer i,j; 0 <= i < size && 0 <= j < size && i != j && (a[i] > **max2 && a[j] > **max2 && a[i] > a[j]));
+       //ensures (size > 1) ==> (\exists integer i,j; 0 <= i < size && 0 <= j < size && i != j);
     complete behaviors;
     disjoint behaviors;
  */
@@ -26,15 +27,14 @@ void max_max(int *a, unsigned size, int **max1, int **max2)
       unsigned i;
       *max1 = &a[0];
       *max2 = *max1;
-      //@ assert *max1 == a;
-      //@ assert *max2 == a;
 
       /*@ loop invariant 0 < i <= size;
           loop invariant \exists integer j; 0 <= j < i && (a + j) == *max1;
           loop invariant \exists integer j; 0 <= j < i && (a + j) == *max2;
           loop invariant **max1 >= **max2;
           loop invariant \forall integer j; 0 <= j < i ==> a[j] <= **max1;
-          loop invariant \exists integer j; 0 <= j < i && a[j] > **max2 && a[j] == **max1;
+          loop invariant \exists integer j; 0 <= j < i && a[j] >= **max2 && a[j] == **max1;
+          loop invariant ! (\exists integer j,k; 0 <= j < i && 0 <= k < i && j != k && (a[j] > **max2 && a[k] > **max2 && a[k] > a[j]));
           loop assigns *max1, *max2;
           loop variant size - i;
        */
