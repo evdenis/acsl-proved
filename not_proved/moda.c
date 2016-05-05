@@ -1,16 +1,24 @@
 /*@ axiomatic Count {
-    logic integer count{L}(int *a, integer i, integer size, int val);
-    axiom zero:
+    logic integer count{L}(int *a, integer size, int val);
+    axiom count_nil:
        \forall int *a, val, integer size;
-          (size <= 0) ==> count(a, 0, 0, val) == 0;
-    axiom step{L}:
+          (size <= 0) ==> count(a, 0, val) == 0;
+    axiom count_step_hit{L}:
        \forall int *a, val, integer size;
-          (a[size] == val ==> count(a, size, val) == 1 + count(a, size-1, val)) &&
-          (a[size] != val ==> count(a, size, val) == count(a, size-1, val));
-    lemma increasing:
+          a[size] == val ==> count(a, size, val) == 1 + count(a, size-1, val);
+    lemma count_step_hit_alt{L}:
+       \forall int *a, val, integer size;
+          a[size] == val ==> count(a, size + 1, val) == 1 + count(a, size, val);
+    axiom count_step_miss{L}:
+       \forall int *a, val, integer size;
+          a[size] != val ==> count(a, size, val) == count(a, size-1, val);
+    lemma count_step_hit_miss{L}:
+       \forall int *a, val, integer size;
+          a[size] != val ==> count(a, size + 1, val) == count(a, size, val);
+    lemma count_monotonic:
        \forall int *a, val, integer size;
           count(a, size, val) >= count(a, size - 1, val);
-    lemma positive:
+    lemma count_non_negative:
        \forall int *a, val, integer size;
           count(a, size, val) >= 0;
     }
@@ -43,18 +51,20 @@ int moda(int a[], unsigned size)
        loop invariant 0 <= element <= i;
        loop invariant 0 <= element < size;
        loop invariant \forall integer j; 0 <= j < i ==> count(a, size, a[element]) >= count(a, size, a[j]);
+       loop assigns max_times, element;
        loop variant size - i;
     */
    for(i = 0; i < size; ++i) {
       unsigned times = 0;
       unsigned j;
 
-      /*@ loop invariant i <= j <= size;
+      /*@ loop invariant 0 <= j <= size;
           loop invariant 0 <= times <= j;
-          loop invariant \forall integer k; i <= k < j ==> count(a, j, a[i]) == times;
+          loop invariant \forall integer k; 0 <= k < j ==> count(a, k, a[i]) == times;
+          loop assigns times;
           loop variant size - j;
        */
-      for(j = i; j < size; ++j) {
+      for(j = 0; j < size; ++j) {
          if (a[j] == a[i]) {
             ++times;
          }
