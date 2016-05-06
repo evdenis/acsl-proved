@@ -1,18 +1,22 @@
+#ifdef OUT_OF_TASK
+# define NULL ((void*)0)
+#endif
 
 /*@ requires \valid(a+(left..right-1));
-    requires \forall integer i, j; left <= i < right && left <= j < right && i < j ==> a[i] <= a[j];
+    requires \forall integer i, j; left <= i < j < right ==> a[i] <= a[j];
+    decreases right - left;
     assigns \nothing;
     behavior NOT_EXISTS:
-       assumes ! \exists integer i; left <= i < right && a[i] == val;
+       assumes \forall integer i; left <= i < right ==> a[i] != key;
        ensures \result == \null; 
     behavior EXISTS:
-       assumes \exists integer i; left <= i < right && a[i] == val;
-       ensures \exists integer i; left <= i < right && \result == a + i;
-       ensures *\result == val;
+       assumes \exists integer i; left <= i < right && a[i] == key;
+       ensures \exists integer i; left <= i < right && \result == (a + i);
+       ensures (*\result) == key;
     complete behaviors;
     disjoint behaviors;
  */
-int *bsearch_rec(int a[], unsigned left, unsigned right, int val)
+int *bsearch_rec(int a[], unsigned left, unsigned right, int key)
 {
    unsigned m = left + (right - left) / 2;
 
@@ -20,31 +24,31 @@ int *bsearch_rec(int a[], unsigned left, unsigned right, int val)
       return NULL;
    }
 
-   if (a[m] < val) {
+   if (a[m] < key) {
       left = m + 1;
-   } else if (a[m] > val) {
+   } else if (a[m] > key) {
       right = m - 1;
    } else {
       return &a[m];
    }
 
-   return bsearch_rec(a, left, right, val);
+   return bsearch_rec(a, left, right, key);
 }
 
 /*@ requires \valid(a+(0..n-1));
-    requires \forall integer i, j; 0 <= i < n && 0 <= j < n && i < j ==> a[i] <= a[j];
+    requires \forall integer i, j; 0 <= i < j < n ==> a[i] <= a[j];
     assigns \nothing;
     behavior NOT_EXISTS:
-       assumes ! \exists integer i; 0 <= i < n && a[i] == val;
+       assumes \forall integer i; 0 <= i < n ==> a[i] != key;
        ensures \result == \null; 
     behavior EXISTS:
-       assumes \exists integer i; 0 <= i < n && a[i] == val;
-       ensures \exists integer i; 0 <= i < n && \result == a + i;
-       ensures *\result == val;
+       assumes \exists integer i; 0 <= i < n && a[i] == key;
+       ensures \exists integer i; 0 <= i < n && \result == (a + i);
+       ensures (*\result) == key;
     complete behaviors;
     disjoint behaviors;
  */
-int *bsearch(int a[], unsigned n, int val)
+int *bsearch(int a[], unsigned n, int key)
 {
-   return bsearch_rec(a, 0, n, val);
+   return bsearch_rec(a, 0, n, key);
 }
