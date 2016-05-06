@@ -3,39 +3,36 @@
 #endif
 
 /*@ requires \valid(a+(0..n-1));
-    requires \forall integer i, j; 0 <= i < n && 0 <= j < n && i < j ==> a[i] <= a[j];
+    requires \forall integer i, j; 0 <= i < j < n ==> a[i] <= a[j];
     assigns \nothing;
     behavior NOT_EXISTS:
-       assumes !(\exists integer i; 0 <= i < n && a[i] == val) || n == 0;
+       assumes \forall integer i; 0 <= i < n ==> a[i] != key;
        ensures \result == \null; 
     behavior EXISTS:
-       assumes n > 0;
-       assumes \exists integer i; 0 <= i < n && a[i] == val;
+       assumes \exists integer i; 0 <= i < n && a[i] == key;
        ensures \exists integer i; 0 <= i < n && \result == (a + i);
-       ensures (*\result) == val;
+       ensures (*\result) == key;
     complete behaviors;
     disjoint behaviors;
  */
-int *bsearch(int a[], unsigned n, int val)
+int *bsearch(int a[], unsigned n, int key)
 {
    unsigned left = 0;
-   long right = n;
+   long right = ((long)n) - 1;
 
    /*@ loop invariant 0 <= left;
-       loop invariant right <= n;
-       //loop invariant left <= right; Найдите ошибку
-       //loop invariant (\exists integer i; left <= i < right && a[i] == val) ==> a[left] <= val <= a[right];
-       //loop invariant \forall integer i; 0 <= i < n && a[i] == val ==> a[left] <= val <= a[right] && left <= i <= right;
-       //loop invariant \forall integer i; 0 <= i < n && a[i] == val ==> a[left] <= val <= a[right] && left <= i <= right;
-       loop invariant \forall integer i; 0 <= i < n && a[i] == val ==> left <= i <= right;
+       loop invariant right < n;
+       //loop invariant left <= right; //Найдите ошибку
+       loop invariant \forall integer i; 0 <= i < n && a[i] == key ==> left <= i <= right;
+       loop invariant \forall integer i; 0 <= i < n && a[i] == key ==> a[left] <= key <= a[right];
        loop variant right - left;
     */
-   while (left < right) {
+   while (left <= right) {
       unsigned m = left + (right - left) / 2;
 
-      if (a[m] < val) {
+      if (a[m] < key) {
          left = m + 1;
-      } else if (a[m] > val) {
+      } else if (a[m] > key) {
          right = ((long)m) - 1;
       } else {
          return &a[m];
