@@ -22,7 +22,7 @@
     assigns \nothing;
     ensures \result == sum(a, n-1);
  */
-unsigned sum(unsigned a[], unsigned n)
+unsigned array_sum(unsigned a[], unsigned n)
 {
    unsigned i;
    unsigned sum = 0;

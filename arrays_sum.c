@@ -10,7 +10,7 @@
     assigns result[0..size-1];
     ensures \forall integer i; 0 <= i < size ==> result[i] == a[i] + b[i];
  */
-void array_sum(int result[], int a[], int b[], int size)
+void arrays_sum(int result[], int a[], int b[], int size)
 {
    int i;
    /*@ loop invariant 0 <= i <= size;

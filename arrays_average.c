@@ -9,7 +9,7 @@
     assigns result[0..size-1];
     ensures \forall integer i; 0 <= i < size ==> result[i] == (a[i] + b[i]) / 2;
  */
-void array_average(int result[], int a[], int b[], int size)
+void arrays_average(int result[], int a[], int b[], int size)
 {
    int i;
    /*@ loop invariant 0 <= i <= size;

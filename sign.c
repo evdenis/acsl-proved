@@ -18,7 +18,7 @@ int sign(int x)
    return (x > 0) - (x < 0);
 }
 
-/*@ assigns \nothing;
+/* assigns \nothing;
     ensures \result == 0 || \result == 1 || \result == -1;
     behavior positive:
        assumes x > 0;

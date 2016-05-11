@@ -8,7 +8,7 @@
     assigns \nothing;
     ensures \result == \abs(\abs(a) - \abs(b));
  */
-unsigned distance(int a, int b)
+unsigned distance_abs(int a, int b)
 {
    unsigned ua = a < 0 ? -a : a;
    unsigned ub = b < 0 ? -b : b;

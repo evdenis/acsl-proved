@@ -25,7 +25,7 @@ void swap(int a[], int i, int j)
             \exists integer j; 0 <= j < size &&
             a[i] == a[j];
  */
-void reverse(int a[], int size)
+void reverse_in_place(int a[], int size)
 {
    int i;
    /*@ loop invariant 0 <= i <= size / 2;
