@@ -7,33 +7,46 @@
 unsigned abs(int x);
 
 /*@ axiomatic Sum2 {
-    logic integer sum2(integer a, integer b);
+    logic integer sum2(integer x, integer y);
+    logic integer sum2(integer x) = sum2(0, x);
 
     axiom init:
-       \forall integer a, b; (a >= 0 && b >= 0) && b <= a ==> sum2(a, b) == a;
+       \forall integer x, y; x > y && x >= 0 ==>
+          sum2(x, y) == 0;
+    axiom init_neg:
+       \forall integer x, y; x < y && x < 0 ==>
+          sum2(x, y) == 0;
 
     axiom step_dec:
-       \forall integer a, b; (a >= 0 && b >= 0) && b > a ==> sum2(a, b) == sum2(a, b - 1) + b;
+       \forall integer x, y; y >= x >= 0 ==> sum2(x, y) == y * y + sum2(x, y - 1);
 
-    lemma lower_bound:
-       \forall integer a, b; a >= 0 && b >= 0 ==> sum2(a, b) >= a;
+    axiom step_dec_neg:
+       \forall integer x, y; y <= x < 0 ==> sum2(x, y) == y * y + sum2(x, y + 1);
 
-    lemma sum_increases:
-       \forall integer i, a, b; (a >= 0 && b >= 0) && b > a && a <= i <= b ==> sum2(a, i) <= sum2(a, b);
+    lemma positive:
+       \forall integer x, y; sum2(x, y) >= 0;
+    lemma monotonic:
+       \forall integer x, y1, y2; y2 > y1 > x >= 0 ==> sum2(x, y2) >= sum2(x, y1);
+    lemma negative_sum:
+       \forall integer x, y; x >= 0 && y > 0 || x < 0 && y < 0 ==> sum2(x, y) == sum2(\abs(x), \abs(y));
     }
  */
 
 
-/*@ requires x*x <= INT_MAX;
+/*@ requires sum2(x) <= INT_MAX;
     assigns \nothing;
-    ensures x >= 0;
-    ensures
+    ensures \result >= 0;
+    ensures \result == sum2(x - 1);
  */
 int sum2(int x)
 {
    int sum = x * x;
    x = abs(x);
    /*@ loop invariant 0 <= x;
+       loop invariant sum == sum2(x, \at(x, Pre) - 1);
+       loop invariant \forall integer i; x < i < \at(x, Pre) ==> i * i < INT_MAX;
+       loop invariant sum < INT_MAX;
+       loop assigns sum;
        loop variant x;
     */
    while (x--) {
