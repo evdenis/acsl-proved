@@ -3,8 +3,8 @@
 
 
 /*@ requires \true;
-    //requires a > INT_MIN; // Найдите ошибку в спецификации. Ответ.
-    //requires b > INT_MIN; // Найдите ошибку в спецификации. Ответ.
+    requires a > INT_MIN; // Найдите ошибку в спецификации. Ответ.
+    requires b > INT_MIN; // Найдите ошибку в спецификации. Ответ.
     assigns \nothing;
     ensures \result == \abs(\abs(a) - \abs(b));
  */
