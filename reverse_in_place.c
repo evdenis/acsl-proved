@@ -5,11 +5,15 @@
     ensures a[j] == \old(a[i]);
  */
 void swap(int a[], int i, int j)
+#ifndef OUT_OF_TASK
+;
+#else
 {
    int tmp = a[i];
    a[i] = a[j];
    a[j] = tmp;
 }
+#endif
 
 /*@ predicate reverse{L1,L2}(int* a, integer size, integer i, integer j) =
        \forall integer k; i <= k < j ==>
