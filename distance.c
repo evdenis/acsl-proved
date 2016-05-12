@@ -1,4 +1,3 @@
-#include <stdio.h>
 
 /*@ //requires \nothing;
     requires \true;
@@ -12,8 +11,11 @@ unsigned distance(unsigned a, unsigned b)
    return res;
 }
 
+#ifdef OUT_OF_TASK
+#include <stdio.h>
 int main(void)
 {
    printf("%d\n", distance(100, 80));
    return 0;
 }
+#endif
