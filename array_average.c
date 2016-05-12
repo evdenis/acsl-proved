@@ -1,11 +1,11 @@
-/*@ axiomatic Sum {
-    logic integer sum{L}(int *a, integer b);
+/*@ axiomatic ASum {
+    logic integer asum{L}(int *a, integer b);
 
-    axiom init{L}:
-       \forall int *a, integer b; b <= 0 ==> sum(a, b) == 0;
+    axiom asum_init{L}:
+       \forall int *a, integer b; b <= 0 ==> asum(a, b) == 0;
 
-    axiom step_dec{L}:
-       \forall int *a, integer b; sum(a, b) == sum(a, b-1) + a[b];
+    axiom asum_step_dec{L}:
+       \forall int *a, integer b; asum(a, b) == asum(a, b-1) + a[b];
     }
  */
 
@@ -15,9 +15,9 @@
 
 /*@ requires size > 0; // Найти ошибку
     requires \valid(a+(0..size-1));
-    requires INT_MIN <= sum(a, size-1) <= INT_MAX;
+    requires INT_MIN <= asum(a, size-1) <= INT_MAX;
     assigns \nothing;
-    ensures \result == (sum(a, size-1) / size);
+    ensures \result == (asum(a, size-1) / size);
  */
 int array_average(int a[], int size)
 {
@@ -25,7 +25,7 @@ int array_average(int a[], int size)
    int sum = 0;
 
    /*@ loop invariant 0 <= i <= size;
-       loop invariant sum == sum(a, i-1);
+       loop invariant sum == asum(a, i-1);
        loop variant size - i;
     */
    for(i = 0; i < size; ++i) {

@@ -1,13 +1,13 @@
 /*@ axiomatic Sum {
     logic integer sum(integer a, integer b);
 
-    axiom init:
+    axiom sum_init:
        \forall integer a, b; (a >= 0 && b >= 0) && b <= a ==> sum(a, b) == a;
 
-    axiom step_dec:
+    axiom sum_step_dec:
        \forall integer a, b; (a >= 0 && b >= 0) && b > a ==> sum(a, b) == sum(a, b - 1) + b;
 
-    lemma lower_bound:
+    lemma sum_lower_bound:
        \forall integer a, b; a >= 0 && b >= 0 ==> sum(a, b) >= a;
 
     lemma sum_increases:
