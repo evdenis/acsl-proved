@@ -1,10 +1,15 @@
 /*@ requires \valid(a+(0..size-1));
     assigns \nothing;
     ensures \result == 0 || \result == 1;
+    behavior nil:
+       assumes size == 0;
+       ensures \result == 1;
     behavior palindrome:
+       assumes size > 0;
        assumes \forall integer i; 0 <= i < size ==> a[i] == a[size - i - 1];
        ensures \result == 1;
     behavior non_palindrome:
+       assumes size > 0;
        assumes \exists integer i; 0 <= i < size && a[i] != a[size - i - 1];
        ensures \result == 0;
     complete behaviors;
