@@ -12,9 +12,9 @@
     }
  */
 
-#define ULONG_MAX 18446744073709551615UL
+#define SPEC_ULONG_MAX 18446744073709551615UL
 
-/*@ requires factorial(i) <= ULONG_MAX;
+/*@ requires factorial(i) <= SPEC_ULONG_MAX;
     assigns \nothing;
     ensures \result == factorial(i);
  */
@@ -30,3 +30,14 @@ unsigned long factorial(unsigned i)
    }
    return f;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   printf("res: %lu\n", factorial(10));
+   printf("res: %lu\n", factorial(20));
+   return 0;
+}
+#endif

@@ -55,10 +55,10 @@
     }
  */
 
-#define INT_MAX 2147483647
-#define INT_MIN -2147483648
+#define SPEC_INT_MAX 2147483647
+#define SPEC_INT_MIN -2147483648
 
-/*@ requires INT_MIN <= fib(i) <= INT_MAX;
+/*@ requires SPEC_INT_MIN <= fib(i) <= SPEC_INT_MAX;
     decreases \abs(i);
     assigns \nothing;
     ensures \result == fib(i);

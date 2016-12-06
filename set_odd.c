@@ -20,3 +20,33 @@ void set_odd(int *p, int size, int val)
       }
    }
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+void print_int_array(int a[], int size)
+{
+   for(int i = 0; i < size - 1; ++i) {
+      printf("%d, ", a[i]);
+   }
+   printf("%d", a[size - 1]);
+}
+
+int main(void)
+{
+   int a[] = {1,2,3,4,5,6,7,8,9,10};
+   int size = sizeof(a) / sizeof(a[0]);
+   
+   printf("orig: ");
+   print_int_array(a, size);
+   printf("\n");
+   
+   set_odd(a, size, 0);
+   
+   printf("res: ");
+   print_int_array(a, size);
+   printf("\n");
+   
+   return 0;
+}
+#endif

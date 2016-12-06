@@ -9,13 +9,13 @@
     }
  */
 
-#define INT_MIN -2147483648
-#define INT_MAX 2147483647
+#define SPEC_INT_MIN -2147483648
+#define SPEC_INT_MAX 2147483647
 
 
 /*@ requires size > 0; // Найти ошибку
     requires \valid(a+(0..size-1));
-    requires INT_MIN <= asum(a, size-1) <= INT_MAX;
+    requires SPEC_INT_MIN <= asum(a, size-1) <= SPEC_INT_MAX;
     assigns \nothing;
     ensures \result == (asum(a, size-1) / size);
  */
@@ -34,3 +34,17 @@ int array_average(int a[], int size)
 
    return sum / size;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   int a[] = {1,2,3,4,5,6,7,8,9,10};
+   int size = sizeof(a) / sizeof(a[0]);
+   
+   printf("res: %d\n", array_average(a, size));
+   
+   return 0;
+}
+#endif

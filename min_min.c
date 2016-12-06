@@ -55,7 +55,7 @@ int main(void)
    int a[] = {1,2,3,4,5,11,7,8,9,10};
    int *min1, *min2;
    min_min(a, sizeof(a)/sizeof(a[0]), &min1, &min2);
-   printf("min1: el: %d val: %d; min2: el: %d val: %d\n", min1 - a, *min1, min2 - a, *min2);
+   printf("min1: el: %ld val: %d; min2: el: %ld val: %d\n", min1 - a, *min1, min2 - a, *min2);
    return 0;
 }
 #endif

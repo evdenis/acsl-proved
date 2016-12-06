@@ -1,5 +1,5 @@
-#define INT_MIN -2147483648
-#define INT_MAX 2147483647
+#define SPEC_INT_MIN -2147483648
+#define SPEC_INT_MAX 2147483647
 
 /*@ assigns \nothing;
     ensures \result >= 0;
@@ -16,7 +16,7 @@
     complete behaviors;
     disjoint behaviors;
  */
-long abs(int a)
+long spec_abs1(int a)
 {
    long abs;
 
@@ -27,3 +27,13 @@ long abs(int a)
 
    return abs;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   printf("res: %ld\n", spec_abs1(SPEC_INT_MIN + 1));
+   return 0;
+}
+#endif

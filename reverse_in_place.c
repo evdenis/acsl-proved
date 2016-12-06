@@ -55,7 +55,7 @@ int main(void)
       printf("%d ", a[i]);
    }
    printf("\n");
-   reverse(a, size);
+   reverse_in_place(a, size);
    for(int i = 0; i < size; ++i) {
       printf("%d ", a[i]);
    }

@@ -1,8 +1,8 @@
-#define INT_MIN -2147483648
-#define INT_MAX 2147483647
+#define SPEC_INT_MIN -2147483648
+#define SPEC_INT_MAX 2147483647
 
-/*@ //requires INT_MIN < a <= INT_MAX;
-    requires INT_MIN < a;
+/*@ //requires SPEC_INT_MIN < a <= SPEC_INT_MAX;
+    requires SPEC_INT_MIN < a;
     assigns \nothing;
     ensures \result >= 0;
     behavior positive:
@@ -18,7 +18,7 @@
     complete behaviors;
     disjoint behaviors;
  */
-int abs(int a)
+int spec_abs2(int a)
 {
    int abs;
 
@@ -30,3 +30,12 @@ int abs(int a)
 
    return abs;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+int main(void)
+{
+   printf("res: %d\n", spec_abs2(SPEC_INT_MIN + 1));
+   return 0;
+}
+#endif

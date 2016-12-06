@@ -18,9 +18,22 @@ int average(int a, int b)
 	   average = smaller + (greater - smaller) / 2;
 	} else if (a < 0 && b < 0) {
 	   average = greater + (smaller - greater) / 2;
-	} else if (a >= 0 && b <= 0 || a <= 0 && b >= 0) {
+	} else if ((a >= 0 && b <= 0) || (a <= 0 && b >= 0)) {
 	   average = (a + b) / 2;
 	}
 
    return average;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   printf("res: %d\n", average(3,30));
+   printf("res: %d\n", average(-5,-20));
+   printf("res: %d\n", average(7,-10));
+   printf("res: %d\n", average(-2,15));
+   return 0;
+}
+#endif

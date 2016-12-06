@@ -13,7 +13,7 @@
     complete behaviors;
     disjoint behaviors;
  */
-int sign(int x)
+int spec_sign(int x)
 {
    return (x > 0) - (x < 0);
 }
@@ -37,3 +37,14 @@ int sign(int x)
     // assumes 32-bit int and 2s complement signed shifts work (implementation defined by C spec)
     return (x>>31) | ((unsigned)-x >> 31);
 }*/
+
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   printf("res: %d\n", spec_sign(-10));
+   return 0;
+}
+#endif

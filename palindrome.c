@@ -36,3 +36,18 @@ int palindrome(int a[], unsigned size)
    return res;
 }
 
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   int a[] = {1,2,3,4,5,6,7,8,9,10};
+   int b[] = {1,2,3,4,5,5,4,3,2,1};
+   int size = sizeof(a) / sizeof(a[0]);
+   
+   printf("res: %d\n", palindrome(a, size));
+   printf("res: %d\n", palindrome(b, size));
+   
+   return 0;
+}
+#endif

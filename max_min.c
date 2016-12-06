@@ -46,7 +46,7 @@ int main(void)
    int a[] = {3,5,3,1,5,11,7,8,9,10};
    int *max, *min;
    max_min(a, sizeof(a)/sizeof(a[0]), &max, &min);
-   printf("max: el: %d val: %d; min: el: %d val: %d\n", max - a, *max, min - a, *min);
+   printf("max: el: %ld val: %d; min: el: %ld val: %d\n", max - a, *max, min - a, *min);
    return 0;
 }
 #endif

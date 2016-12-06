@@ -15,10 +15,10 @@
     }
  */
 
-#define UINT_MAX 32767
+#define SPEC_UINT_MAX 32767
 
 /*@ requires \valid(a+(0..n-1));
-    requires array_sum(a, n) < UINT_MAX;
+    requires array_sum(a, n) < SPEC_UINT_MAX;
     assigns \nothing;
     ensures \result == array_sum(a, n-1);
  */
@@ -29,7 +29,7 @@ unsigned array_sum(unsigned a[], unsigned n)
 
    /*@ loop invariant 0 <= i <= n;
        loop invariant sum == array_sum(a, i-1);
-       //loop invariant array_sum(a, i-1) < UINT_MAX; Не обязательно
+       //loop invariant array_sum(a, i-1) < SPEC_UINT_MAX; Не обязательно
        loop variant n - i;
     */
    for(i = 0; i < n; ++i) {
@@ -38,3 +38,17 @@ unsigned array_sum(unsigned a[], unsigned n)
 
    return sum;
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   unsigned a[] = {1,2,3,4,5,6,7,8,9,10};
+   unsigned size = sizeof(a) / sizeof(a[0]);
+   
+   printf("res: %u\n", array_sum(a, size));
+   
+   return 0;
+}
+#endif

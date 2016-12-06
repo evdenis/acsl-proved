@@ -13,7 +13,7 @@
           i2 >= i1 && factorial_ind(i1, f1) && factorial_ind(i2, f2) ==> f2 >= f1;
  */
 
-#define ULONG_MAX 18446744073709551615UL
+#define SPEC_ULONG_MAX 18446744073709551615UL
 
 /*@ requires i <= 20;
     decreases i;
@@ -28,3 +28,14 @@ unsigned long factorial_rec(unsigned i)
       return factorial_rec(i - 1) * i;
    }
 }
+
+#ifdef OUT_OF_TASK
+#include <stdio.h>
+
+int main(void)
+{
+   printf("res: %lu\n", factorial_rec(10));
+   printf("res: %lu\n", factorial_rec(20));
+   return 0;
+}
+#endif
