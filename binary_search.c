@@ -15,7 +15,7 @@
     complete behaviors;
     disjoint behaviors;
  */
-int *bsearch(int a[], unsigned n, int key)
+int *spec_bsearch(int a[], unsigned n, int key)
 {
    unsigned left = 0;
    long right = ((long)n) - 1;
@@ -52,11 +52,11 @@ int main(void)
    int c[] = {0,1,2,3,4,5};
    int *res;
 
-   res = bsearch(a, ARRAY_SIZE(a), 0);
+   res = spec_bsearch(a, ARRAY_SIZE(a), 0);
    printf("res: %d\n", *res);
-   res = bsearch(b, ARRAY_SIZE(b), 1);
+   res = spec_bsearch(b, ARRAY_SIZE(b), 1);
    printf("res: %d\n", *res);
-   res = bsearch(c, ARRAY_SIZE(c), 10);
+   res = spec_bsearch(c, ARRAY_SIZE(c), 10);
    printf("res: %p\n", res);
 }
 #endif
