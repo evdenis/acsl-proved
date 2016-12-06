@@ -1,0 +1,176 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+axiomatic Jessie_memory_reinterpretation_predicates {
+
+  predicate uint8_as_uint32(uint32 d0, uint8 a0, uint8 a1, uint8 a2, uint8 a3) =
+  ((d0 == ((((((a3 * 256) + a2) * 256) + a1) * 256) + a0)) &&
+    \uint8_as_uint32(d0, a0, a1, a2, a3))
+   
+  logic uint32 complement_to_uint32(int32 v) =
+  (if (v >= 0) then (v :> uint32) else (((v :> integer) + 4294967296) :> uint32))
+   
+  predicate uint8_as_int32(int32 d0, uint8 a3, uint8 a2, uint8 a1, uint8 a0) =
+  (uint8_as_uint32(complement_to_uint32(d0), a3, a2, a1, a0) &&
+    \uint8_as_int32(d0, a3, a2, a1, a0))
+   
+  predicate uint32_as_uint8(uint32 d0, uint8 a0, uint8 a1, uint8 a2, uint8 a3) =
+  (((a0 == (d0 % 256)) &&
+     (let d1 = (d0 / 256)
+     in ((a1 == (d1 % 256)) &&
+          (let d2 = (d1 / 256)
+          in ((a2 == (d2 % 256)) && (let d3 = (d2 / 256) in (a3 == d3))))))) &&
+    \uint32_as_uint8(d0, a0, a1, a2, a3))
+   
+  predicate int32_as_uint8(int32 d0, uint8 a3, uint8 a2, uint8 a1, uint8 a0) =
+  (uint32_as_uint8(complement_to_uint32(d0), a3, a2, a1, a0) &&
+    \int32_as_uint8(d0, a3, a2, a1, a0))
+   
+  logic uint8 complement_to_uint8(int8 v) =
+  (if (v >= 0) then (v :> uint8) else (((v :> integer) + 256) :> uint8))
+   
+  predicate int8_as_int32(int32 d0, int8 a3, int8 a2, int8 a1, int8 a0) =
+  (uint8_as_int32(d0, complement_to_uint8(a3), complement_to_uint8(a2),
+                  complement_to_uint8(a1), complement_to_uint8(a0)) &&
+    \int8_as_int32(d0, a3, a2, a1, a0))
+   
+  predicate int32_as_int8(int32 d0, int8 a3, int8 a2, int8 a1, int8 a0) =
+  (int32_as_uint8(d0, complement_to_uint8(a3), complement_to_uint8(a2),
+                  complement_to_uint8(a1), complement_to_uint8(a0)) &&
+    \int32_as_int8(d0, a3, a2, a1, a0))
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = voidP with {
+  int32 intM: 32;
+}
+
+intP[..] bsearch(intP[..] a, uint32 n_1, int32 key)
+  requires ((_C_44 : \at((if (\at(0,Here) <=
+                               \at(((n_1 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a,Here)) >=
+                              \at(((n_1 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp1;
+                             (((\at(0,Here) <= __framac_tmp1) &&
+                                (__framac_tmp1 <=
+                                  \at(((n_1 :> integer) - 1),Here))) ==>
+                               true))) else true),Here)) &&
+             (_C_45 : (\forall integer i_6;
+                        (\forall integer j_0;
+                          ((((0 <= i_6) && (i_6 < j_0)) &&
+                             (j_0 < (n_1 :> integer))) ==>
+                            ((a + i_6).intM <= (a + j_0).intM))))));
+behavior default:
+  assigns \nothing;
+  ensures true;
+behavior NOT_EXISTS:
+  assumes (\forall integer i_5;
+            (((0 <= i_5) && (i_5 < (n_1 :> integer))) ==>
+              ((a + i_5).intM != key)));
+  ensures (_C_38 : (\result == null));
+behavior EXISTS:
+  assumes (\exists integer i_3;
+            (((0 <= i_3) && (i_3 < (n_1 :> integer))) &&
+              ((a + i_3).intM == key)));
+  ensures (_C_39 : ((_C_40 : (\exists integer i_4;
+                               (((0 <= i_4) &&
+                                  (i_4 < (\at(n_1,Old) :> integer))) &&
+                                 (\result == (\at(a,Old) + i_4))))) &&
+                     (_C_41 : (\result.intM == \at(key,Old)))));
+{  
+   (check (disjoint_behaviors : (! ((\forall integer i_5;
+                                      (((0 <= i_5) &&
+                                         (i_5 < (n_1 :> integer))) ==>
+                                        ((a + i_5).intM != key))) &&
+                                     (\exists integer i_3;
+                                       (((0 <= i_3) &&
+                                          (i_3 < (n_1 :> integer))) &&
+                                         ((a + i_3).intM == key)))))));
+   
+   (check (complete_behaviors : ((\exists integer i_3;
+                                   (((0 <= i_3) && (i_3 < (n_1 :> integer))) &&
+                                     ((a + i_3).intM == key))) ||
+                                  (\forall integer i_5;
+                                    (((0 <= i_5) && (i_5 < (n_1 :> integer))) ==>
+                                      ((a + i_5).intM != key))))));
+   
+   (var uint32 left);
+   
+   (var int64 right);
+   
+   (var uint32 m);
+   
+   (var intP[..] __retres);
+   
+   {  (_C_1 : (left = (0 :> uint32)));
+      (_C_5 : (right = (_C_4 : ((_C_3 : ((_C_2 : (n_1 :> int64)) -
+                                          (1 :> int64))) :> int64))));
+      
+      loop 
+      behavior default:
+        invariant (_C_10 : (0 <= (left :> integer)));
+      behavior default:
+        invariant (_C_9 : ((right :> integer) < (n_1 :> integer)));
+      behavior default:
+        invariant (_C_8 : (\forall integer i_1;
+                            ((((0 <= i_1) && (i_1 < (n_1 :> integer))) &&
+                               ((a + i_1).intM == key)) ==>
+                              (((left :> integer) <= i_1) &&
+                                (i_1 <= (right :> integer))))));
+      behavior default:
+        invariant (_C_7 : (\forall integer i_2;
+                            ((((0 <= i_2) && (i_2 < (n_1 :> integer))) &&
+                               ((a + i_2).intM == key)) ==>
+                              (((a + (left :> integer)).intM <= key) &&
+                                (key <= (a + (right :> integer)).intM)))));
+      variant (_C_6 : ((right :> integer) - (left :> integer)));
+      while (true)
+      {  
+         {  (if (_C_12 : ((_C_11 : (left :> int64)) <= right)) then () else 
+            (goto while_0_break));
+            
+            {  (_C_21 : (m = (_C_20 : ((_C_19 : ((_C_18 : (left :> int64)) +
+                                                  (_C_17 : ((_C_16 : 
+                                                            ((_C_15 : (
+                                                             (_C_14 : 
+                                                             (right -
+                                                               (_C_13 : (left :> int64)))) :> int64)) /
+                                                              (2 :> int64))) :> int64)))) :> uint32))));
+               (if (_C_36 : ((_C_35 : (_C_34 : (a + m)).intM) < key)) then 
+               (_C_33 : (left = (_C_32 : ((_C_31 : (m + (1 :> uint32))) :> uint32)))) else 
+               (if (_C_30 : ((_C_29 : (_C_28 : (a + m)).intM) > key)) then 
+               (_C_27 : (right = (_C_26 : ((_C_25 : ((_C_24 : (m :> int64)) -
+                                                      (1 :> int64))) :> int64)))) else 
+               {  (_C_23 : (__retres = (_C_22 : (a + m))));
+                  
+                  (goto return_label)
+               }))
+            }
+         }
+      };
+      (while_0_break : ());
+      (_C_37 : (__retres = null));
+      (return_label : 
+      (return __retres))
+   }
+}

@@ -1,0 +1,61 @@
+[_C_4]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 21
+end = 26
+
+[_C_5]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 21
+end = 26
+
+[distance]
+name = "Function distance"
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 7
+begin = 9
+end = 41
+
+[_C_9]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 3
+begin = 13
+end = 18
+
+[_C_6]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 10
+end = 37
+
+[_C_3]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 10
+end = 37
+
+[_C_7]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 11
+end = 16
+
+[_C_8]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 5
+begin = 12
+end = 46
+
+[_C_2]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 31
+end = 36
+
+[_C_1]
+file = "/home/work/workspace/education/acsl-exam/./distance.c"
+line = 9
+begin = 31
+end = 36
+

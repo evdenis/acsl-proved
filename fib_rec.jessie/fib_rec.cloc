@@ -1,0 +1,432 @@
+[_C_35]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 21
+end = 26
+
+[fib_negative_positive_1]
+name = "Lemma fib_negative_positive_1"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 49
+begin = 4
+end = 126
+
+[_C_28]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 38
+end = 43
+
+[power_monotonic]
+name = "Lemma power_monotonic"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 26
+begin = 4
+end = 133
+
+[_C_48]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 61
+begin = 13
+end = 48
+
+[_C_51]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 62
+begin = 14
+end = 21
+
+[_C_31]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 30
+end = 44
+
+[fib_non_negative_increasing]
+name = "Lemma fib_non_negative_increasing"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 46
+begin = 4
+end = 126
+
+[_C_41]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 30
+end = 44
+
+[_C_4]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 13
+begin = 7
+end = 60
+
+[power_non_negative]
+name = "Lemma power_non_negative"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 24
+begin = 4
+end = 105
+
+[fib_negative_positive_2]
+name = "Lemma fib_negative_positive_2"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 52
+begin = 4
+end = 105
+
+[_C_32]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 13
+end = 44
+
+[_C_23]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 69
+begin = 7
+end = 14
+
+[_C_19]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 68
+begin = 17
+end = 23
+
+[fib_step_negative]
+name = "Lemma fib_step_negative"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 40
+begin = 4
+end = 109
+
+[_C_42]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 30
+end = 44
+
+[fib_one]
+name = "Lemma fib_one"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 35
+begin = 4
+end = 38
+
+[_C_13]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 41
+begin = 7
+end = 79
+
+[_C_5]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 16
+begin = 7
+end = 139
+
+[_C_36]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 21
+end = 26
+
+[_C_12]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 38
+begin = 7
+end = 80
+
+[_C_33]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 13
+end = 44
+
+[fib_step_positive]
+name = "Lemma fib_step_positive"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 37
+begin = 4
+end = 110
+
+[fib_non_negative]
+name = "Lemma fib_non_negative"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 43
+begin = 4
+end = 87
+
+[_C_22]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 69
+begin = 16
+end = 25
+
+[_C_9]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 27
+begin = 7
+end = 105
+
+[_C_30]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 30
+end = 44
+
+[_C_6]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 19
+begin = 7
+end = 135
+
+[_C_49]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 61
+begin = 13
+end = 34
+
+[_C_24]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 21
+end = 26
+
+[power_mult_2]
+name = "Lemma power_mult_2"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 21
+begin = 4
+end = 152
+
+[_C_45]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 6
+end = 45
+
+[_C_20]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 68
+begin = 25
+end = 34
+
+[_C_38]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 13
+end = 27
+
+[_C_3]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 10
+begin = 7
+end = 99
+
+[_C_17]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 53
+begin = 7
+end = 69
+
+[power_one]
+name = "Lemma power_one"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 12
+begin = 4
+end = 82
+
+[_C_7]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 22
+begin = 7
+end = 127
+
+[fib_nil]
+name = "Lemma fib_nil"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 33
+begin = 4
+end = 38
+
+[_C_27]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 13
+end = 27
+
+[_C_46]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 71
+begin = 7
+end = 12
+
+[_C_44]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 13
+end = 44
+
+[_C_15]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 47
+begin = 7
+end = 86
+
+[_C_26]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 13
+end = 27
+
+[_C_47]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 64
+begin = 12
+end = 29
+
+[_C_10]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 34
+begin = 7
+end = 18
+
+[_C_40]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 38
+end = 43
+
+[_C_8]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 25
+begin = 7
+end = 74
+
+[_C_18]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 68
+begin = 25
+end = 34
+
+[_C_29]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 38
+end = 43
+
+[_C_14]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 44
+begin = 7
+end = 58
+
+[power_nil]
+name = "Lemma power_nil"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 3
+begin = 4
+end = 82
+
+[_C_50]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 61
+begin = 28
+end = 48
+
+[_C_37]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 13
+end = 27
+
+[_C_43]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 13
+end = 44
+
+[_C_2]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 7
+begin = 7
+end = 100
+
+[_C_34]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 6
+end = 45
+
+[_C_16]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 50
+begin = 7
+end = 90
+
+[power_sum]
+name = "Lemma power_sum"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 15
+begin = 4
+end = 161
+
+[power_mult_1]
+name = "Lemma power_mult_1"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 18
+begin = 4
+end = 160
+
+[fib_rec]
+name = "Function fib_rec"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 66
+begin = 4
+end = 18
+
+[_C_1]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 4
+begin = 7
+end = 60
+
+[_C_25]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 74
+begin = 21
+end = 26
+
+[_C_39]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 72
+begin = 38
+end = 43
+
+[power_alt_step]
+name = "Lemma power_alt_step"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 9
+begin = 4
+end = 126
+
+[_C_11]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 36
+begin = 7
+end = 18
+
+[_C_21]
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 68
+begin = 7
+end = 13
+
+[power_step]
+name = "Lemma power_step"
+file = "/home/work/workspace/education/acsl-exam/./fib_rec.c"
+line = 6
+begin = 4
+end = 123
+

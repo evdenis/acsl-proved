@@ -1,0 +1,2262 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+axiomatic Jessie_memory_reinterpretation_predicates {
+
+  predicate uint8_as_uint32(uint32 d0, uint8 a0, uint8 a1, uint8 a2, uint8 a3) =
+  ((d0 == ((((((a3 * 256) + a2) * 256) + a1) * 256) + a0)) &&
+    \uint8_as_uint32(d0, a0, a1, a2, a3))
+   
+  logic uint32 complement_to_uint32(int32 v) =
+  (if (v >= 0) then (v :> uint32) else (((v :> integer) + 4294967296) :> uint32))
+   
+  predicate uint8_as_int32(int32 d0, uint8 a3, uint8 a2, uint8 a1, uint8 a0) =
+  (uint8_as_uint32(complement_to_uint32(d0), a3, a2, a1, a0) &&
+    \uint8_as_int32(d0, a3, a2, a1, a0))
+   
+  predicate uint32_as_uint8(uint32 d0, uint8 a0, uint8 a1, uint8 a2, uint8 a3) =
+  (((a0 == (d0 % 256)) &&
+     (let d1 = (d0 / 256)
+     in ((a1 == (d1 % 256)) &&
+          (let d2 = (d1 / 256)
+          in ((a2 == (d2 % 256)) && (let d3 = (d2 / 256) in (a3 == d3))))))) &&
+    \uint32_as_uint8(d0, a0, a1, a2, a3))
+   
+  predicate int32_as_uint8(int32 d0, uint8 a3, uint8 a2, uint8 a1, uint8 a0) =
+  (uint32_as_uint8(complement_to_uint32(d0), a3, a2, a1, a0) &&
+    \int32_as_uint8(d0, a3, a2, a1, a0))
+   
+  logic uint8 complement_to_uint8(int8 v) =
+  (if (v >= 0) then (v :> uint8) else (((v :> integer) + 256) :> uint8))
+   
+  predicate int8_as_int32(int32 d0, int8 a3, int8 a2, int8 a1, int8 a0) =
+  (uint8_as_int32(d0, complement_to_uint8(a3), complement_to_uint8(a2),
+                  complement_to_uint8(a1), complement_to_uint8(a0)) &&
+    \int8_as_int32(d0, a3, a2, a1, a0))
+   
+  predicate int32_as_int8(int32 d0, int8 a3, int8 a2, int8 a1, int8 a0) =
+  (int32_as_uint8(d0, complement_to_uint8(a3), complement_to_uint8(a2),
+                  complement_to_uint8(a1), complement_to_uint8(a0)) &&
+    \int32_as_int8(d0, a3, a2, a1, a0))
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = voidP with {
+  int32 intM: 32;
+}
+
+tag unsigned_intP = {
+  uint32 unsigned_intM: 32;
+}
+
+type unsigned_intP = [unsigned_intP]
+
+tag int_xP = {
+  intP[..] int_xM: 64;
+}
+
+type int_xP = [int_xP]
+
+int32 spec_abs2(int32 a_15)
+  requires (_C_15 : ((- 2147483648) < (a_15 :> integer)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_6 : (\result >= (0 :> int32)));
+behavior positive:
+  assumes (a_15 > (0 :> int32));
+  ensures (_C_7 : (\result == \at(a_15,Old)));
+behavior zero:
+  assumes (a_15 == (0 :> int32));
+  ensures (_C_8 : ((_C_9 : (\result == (0 :> int32))) &&
+                    (_C_10 : (\result == \at(a_15,Old)))));
+behavior negative:
+  assumes (a_15 < (0 :> int32));
+  ensures (_C_11 : ((\result :> integer) == (- (\at(a_15,Old) :> integer))));
+{  
+   (check (disjoint_behaviors : (! ((a_15 == (0 :> int32)) &&
+                                     (a_15 < (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((a_15 > (0 :> int32)) &&
+                                     (a_15 == (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((a_15 > (0 :> int32)) &&
+                                     (a_15 < (0 :> int32))))));
+   
+   (check (complete_behaviors : ((a_15 < (0 :> int32)) ||
+                                  ((a_15 == (0 :> int32)) ||
+                                    (a_15 > (0 :> int32))))));
+   
+   (var int32 abs);
+   
+   {  (if (_C_5 : (a_15 < (0 :> int32))) then (_C_4 : (abs = (_C_3 : (
+                                                             (_C_2 : 
+                                                             (- a_15)) :> int32)))) else 
+      (_C_1 : (abs = a_15)));
+      
+      (return abs)
+   }
+}
+
+int64 spec_abs1(int32 a_14)
+behavior default:
+  assigns \nothing;
+  ensures (_C_22 : ((\result :> integer) >= 0));
+behavior positive:
+  assumes (a_14 > (0 :> int32));
+  ensures (_C_23 : (\result == (\at(a_14,Old) :> int64)));
+behavior zero:
+  assumes (a_14 == (0 :> int32));
+  ensures (_C_24 : ((_C_25 : ((\result :> integer) == 0)) &&
+                     (_C_26 : (\result == (\at(a_14,Old) :> int64)))));
+behavior negative:
+  assumes (a_14 < (0 :> int32));
+  ensures (_C_27 : ((\result :> integer) == (- (\at(a_14,Old) :> integer))));
+{  
+   (check (disjoint_behaviors : (! ((a_14 == (0 :> int32)) &&
+                                     (a_14 < (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((a_14 > (0 :> int32)) &&
+                                     (a_14 == (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((a_14 > (0 :> int32)) &&
+                                     (a_14 < (0 :> int32))))));
+   
+   (check (complete_behaviors : ((a_14 < (0 :> int32)) ||
+                                  ((a_14 == (0 :> int32)) ||
+                                    (a_14 > (0 :> int32))))));
+   
+   (var int64 abs_0);
+   
+   {  (_C_17 : (abs_0 = (_C_16 : (a_14 :> int64))));
+      (if (_C_21 : (a_14 < (0 :> int32))) then (_C_20 : (abs_0 = (_C_19 : (
+                                                                 (_C_18 : 
+                                                                 (- abs_0)) :> int64)))) else ());
+      
+      (return abs_0)
+   }
+}
+
+axiomatic ASum {
+
+  logic integer asum{L}(intP[..] a, integer b)
+   
+  axiom asum_init{L} :
+  (_C_31 : (\forall intP[..] a_0;
+             (\forall integer b_0;
+               ((b_0 <= 0) ==> (asum{L}(a_0, b_0) == 0)))))
+   
+  axiom asum_step_dec{L} :
+  (_C_32 : (\forall intP[..] a_1;
+             (\forall integer b_1;
+               (asum{L}(a_1, b_1) ==
+                 (asum{L}(a_1, (b_1 - 1)) + ((a_1 + b_1).intM :> integer))))))
+  
+}
+
+int32 array_average(intP[..] a, int32 size_0)
+  requires ((_C_53 : (size_0 > (0 :> int32))) &&
+             ((_C_54 : \at((if (\at(0,Here) <=
+                                 \at(((size_0 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(a,Here)) >=
+                                \at(((size_0 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp1;
+                               (((\at(0,Here) <= __framac_tmp1) &&
+                                  (__framac_tmp1 <=
+                                    \at(((size_0 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)) &&
+               (_C_55 : ((_C_56 : ((- 2147483648) <=
+                                    asum{Here}(a, ((size_0 :> integer) - 1)))) &&
+                          (_C_57 : (asum{Here}(a, ((size_0 :> integer) - 1)) <=
+                                     2147483647))))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_52 : ((\result :> integer) ==
+                     (asum{Here}(\at(a,Old),
+                                 ((\at(size_0,Old) :> integer) - 1)) /
+                       (\at(size_0,Old) :> integer))));
+{  
+   (var int32 i_3);
+   
+   (var int32 sum_0);
+   
+   (var int32 __retres);
+   
+   {  (_C_33 : (sum_0 = (0 :> int32)));
+      (_C_34 : (i_3 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_37 : ((_C_38 : ((0 :> int32) <= i_3)) &&
+                             (_C_39 : (i_3 <= size_0))));
+      behavior default:
+        invariant (_C_36 : ((sum_0 :> integer) ==
+                             asum{Here}(a, ((i_3 :> integer) - 1))));
+      variant (_C_35 : ((size_0 :> integer) - (i_3 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_40 : (i_3 < size_0)) then () else 
+            (goto while_0_break));
+            (_C_45 : (sum_0 = (_C_44 : ((_C_43 : (sum_0 +
+                                                   (_C_42 : (_C_41 : 
+                                                            (a +
+                                                              i_3)).intM))) :> int32))));
+            (_C_48 : (i_3 = (_C_47 : ((_C_46 : (i_3 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      (_C_51 : (__retres = (_C_50 : ((_C_49 : (sum_0 / size_0)) :> int32))));
+      
+      (return __retres)
+   }
+}
+
+axiomatic Array_Sum {
+
+  logic integer array_sum{L}(unsigned_intP[..] a_2, integer b_2)
+   
+  axiom array_sum_init{L} :
+  (_C_58 : (\forall unsigned_intP[..] a_3;
+             (\forall integer b_3;
+               ((b_3 <= 0) ==> (array_sum{L}(a_3, b_3) == 0)))))
+   
+  axiom array_sum_step_dec{L} :
+  (_C_59 : (\forall unsigned_intP[..] a_4;
+             (\forall integer b_4;
+               (array_sum{L}(a_4, b_4) ==
+                 (array_sum{L}(a_4, (b_4 - 1)) +
+                   ((a_4 + b_4).unsigned_intM :> integer))))))
+   
+  lemma array_sum_lower_bound{L} :
+  (_C_60 : (\forall unsigned_intP[..] a_5;
+             (\forall integer b_5;
+               (array_sum{L}(a_5, b_5) >= 0))))
+   
+  lemma array_sum_increases{L} :
+  (_C_61 : (\forall unsigned_intP[..] a_6;
+             (\forall integer i_1;
+               (\forall integer b_6;
+                 (((0 <= i_1) && (i_1 <= b_6)) ==>
+                   (array_sum{L}(a_6, i_1) <= array_sum{L}(a_6, b_6)))))))
+  
+}
+
+uint32 array_sum(unsigned_intP[..] a_0, uint32 n_1)
+  requires ((_C_79 : \at((if (\at(0,Here) <=
+                               \at(((n_1 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a_0,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a_0,Here)) >=
+                              \at(((n_1 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp2;
+                             (((\at(0,Here) <= __framac_tmp2) &&
+                                (__framac_tmp2 <=
+                                  \at(((n_1 :> integer) - 1),Here))) ==>
+                               true))) else true),Here)) &&
+             (_C_80 : (array_sum{Here}(a_0, (n_1 :> integer)) < 32767)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_78 : ((\result :> integer) ==
+                     array_sum{Here}(\at(a_0,Old),
+                                     ((\at(n_1,Old) :> integer) - 1))));
+{  
+   (var uint32 i_4);
+   
+   (var uint32 sum_0_0);
+   
+   {  (_C_62 : (sum_0_0 = (0 :> uint32)));
+      (_C_63 : (i_4 = (0 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_66 : ((_C_67 : (0 <= (i_4 :> integer))) &&
+                             (_C_68 : (i_4 <= n_1))));
+      behavior default:
+        invariant (_C_65 : ((sum_0_0 :> integer) ==
+                             array_sum{Here}(a_0, ((i_4 :> integer) - 1))));
+      variant (_C_64 : ((n_1 :> integer) - (i_4 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_69 : (i_4 < n_1)) then () else 
+            (goto while_0_break));
+            (_C_74 : (sum_0_0 = (_C_73 : ((_C_72 : (sum_0_0 +
+                                                     (_C_71 : (_C_70 : 
+                                                              (a_0 +
+                                                                i_4)).unsigned_intM))) :> uint32))));
+            (_C_77 : (i_4 = (_C_76 : ((_C_75 : (i_4 + (1 :> uint32))) :> uint32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return sum_0_0)
+   }
+}
+
+unit arrays_average(intP[..] result, intP[..] a_1, intP[..] b, int32 size_1)
+  requires ((_C_103 : (size_1 >= (0 :> int32))) &&
+             ((_C_104 : \at((if (\at(0,Here) <=
+                                  \at(((size_1 :> integer) - 1),Here)) then 
+                            (((\offset_min(\at(result,Here)) <= \at(0,Here)) &&
+                               (\offset_max(\at(result,Here)) >=
+                                 \at(((size_1 :> integer) - 1),Here))) &&
+                              (\forall integer __framac_tmp3;
+                                (((\at(0,Here) <= __framac_tmp3) &&
+                                   (__framac_tmp3 <=
+                                     \at(((size_1 :> integer) - 1),Here))) ==>
+                                  true))) else true),Here)) &&
+               ((_C_105 : \at((if (\at(0,Here) <=
+                                    \at(((size_1 :> integer) - 1),Here)) then 
+                              (((\offset_min(\at(a_1,Here)) <= \at(0,Here)) &&
+                                 (\offset_max(\at(a_1,Here)) >=
+                                   \at(((size_1 :> integer) - 1),Here))) &&
+                                (\forall integer __framac_tmp4;
+                                  (((\at(0,Here) <= __framac_tmp4) &&
+                                     (__framac_tmp4 <=
+                                       \at(((size_1 :> integer) - 1),Here))) ==>
+                                    true))) else true),Here)) &&
+                 ((_C_106 : \at((if (\at(0,Here) <=
+                                      \at(((size_1 :> integer) - 1),Here)) then 
+                                (((\offset_min(\at(b,Here)) <= \at(0,Here)) &&
+                                   (\offset_max(\at(b,Here)) >=
+                                     \at(((size_1 :> integer) - 1),Here))) &&
+                                  (\forall integer __framac_tmp5;
+                                    (((\at(0,Here) <= __framac_tmp5) &&
+                                       (__framac_tmp5 <=
+                                         \at(((size_1 :> integer) - 1),Here))) ==>
+                                      true))) else true),Here)) &&
+                   (_C_107 : (\forall integer i_2;
+                               (((0 <= i_2) && (i_2 < (size_1 :> integer))) ==>
+                                 (((- 2147483648) <=
+                                    (((a_1 + i_2).intM :> integer) +
+                                      ((b + i_2).intM :> integer))) &&
+                                   ((((a_1 + i_2).intM :> integer) +
+                                      ((b + i_2).intM :> integer)) <=
+                                     2147483647)))))))));
+behavior default:
+  assigns (result + [0..((size_1 :> integer) - 1)]).intM;
+  ensures (_C_102 : (\forall integer i_3;
+                      (((0 <= i_3) && (i_3 < (\at(size_1,Old) :> integer))) ==>
+                        (((\at(result,Old) + i_3).intM :> integer) ==
+                          ((((\at(a_1,Old) + i_3).intM :> integer) +
+                             ((\at(b,Old) + i_3).intM :> integer)) /
+                            2)))));
+{  
+   (var int32 i_5);
+   
+   {  (_C_81 : (i_5 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_84 : ((_C_85 : ((0 :> int32) <= i_5)) &&
+                             (_C_86 : (i_5 <= size_1))));
+      behavior default:
+        invariant (_C_83 : (\forall integer j_0;
+                             (((0 <= j_0) && (j_0 < (i_5 :> integer))) ==>
+                               (((result + j_0).intM :> integer) ==
+                                 ((((a_1 + j_0).intM :> integer) +
+                                    ((b + j_0).intM :> integer)) /
+                                   2)))));
+      variant (_C_82 : ((size_1 :> integer) - (i_5 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_87 : (i_5 < size_1)) then () else 
+            (goto while_0_break));
+            (_C_98 : ((_C_97 : (_C_96 : (result + i_5)).intM) = (_C_95 : (
+                                                                (_C_94 : 
+                                                                ((_C_93 : (
+                                                                 (_C_92 : 
+                                                                 ((_C_91 : 
+                                                                  (_C_90 : 
+                                                                  (a_1 +
+                                                                    i_5)).intM) +
+                                                                   (_C_89 : 
+                                                                   (_C_88 : 
+                                                                   (b +
+                                                                    i_5)).intM))) :> int32)) /
+                                                                  (2 :> int32))) :> int32))));
+            (_C_101 : (i_5 = (_C_100 : ((_C_99 : (i_5 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit arrays_sum(intP[..] result_0, intP[..] a_2, intP[..] b_0, int32 size_2)
+  requires ((_C_128 : (size_2 >= (0 :> int32))) &&
+             ((_C_129 : \at((if (\at(0,Here) <=
+                                  \at(((size_2 :> integer) - 1),Here)) then 
+                            (((\offset_min(\at(result_0,Here)) <=
+                                \at(0,Here)) &&
+                               (\offset_max(\at(result_0,Here)) >=
+                                 \at(((size_2 :> integer) - 1),Here))) &&
+                              (\forall integer __framac_tmp6;
+                                (((\at(0,Here) <= __framac_tmp6) &&
+                                   (__framac_tmp6 <=
+                                     \at(((size_2 :> integer) - 1),Here))) ==>
+                                  true))) else true),Here)) &&
+               ((_C_130 : \at((if (\at(0,Here) <=
+                                    \at(((size_2 :> integer) - 1),Here)) then 
+                              (((\offset_min(\at(a_2,Here)) <= \at(0,Here)) &&
+                                 (\offset_max(\at(a_2,Here)) >=
+                                   \at(((size_2 :> integer) - 1),Here))) &&
+                                (\forall integer __framac_tmp7;
+                                  (((\at(0,Here) <= __framac_tmp7) &&
+                                     (__framac_tmp7 <=
+                                       \at(((size_2 :> integer) - 1),Here))) ==>
+                                    true))) else true),Here)) &&
+                 ((_C_131 : \at((if (\at(0,Here) <=
+                                      \at(((size_2 :> integer) - 1),Here)) then 
+                                (((\offset_min(\at(b_0,Here)) <= \at(0,Here)) &&
+                                   (\offset_max(\at(b_0,Here)) >=
+                                     \at(((size_2 :> integer) - 1),Here))) &&
+                                  (\forall integer __framac_tmp8;
+                                    (((\at(0,Here) <= __framac_tmp8) &&
+                                       (__framac_tmp8 <=
+                                         \at(((size_2 :> integer) - 1),Here))) ==>
+                                      true))) else true),Here)) &&
+                   (_C_132 : (\forall integer i_4;
+                               (((0 <= i_4) && (i_4 < (size_2 :> integer))) ==>
+                                 (((- 2147483648) <=
+                                    (((a_2 + i_4).intM :> integer) +
+                                      ((b_0 + i_4).intM :> integer))) &&
+                                   ((((a_2 + i_4).intM :> integer) +
+                                      ((b_0 + i_4).intM :> integer)) <=
+                                     2147483647)))))))));
+behavior default:
+  assigns (result_0 + [0..((size_2 :> integer) - 1)]).intM;
+  ensures (_C_127 : (\forall integer i_5;
+                      (((0 <= i_5) && (i_5 < (\at(size_2,Old) :> integer))) ==>
+                        (((\at(result_0,Old) + i_5).intM :> integer) ==
+                          (((\at(a_2,Old) + i_5).intM :> integer) +
+                            ((\at(b_0,Old) + i_5).intM :> integer))))));
+{  
+   (var int32 i_6);
+   
+   {  (_C_108 : (i_6 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_111 : ((_C_112 : ((0 :> int32) <= i_6)) &&
+                              (_C_113 : (i_6 <= size_2))));
+      behavior default:
+        invariant (_C_110 : (\forall integer j_1;
+                              (((0 <= j_1) && (j_1 < (i_6 :> integer))) ==>
+                                (((result_0 + j_1).intM :> integer) ==
+                                  (((a_2 + j_1).intM :> integer) +
+                                    ((b_0 + j_1).intM :> integer))))));
+      variant (_C_109 : ((size_2 :> integer) - (i_6 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_114 : (i_6 < size_2)) then () else 
+            (goto while_0_break));
+            (_C_123 : ((_C_122 : (_C_121 : (result_0 + i_6)).intM) = 
+            (_C_120 : ((_C_119 : ((_C_118 : (_C_117 : (a_2 + i_6)).intM) +
+                                   (_C_116 : (_C_115 : (b_0 + i_6)).intM))) :> int32))));
+            (_C_126 : (i_6 = (_C_125 : ((_C_124 : (i_6 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+int32 average(int32 a_3, int32 b_1)
+behavior default:
+  assigns \nothing;
+  ensures (_C_166 : ((\result :> integer) ==
+                      (((\at(a_3,Old) :> integer) +
+                         (\at(b_1,Old) :> integer)) /
+                        2)));
+{  
+   (var int32 average_0);
+   
+   (var int32 greater);
+   
+   (var int32 smaller);
+   
+   {  (_C_133 : (average_0 = (0 :> int32)));
+      (if (_C_138 : (a_3 > b_1)) then 
+      {  (_C_136 : (greater = a_3));
+         (_C_137 : (smaller = b_1))
+      } else 
+      {  (_C_134 : (greater = b_1));
+         (_C_135 : (smaller = a_3))
+      });
+      (if (_C_147 : (a_3 >= (0 :> int32))) then (if (_C_146 : (b_1 >=
+                                                                (0 :> int32))) then 
+                                                (_C_145 : (average_0 = 
+                                                (_C_144 : ((_C_143 : 
+                                                           (smaller +
+                                                             (_C_142 : (
+                                                             (_C_141 : 
+                                                             ((_C_140 : (
+                                                              (_C_139 : 
+                                                              (greater -
+                                                                smaller)) :> int32)) /
+                                                               (2 :> int32))) :> int32)))) :> int32)))) else 
+                                                (goto _LAND_3)) else 
+      (goto _LAND_3));
+      
+      (goto _LAND_4);
+      (_LAND_3 : ());
+      (if (_C_156 : (a_3 < (0 :> int32))) then (if (_C_155 : (b_1 <
+                                                               (0 :> int32))) then 
+                                               (_C_154 : (average_0 = 
+                                               (_C_153 : ((_C_152 : (greater +
+                                                                    (_C_151 : (
+                                                                    (_C_150 : 
+                                                                    ((_C_149 : (
+                                                                    (_C_148 : 
+                                                                    (smaller -
+                                                                    greater)) :> int32)) /
+                                                                    (2 :> int32))) :> int32)))) :> int32)))) else 
+                                               (goto _LAND_1)) else 
+      (goto _LAND_1));
+      
+      (goto _LAND_2);
+      (_LAND_1 : ());
+      (if (_C_158 : (a_3 >= (0 :> int32))) then (if (_C_157 : (b_1 <=
+                                                                (0 :> int32))) then 
+                                                (goto _LOR) else 
+                                                (goto _LAND)) else 
+      (goto _LAND));
+      (_LAND : ());
+      (if (_C_160 : (a_3 <= (0 :> int32))) then (if (_C_159 : (b_1 >=
+                                                                (0 :> int32))) then 
+                                                (goto _LOR) else ()) else ());
+      
+      (goto _LOR_0);
+      (_LOR : (_LOR : (_C_165 : (average_0 = (_C_164 : ((_C_163 : ((_C_162 : (
+                                                                   (_C_161 : 
+                                                                   (a_3 +
+                                                                    b_1)) :> int32)) /
+                                                                    (2 :> int32))) :> int32))))));
+      (_LOR_0 : ());
+      (_LAND_2 : ());
+      (_LAND_4 : ());
+      
+      (return average_0)
+   }
+}
+
+intP[..] bsearch(intP[..] a_4, uint32 n_2, int32 key)
+  requires ((_C_210 : \at((if (\at(0,Here) <=
+                                \at(((n_2 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(a_4,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(a_4,Here)) >=
+                               \at(((n_2 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp9;
+                              (((\at(0,Here) <= __framac_tmp9) &&
+                                 (__framac_tmp9 <=
+                                   \at(((n_2 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)) &&
+             (_C_211 : (\forall integer i_11;
+                         (\forall integer j_2;
+                           ((((0 <= i_11) && (i_11 < j_2)) &&
+                              (j_2 < (n_2 :> integer))) ==>
+                             ((a_4 + i_11).intM <= (a_4 + j_2).intM))))));
+behavior default:
+  assigns \nothing;
+  ensures true;
+behavior NOT_EXISTS:
+  assumes (\forall integer i_10;
+            (((0 <= i_10) && (i_10 < (n_2 :> integer))) ==>
+              ((a_4 + i_10).intM != key)));
+  ensures (_C_204 : (\result == null));
+behavior EXISTS:
+  assumes (\exists integer i_8;
+            (((0 <= i_8) && (i_8 < (n_2 :> integer))) &&
+              ((a_4 + i_8).intM == key)));
+  ensures (_C_205 : ((_C_206 : (\exists integer i_9;
+                                 (((0 <= i_9) &&
+                                    (i_9 < (\at(n_2,Old) :> integer))) &&
+                                   (\result == (\at(a_4,Old) + i_9))))) &&
+                      (_C_207 : (\result.intM == \at(key,Old)))));
+{  
+   (check (disjoint_behaviors : (! ((\forall integer i_10;
+                                      (((0 <= i_10) &&
+                                         (i_10 < (n_2 :> integer))) ==>
+                                        ((a_4 + i_10).intM != key))) &&
+                                     (\exists integer i_8;
+                                       (((0 <= i_8) &&
+                                          (i_8 < (n_2 :> integer))) &&
+                                         ((a_4 + i_8).intM == key)))))));
+   
+   (check (complete_behaviors : ((\exists integer i_8;
+                                   (((0 <= i_8) && (i_8 < (n_2 :> integer))) &&
+                                     ((a_4 + i_8).intM == key))) ||
+                                  (\forall integer i_10;
+                                    (((0 <= i_10) &&
+                                       (i_10 < (n_2 :> integer))) ==>
+                                      ((a_4 + i_10).intM != key))))));
+   
+   (var uint32 left);
+   
+   (var int64 right);
+   
+   (var uint32 m);
+   
+   (var intP[..] __retres_0);
+   
+   {  (_C_167 : (left = (0 :> uint32)));
+      (_C_171 : (right = (_C_170 : ((_C_169 : ((_C_168 : (n_2 :> int64)) -
+                                                (1 :> int64))) :> int64))));
+      
+      loop 
+      behavior default:
+        invariant (_C_176 : (0 <= (left :> integer)));
+      behavior default:
+        invariant (_C_175 : ((right :> integer) < (n_2 :> integer)));
+      behavior default:
+        invariant (_C_174 : (\forall integer i_6;
+                              ((((0 <= i_6) && (i_6 < (n_2 :> integer))) &&
+                                 ((a_4 + i_6).intM == key)) ==>
+                                (((left :> integer) <= i_6) &&
+                                  (i_6 <= (right :> integer))))));
+      behavior default:
+        invariant (_C_173 : (\forall integer i_7;
+                              ((((0 <= i_7) && (i_7 < (n_2 :> integer))) &&
+                                 ((a_4 + i_7).intM == key)) ==>
+                                (((a_4 + (left :> integer)).intM <= key) &&
+                                  (key <= (a_4 + (right :> integer)).intM)))));
+      variant (_C_172 : ((right :> integer) - (left :> integer)));
+      while (true)
+      {  
+         {  (if (_C_178 : ((_C_177 : (left :> int64)) <= right)) then () else 
+            (goto while_0_break));
+            
+            {  (_C_187 : (m = (_C_186 : ((_C_185 : ((_C_184 : (left :> int64)) +
+                                                     (_C_183 : ((_C_182 : 
+                                                                ((_C_181 : (
+                                                                 (_C_180 : 
+                                                                 (right -
+                                                                   (_C_179 : (left :> int64)))) :> int64)) /
+                                                                  (2 :> int64))) :> int64)))) :> uint32))));
+               (if (_C_202 : ((_C_201 : (_C_200 : (a_4 + m)).intM) < key)) then 
+               (_C_199 : (left = (_C_198 : ((_C_197 : (m + (1 :> uint32))) :> uint32)))) else 
+               (if (_C_196 : ((_C_195 : (_C_194 : (a_4 + m)).intM) > key)) then 
+               (_C_193 : (right = (_C_192 : ((_C_191 : ((_C_190 : (m :> int64)) -
+                                                         (1 :> int64))) :> int64)))) else 
+               {  (_C_189 : (__retres_0 = (_C_188 : (a_4 + m))));
+                  
+                  (goto return_label)
+               }))
+            }
+         }
+      };
+      (while_0_break : ());
+      (_C_203 : (__retres_0 = null));
+      (return_label : 
+      (return __retres_0))
+   }
+}
+
+uint32 distance(uint32 a_5, uint32 b_2)
+  requires (_C_220 : true);
+behavior default:
+  assigns \nothing;
+  ensures (_C_219 : ((\result :> integer) ==
+                      (\integer_max((\at(a_5,Old) :> integer),
+                                    (\at(b_2,Old) :> integer)) -
+                        \integer_min((\at(a_5,Old) :> integer),
+                                     (\at(b_2,Old) :> integer)))));
+{  
+   (var uint32 tmp);
+   
+   {  (if (_C_218 : (a_5 > b_2)) then (_C_217 : (tmp = (_C_216 : ((_C_215 : 
+                                                                  (a_5 -
+                                                                    b_2)) :> uint32)))) else 
+      (_C_214 : (tmp = (_C_213 : ((_C_212 : (b_2 - a_5)) :> uint32)))));
+      
+      (return tmp)
+   }
+}
+
+uint32 distance_abs(int32 a_6, int32 b_3)
+  requires ((_C_243 : true) &&
+             ((_C_244 : ((a_6 :> integer) > (- 2147483648))) &&
+               (_C_245 : ((b_3 :> integer) > (- 2147483648)))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_242 : ((\result :> integer) ==
+                      \integer_abs((\integer_abs((\at(a_6,Old) :> integer)) -
+                                     \integer_abs((\at(b_3,Old) :> integer))))));
+{  
+   (var uint32 ua);
+   
+   (var int32 tmp_0);
+   
+   (var uint32 ub);
+   
+   (var int32 tmp_0_0);
+   
+   (var uint32 tmp_1);
+   
+   {  (if (_C_225 : (a_6 < (0 :> int32))) then (_C_224 : (tmp_0 = (_C_223 : (
+                                                                  (_C_222 : 
+                                                                  (- a_6)) :> int32)))) else 
+      (_C_221 : (tmp_0 = a_6)));
+      (_C_227 : (ua = (_C_226 : (tmp_0 :> uint32))));
+      (if (_C_232 : (b_3 < (0 :> int32))) then (_C_231 : (tmp_0_0 = (_C_230 : (
+                                                                    (_C_229 : 
+                                                                    (- b_3)) :> int32)))) else 
+      (_C_228 : (tmp_0_0 = b_3)));
+      (_C_234 : (ub = (_C_233 : (tmp_0_0 :> uint32))));
+      (if (_C_241 : (ua > ub)) then (_C_240 : (tmp_1 = (_C_239 : ((_C_238 : 
+                                                                  (ua -
+                                                                    ub)) :> uint32)))) else 
+      (_C_237 : (tmp_1 = (_C_236 : ((_C_235 : (ub - ua)) :> uint32)))));
+      
+      (return tmp_1)
+   }
+}
+
+axiomatic Factorial {
+
+  logic integer factorial(integer i_12)
+   
+  axiom nil :
+  (_C_246 : (factorial(0) == 1))
+   
+  axiom step :
+  (_C_247 : (\forall integer i_13;
+              ((i_13 >= 0) ==>
+                (factorial(i_13) == (factorial((i_13 - 1)) * i_13)))))
+   
+  lemma non_negative :
+  (_C_248 : (\forall integer i_14;
+              ((i_14 >= 0) ==> (factorial(i_14) > 0))))
+  
+}
+
+uint64 factorial(uint32 i)
+  requires (_C_262 : (factorial((i :> integer)) <= 18446744073709551615UL));
+behavior default:
+  assigns \nothing;
+  ensures (_C_261 : ((\result :> integer) ==
+                      factorial((\at(i,Old) :> integer))));
+{  
+   (var uint64 f);
+   
+   (var uint32 tmp_1_0);
+   
+   {  (_C_249 : (f = (1 :> uint64)));
+      
+      loop 
+      behavior default:
+        invariant (_C_251 : (0 <= (i :> integer)));
+      behavior default:
+        
+        assigns f,
+        i;
+      variant (_C_250 : i);
+      while (true)
+      {  
+         {  (if (_C_252 : ((i :> uint32) != (0 :> uint32))) then () else 
+            (goto while_0_break));
+            
+            {  
+               {  (_C_253 : (tmp_1_0 = i));
+                  (_C_256 : (i = (_C_255 : ((_C_254 : (i - (1 :> uint32))) :> uint32))));
+                  (_C_260 : (f = (_C_259 : ((_C_258 : (f *
+                                                        (_C_257 : (tmp_1_0 :> uint64)))) :> uint64))))
+               }
+            }
+         }
+      };
+      (while_0_break : ());
+      
+      (return f)
+   }
+}
+
+predicate factorial_ind(integer i_15, integer f) {
+case nil: factorial_ind(0, 1);
+  
+  case step_inc: (\forall integer i_16;
+                   (\forall integer f_0;
+                     (factorial_ind((i_16 - 1), f_0) ==>
+                       factorial_ind(i_16, (f_0 * i_16)))));
+  
+}
+
+lemma factorial_ind_20 :
+(_C_263 : factorial_ind(20, 2432902008176640000))
+
+lemma increasing :
+(_C_264 : (\forall integer i1;
+            (\forall integer i2;
+              (\forall integer f1;
+                (\forall integer f2;
+                  ((((i2 >= i1) && factorial_ind(i1, f1)) &&
+                     factorial_ind(i2, f2)) ==>
+                    (f2 >= f1)))))))
+
+uint64 factorial_rec(uint32 i_0)
+  requires (_C_276 : ((i_0 :> integer) <= 20));
+  decreases (_C_277 : i_0);
+behavior default:
+  assigns \nothing;
+  ensures (_C_275 : factorial_ind((\at(i_0,Old) :> integer),
+                                  (\result :> integer)));
+{  
+   (var uint64 tmp_1_1);
+   
+   (var uint64 __retres_1);
+   
+   {  (if (_C_274 : (i_0 == (0 :> uint32))) then 
+      {  (_C_273 : (__retres_1 = (1 :> uint64)));
+         
+         (goto return_label)
+      } else 
+      {  
+         {  (_C_268 : (tmp_1_1 = (_C_267 : factorial_rec((_C_266 : ((_C_265 : 
+                                                                    (i_0 -
+                                                                    (1 :> uint32))) :> uint32))))));
+            ()
+         };
+         (_C_272 : (__retres_1 = (_C_271 : ((_C_270 : (tmp_1_1 *
+                                                        (_C_269 : (i_0 :> uint64)))) :> uint64))));
+         
+         (goto return_label)
+      });
+      (return_label : 
+      (return __retres_1))
+   }
+}
+
+axiomatic Power {
+
+  logic integer power_int_pos(integer b_7, integer p)
+   
+  axiom power_nil :
+  (_C_278 : (\forall integer b_8;
+              (power_int_pos(b_8, 0) == 1)))
+   
+  axiom power_step :
+  (_C_279 : (\forall integer b_9;
+              (\forall integer p_0;
+                ((p_0 >= 0) ==>
+                  (power_int_pos(b_9, (p_0 + 1)) ==
+                    (b_9 * power_int_pos(b_9, p_0)))))))
+   
+  lemma power_alt_step :
+  (_C_280 : (\forall integer b_10;
+              (\forall integer p_1;
+                ((p_1 > 0) ==>
+                  (power_int_pos(b_10, p_1) ==
+                    (b_10 * power_int_pos(b_10, (p_1 - 1))))))))
+   
+  lemma power_one :
+  (_C_281 : (\forall integer b_11;
+              (power_int_pos(b_11, 1) == b_11)))
+   
+  lemma power_sum :
+  (_C_282 : (\forall integer b_12;
+              (\forall integer p1_1;
+                (\forall integer p2_1;
+                  (((p1_1 >= 0) && (p2_1 >= 0)) ==>
+                    (power_int_pos(b_12, (p1_1 + p2_1)) ==
+                      (power_int_pos(b_12, p1_1) * power_int_pos(b_12, p2_1))))))))
+   
+  lemma power_mult_1 :
+  (_C_283 : (\forall integer b_13;
+              (\forall integer p1_2;
+                (\forall integer p2_2;
+                  (((p1_2 >= 0) && (p2_2 >= 0)) ==>
+                    (power_int_pos(b_13, (p1_2 * p2_2)) ==
+                      power_int_pos(power_int_pos(b_13, p1_2), p2_2)))))))
+   
+  lemma power_mult_2 :
+  (_C_284 : (\forall integer b1;
+              (\forall integer b2;
+                (\forall integer p_2;
+                  ((p_2 >= 0) ==>
+                    (power_int_pos((b1 * b2), p_2) ==
+                      (power_int_pos(b1, p_2) * power_int_pos(b2, p_2))))))))
+   
+  lemma power_non_negative :
+  (_C_285 : (\forall integer b_14;
+              (\forall integer p_3;
+                (((b_14 >= 0) && (p_3 >= 0)) ==>
+                  (power_int_pos(b_14, p_3) >= 0)))))
+   
+  lemma power_monotonic :
+  (_C_286 : (\forall integer b_15;
+              (\forall integer p1_3;
+                (\forall integer p2_3;
+                  ((((b_15 > 0) && (0 <= p1_3)) && (p1_3 <= p2_3)) ==>
+                    (power_int_pos(b_15, p1_3) <= power_int_pos(b_15, p2_3)))))))
+  
+}
+
+axiomatic Fib {
+
+  logic integer fib(integer i_17)
+   
+  axiom fib_nil :
+  (_C_287 : (fib(0) == 0))
+   
+  axiom fib_one :
+  (_C_288 : (fib(1) == 1))
+   
+  axiom fib_step_positive :
+  (_C_289 : (\forall integer i_18;
+              ((i_18 >= 2) ==>
+                (fib(i_18) == (fib((i_18 - 1)) + fib((i_18 - 2)))))))
+   
+  axiom fib_step_negative :
+  (_C_290 : (\forall integer i_19;
+              ((i_19 < 0) ==>
+                (fib(i_19) == (fib((i_19 + 2)) - fib((i_19 + 1)))))))
+   
+  lemma fib_non_negative :
+  (_C_291 : (\forall integer i_20;
+              ((i_20 >= 0) ==> (fib(i_20) >= 0))))
+   
+  lemma fib_non_negative_increasing :
+  (_C_292 : (\forall integer i_21;
+              (\forall integer j_3;
+                ((((i_21 >= 0) && (j_3 >= 0)) && (i_21 >= j_3)) ==>
+                  (fib(i_21) >= fib(j_3))))))
+   
+  lemma fib_negative_positive_1 :
+  (_C_293 : (\forall integer i_22;
+              ((i_22 < 0) ==>
+                (fib(i_22) ==
+                  (power_int_pos((- 1), (i_22 + 1)) * fib((- i_22)))))))
+   
+  lemma fib_negative_positive_2 :
+  (_C_294 : (\forall integer i_23;
+              ((i_23 < 0) ==> (\integer_abs(fib(i_23)) == fib((- i_23))))))
+  
+}
+
+int32 fib_rec(int32 i_1)
+  requires (_C_325 : ((_C_326 : ((- 2147483648) <= fib((i_1 :> integer)))) &&
+                       (_C_327 : (fib((i_1 :> integer)) <= 2147483647))));
+  decreases (_C_328 : \integer_abs((i_1 :> integer)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_324 : ((\result :> integer) == fib((\at(i_1,Old) :> integer))));
+{  
+   (var int32 tmp_1_2);
+   
+   (var int32 tmp_0_1);
+   
+   (var int32 tmp_1_3);
+   
+   (var int32 tmp_2);
+   
+   (var int32 __retres_2);
+   
+   {  (if (_C_298 : (i_1 == (0 :> int32))) then 
+      {  (_C_297 : (__retres_2 = i_1));
+         
+         (goto return_label)
+      } else (if (_C_296 : (i_1 == (1 :> int32))) then 
+             {  (_C_295 : (__retres_2 = i_1));
+                
+                (goto return_label)
+             } else ()));
+      (if (_C_300 : (i_1 == (-1 :> int32))) then 
+      {  (_C_299 : (__retres_2 = (1 :> int32)));
+         
+         (goto return_label)
+      } else ());
+      (if (_C_323 : (i_1 > (0 :> int32))) then 
+      {  
+         {  (_C_315 : (tmp_1_2 = (_C_314 : fib_rec((_C_313 : ((_C_312 : 
+                                                              (i_1 -
+                                                                (1 :> int32))) :> int32))))));
+            (_C_319 : (tmp_0_1 = (_C_318 : fib_rec((_C_317 : ((_C_316 : 
+                                                              (i_1 -
+                                                                (2 :> int32))) :> int32))))))
+         };
+         (_C_322 : (__retres_2 = (_C_321 : ((_C_320 : (tmp_1_2 + tmp_0_1)) :> int32))));
+         
+         (goto return_label)
+      } else 
+      {  
+         {  (_C_304 : (tmp_1_3 = (_C_303 : fib_rec((_C_302 : ((_C_301 : 
+                                                              (i_1 +
+                                                                (2 :> int32))) :> int32))))));
+            (_C_308 : (tmp_2 = (_C_307 : fib_rec((_C_306 : ((_C_305 : 
+                                                            (i_1 +
+                                                              (1 :> int32))) :> int32))))))
+         };
+         (_C_311 : (__retres_2 = (_C_310 : ((_C_309 : (tmp_1_3 - tmp_2)) :> int32))));
+         
+         (goto return_label)
+      });
+      (return_label : 
+      (return __retres_2))
+   }
+}
+
+unit max_max(intP[..] a_7, uint32 size_5, int_xP[..] max1, int_xP[..] max2)
+  requires ((_C_390 : \at((if (\at(0,Here) <=
+                                \at(((size_5 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(a_7,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(a_7,Here)) >=
+                               \at(((size_5 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp12;
+                              (((\at(0,Here) <= __framac_tmp12) &&
+                                 (__framac_tmp12 <=
+                                   \at(((size_5 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)) &&
+             (_C_391 : ((_C_392 : \at((((\offset_min(\at(max1,Here)) <=
+                                          \at(0,Here)) &&
+                                         (\offset_max(\at(max1,Here)) >=
+                                           \at(0,Here))) &&
+                                        true),Here)) &&
+                         (_C_393 : \at((((\offset_min(\at(max2,Here)) <=
+                                           \at(0,Here)) &&
+                                          (\offset_max(\at(max2,Here)) >=
+                                            \at(0,Here))) &&
+                                         true),Here)))));
+behavior default:
+  ensures true;
+behavior zero_size:
+  assumes ((size_5 :> integer) == 0);
+  assigns \nothing;
+  ensures (_C_370 : ((_C_371 : (\at(max1,Old) == \at(max1,Old))) &&
+                      (_C_372 : (\at(max2,Old) == \at(max2,Old)))));
+behavior positive_size:
+  assumes ((size_5 :> integer) > 0);
+  assigns max1.int_xM,
+  max2.int_xM;
+  ensures (_C_373 : (((_C_375 : \at(\at((((\offset_min(\at(max1,Old)) <=
+                                            \at(0,Old)) &&
+                                           (\offset_max(\at(max1,Old)) >=
+                                             \at(0,Old))) &&
+                                          true),Here),Old)) &&
+                       (_C_376 : \at(\at((((\offset_min(\at(max2,Old)) <=
+                                             \at(0,Old)) &&
+                                            (\offset_max(\at(max2,Old)) >=
+                                              \at(0,Old))) &&
+                                           true),Here),Old))) &&
+                      ((_C_378 : (\exists integer i_24;
+                                   (((0 <= i_24) &&
+                                      (i_24 < (\at(size_5,Old) :> integer))) &&
+                                     ((\at(a_7,Old) + i_24) ==
+                                       \at(max1,Old).int_xM)))) &&
+                        ((_C_380 : (\exists integer i_25;
+                                     (((0 <= i_25) &&
+                                        (i_25 < (\at(size_5,Old) :> integer))) &&
+                                       ((\at(a_7,Old) + i_25) ==
+                                         \at(max2,Old).int_xM)))) &&
+                          ((_C_382 : (\at(max1,Old).int_xM.intM >=
+                                       \at(max2,Old).int_xM.intM)) &&
+                            ((_C_384 : (\forall integer i_26;
+                                         (((0 <= i_26) &&
+                                            (i_26 <
+                                              (\at(size_5,Old) :> integer))) ==>
+                                           ((\at(a_7,Old) + i_26).intM <=
+                                             \at(max1,Old).int_xM.intM)))) &&
+                              ((_C_386 : (\exists integer i_27;
+                                           ((((0 <= i_27) &&
+                                               (i_27 <
+                                                 (\at(size_5,Old) :> integer))) &&
+                                              ((\at(a_7,Old) + i_27).intM >=
+                                                \at(max2,Old).int_xM.intM)) &&
+                                             ((\at(a_7,Old) + i_27).intM ==
+                                               \at(max1,Old).int_xM.intM)))) &&
+                                (_C_387 : (! (\exists integer i_28;
+                                               (\exists integer j_9;
+                                                 ((((((((0 <= i_28) &&
+                                                         (i_28 <
+                                                           (\at(size_5,Old) :> integer))) &&
+                                                        (0 <= j_9)) &&
+                                                       (j_9 <
+                                                         (\at(size_5,Old) :> integer))) &&
+                                                      (i_28 != j_9)) &&
+                                                     ((\at(a_7,Old) + i_28).intM >
+                                                       \at(max2,Old).int_xM.intM)) &&
+                                                    ((\at(a_7,Old) + j_9).intM >
+                                                      \at(max2,Old).int_xM.intM)) &&
+                                                   ((\at(a_7,Old) + i_28).intM >
+                                                     (\at(a_7,Old) + j_9).intM)))))))))))));
+{  
+   (check (disjoint_behaviors : (! (((size_5 :> integer) == 0) &&
+                                     ((size_5 :> integer) > 0)))));
+   
+   (check (complete_behaviors : (((size_5 :> integer) > 0) ||
+                                  ((size_5 :> integer) == 0))));
+   
+   (var uint32 i_7);
+   
+   {  (if (_C_369 : (size_5 > (0 :> uint32))) then 
+      {  (_C_331 : ((_C_330 : max1.int_xM) = (_C_329 : (a_7 + (0 :> int32)))));
+         (_C_334 : ((_C_333 : max2.int_xM) = (_C_332 : max1.int_xM)));
+         (_C_335 : (i_7 = (1 :> uint32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_343 : ((_C_344 : (0 < (i_7 :> integer))) &&
+                                 (_C_345 : (i_7 <= size_5))));
+         behavior default:
+           invariant (_C_342 : (\exists integer j_4;
+                                 (((0 <= j_4) && (j_4 < (i_7 :> integer))) &&
+                                   ((a_7 + j_4) == max1.int_xM))));
+         behavior default:
+           invariant (_C_341 : (\exists integer j_5;
+                                 (((0 <= j_5) && (j_5 < (i_7 :> integer))) &&
+                                   ((a_7 + j_5) == max2.int_xM))));
+         behavior default:
+           invariant (_C_340 : (max1.int_xM.intM >= max2.int_xM.intM));
+         behavior default:
+           invariant (_C_339 : (\forall integer j_6;
+                                 (((0 <= j_6) && (j_6 < (i_7 :> integer))) ==>
+                                   ((a_7 + j_6).intM <= max1.int_xM.intM))));
+         behavior default:
+           invariant (_C_338 : (\exists integer j_7;
+                                 ((((0 <= j_7) && (j_7 < (i_7 :> integer))) &&
+                                    ((a_7 + j_7).intM >= max2.int_xM.intM)) &&
+                                   ((a_7 + j_7).intM == max1.int_xM.intM))));
+         behavior default:
+           invariant (_C_337 : (! (\exists integer j_8;
+                                    (\exists integer k_1;
+                                      ((((((((0 <= j_8) &&
+                                              (j_8 < (i_7 :> integer))) &&
+                                             (0 <= k_1)) &&
+                                            (k_1 < (i_7 :> integer))) &&
+                                           (j_8 != k_1)) &&
+                                          ((a_7 + j_8).intM >
+                                            max2.int_xM.intM)) &&
+                                         ((a_7 + k_1).intM >
+                                           max2.int_xM.intM)) &&
+                                        ((a_7 + k_1).intM > (a_7 + j_8).intM))))));
+         behavior default:
+           
+           assigns max1.int_xM,
+           max2.int_xM;
+         variant (_C_336 : ((size_5 :> integer) - (i_7 :> integer)));
+         while (true)
+         {  
+            {  (if (_C_346 : (i_7 < size_5)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_365 : ((_C_364 : (_C_363 : (a_7 + i_7)).intM) >
+                                  (_C_362 : (_C_361 : max1.int_xM).intM))) then 
+                  {  (_C_357 : ((_C_356 : max2.int_xM) = (_C_355 : max1.int_xM)));
+                     (_C_360 : ((_C_359 : max1.int_xM) = (_C_358 : (a_7 +
+                                                                    i_7))))
+                  } else (if (_C_354 : ((_C_353 : (_C_352 : (a_7 + i_7)).intM) >
+                                         (_C_351 : (_C_350 : max2.int_xM).intM))) then 
+                         (_C_349 : ((_C_348 : max2.int_xM) = (_C_347 : 
+                                                             (a_7 +
+                                                               i_7)))) else ()))
+               };
+               (_C_368 : (i_7 = (_C_367 : ((_C_366 : (i_7 + (1 :> uint32))) :> uint32))))
+            }
+         };
+         (while_0_break : ())
+      } else ());
+      
+      (return ())
+   }
+}
+
+unit max_min(intP[..] a_8, uint32 size_6, int_xP[..] max, int_xP[..] min)
+  requires ((_C_442 : \at((if (\at(0,Here) <=
+                                \at(((size_6 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(a_8,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(a_8,Here)) >=
+                               \at(((size_6 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp15;
+                              (((\at(0,Here) <= __framac_tmp15) &&
+                                 (__framac_tmp15 <=
+                                   \at(((size_6 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)) &&
+             ((_C_443 : \at((((\offset_min(\at(max,Here)) <= \at(0,Here)) &&
+                               (\offset_max(\at(max,Here)) >= \at(0,Here))) &&
+                              true),Here)) &&
+               (_C_444 : \at((((\offset_min(\at(min,Here)) <= \at(0,Here)) &&
+                                (\offset_max(\at(min,Here)) >= \at(0,Here))) &&
+                               true),Here))));
+behavior default:
+  ensures true;
+behavior zero_size:
+  assumes ((size_6 :> integer) == 0);
+  assigns \nothing;
+  ensures (_C_430 : ((_C_431 : (\at(max,Old) == \at(max,Old))) &&
+                      (_C_432 : (\at(min,Old) == \at(min,Old)))));
+behavior positive_size:
+  assumes ((size_6 :> integer) > 0);
+  assigns max.int_xM,
+  min.int_xM;
+  ensures (_C_433 : ((_C_434 : (\exists integer i_29;
+                                 (((0 <= i_29) &&
+                                    (i_29 < (\at(size_6,Old) :> integer))) &&
+                                   ((\at(a_8,Old) + i_29) ==
+                                     \at(max,Old).int_xM)))) &&
+                      ((_C_436 : (\exists integer i_30;
+                                   (((0 <= i_30) &&
+                                      (i_30 < (\at(size_6,Old) :> integer))) &&
+                                     ((\at(a_8,Old) + i_30) ==
+                                       \at(min,Old).int_xM)))) &&
+                        ((_C_438 : (\at(max,Old).int_xM.intM >=
+                                     \at(min,Old).int_xM.intM)) &&
+                          (_C_439 : (\forall integer i_31;
+                                      (((0 <= i_31) &&
+                                         (i_31 <
+                                           (\at(size_6,Old) :> integer))) ==>
+                                        ((\at(max,Old).int_xM.intM >=
+                                           (\at(a_8,Old) + i_31).intM) &&
+                                          ((\at(a_8,Old) + i_31).intM >=
+                                            \at(min,Old).int_xM.intM)))))))));
+{  
+   (check (disjoint_behaviors : (! (((size_6 :> integer) == 0) &&
+                                     ((size_6 :> integer) > 0)))));
+   
+   (check (complete_behaviors : (((size_6 :> integer) > 0) ||
+                                  ((size_6 :> integer) == 0))));
+   
+   (var uint32 i_8);
+   
+   {  (if (_C_429 : (size_6 > (0 :> uint32))) then 
+      {  (_C_396 : ((_C_395 : max.int_xM) = (_C_394 : (a_8 + (0 :> int32)))));
+         (_C_399 : ((_C_398 : min.int_xM) = (_C_397 : max.int_xM)));
+         (_C_400 : (i_8 = (1 :> uint32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_406 : ((_C_407 : (1 <= (i_8 :> integer))) &&
+                                 (_C_408 : (i_8 <= size_6))));
+         behavior default:
+           invariant (_C_405 : (\exists integer j_10;
+                                 (((0 <= j_10) && (j_10 < (i_8 :> integer))) &&
+                                   ((a_8 + j_10) == max.int_xM))));
+         behavior default:
+           invariant (_C_404 : (\exists integer j_11;
+                                 (((0 <= j_11) && (j_11 < (i_8 :> integer))) &&
+                                   ((a_8 + j_11) == min.int_xM))));
+         behavior default:
+           invariant (_C_403 : (max.int_xM.intM >= min.int_xM.intM));
+         behavior default:
+           invariant (_C_402 : (\forall integer j_12;
+                                 (((0 <= j_12) && (j_12 < (i_8 :> integer))) ==>
+                                   ((max.int_xM.intM >= (a_8 + j_12).intM) &&
+                                     ((a_8 + j_12).intM >= min.int_xM.intM)))));
+         behavior default:
+           
+           assigns max.int_xM,
+           min.int_xM;
+         variant (_C_401 : ((size_6 :> integer) - (i_8 :> integer)));
+         while (true)
+         {  
+            {  (if (_C_409 : (i_8 < size_6)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_425 : ((_C_424 : (_C_423 : max.int_xM).intM) <
+                                  (_C_422 : (_C_421 : (a_8 + i_8)).intM))) then 
+                  (_C_420 : ((_C_419 : max.int_xM) = (_C_418 : (a_8 + i_8)))) else 
+                  (if (_C_417 : ((_C_416 : (_C_415 : min.int_xM).intM) >
+                                  (_C_414 : (_C_413 : (a_8 + i_8)).intM))) then 
+                  (_C_412 : ((_C_411 : min.int_xM) = (_C_410 : (a_8 + i_8)))) else ()))
+               };
+               (_C_428 : (i_8 = (_C_427 : ((_C_426 : (i_8 + (1 :> uint32))) :> uint32))))
+            }
+         };
+         (while_0_break : ())
+      } else ());
+      
+      (return ())
+   }
+}
+
+unit min_min(intP[..] a_9, uint32 size_7, int_xP[..] min1, int_xP[..] min2)
+  requires ((_C_506 : \at((if (\at(0,Here) <=
+                                \at(((size_7 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(a_9,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(a_9,Here)) >=
+                               \at(((size_7 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp20;
+                              (((\at(0,Here) <= __framac_tmp20) &&
+                                 (__framac_tmp20 <=
+                                   \at(((size_7 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)) &&
+             (_C_507 : ((_C_508 : \at((((\offset_min(\at(min1,Here)) <=
+                                          \at(0,Here)) &&
+                                         (\offset_max(\at(min1,Here)) >=
+                                           \at(0,Here))) &&
+                                        true),Here)) &&
+                         (_C_509 : \at((((\offset_min(\at(min2,Here)) <=
+                                           \at(0,Here)) &&
+                                          (\offset_max(\at(min2,Here)) >=
+                                            \at(0,Here))) &&
+                                         true),Here)))));
+behavior default:
+  ensures true;
+behavior zero_size:
+  assumes ((size_7 :> integer) == 0);
+  assigns \nothing;
+  ensures (_C_486 : ((_C_487 : (\at(min1,Old) == \at(min1,Old))) &&
+                      (_C_488 : (\at(min2,Old) == \at(min2,Old)))));
+behavior positive_size:
+  assumes ((size_7 :> integer) > 0);
+  assigns min1.int_xM,
+  min2.int_xM;
+  ensures (_C_489 : (((_C_491 : \at(\at((((\offset_min(\at(min1,Old)) <=
+                                            \at(0,Old)) &&
+                                           (\offset_max(\at(min1,Old)) >=
+                                             \at(0,Old))) &&
+                                          true),Here),Old)) &&
+                       (_C_492 : \at(\at((((\offset_min(\at(min2,Old)) <=
+                                             \at(0,Old)) &&
+                                            (\offset_max(\at(min2,Old)) >=
+                                              \at(0,Old))) &&
+                                           true),Here),Old))) &&
+                      ((_C_494 : (\exists integer i_32;
+                                   (((0 <= i_32) &&
+                                      (i_32 < (\at(size_7,Old) :> integer))) &&
+                                     ((\at(a_9,Old) + i_32) ==
+                                       \at(min1,Old).int_xM)))) &&
+                        ((_C_496 : (\exists integer i_33;
+                                     (((0 <= i_33) &&
+                                        (i_33 < (\at(size_7,Old) :> integer))) &&
+                                       ((\at(a_9,Old) + i_33) ==
+                                         \at(min2,Old).int_xM)))) &&
+                          ((_C_498 : (\at(min1,Old).int_xM.intM <=
+                                       \at(min2,Old).int_xM.intM)) &&
+                            ((_C_500 : (\forall integer i_34;
+                                         (((0 <= i_34) &&
+                                            (i_34 <
+                                              (\at(size_7,Old) :> integer))) ==>
+                                           ((\at(a_9,Old) + i_34).intM >=
+                                             \at(min1,Old).int_xM.intM)))) &&
+                              ((_C_502 : (\exists integer i_35;
+                                           ((((0 <= i_35) &&
+                                               (i_35 <
+                                                 (\at(size_7,Old) :> integer))) &&
+                                              ((\at(a_9,Old) + i_35).intM <=
+                                                \at(min2,Old).int_xM.intM)) &&
+                                             ((\at(a_9,Old) + i_35).intM ==
+                                               \at(min1,Old).int_xM.intM)))) &&
+                                (_C_503 : (! (\exists integer i_36;
+                                               (\exists integer j_18;
+                                                 ((((((((0 <= i_36) &&
+                                                         (i_36 <
+                                                           (\at(size_7,Old) :> integer))) &&
+                                                        (0 <= j_18)) &&
+                                                       (j_18 <
+                                                         (\at(size_7,Old) :> integer))) &&
+                                                      (i_36 != j_18)) &&
+                                                     ((\at(a_9,Old) + i_36).intM <
+                                                       \at(min2,Old).int_xM.intM)) &&
+                                                    ((\at(a_9,Old) + j_18).intM <
+                                                      \at(min2,Old).int_xM.intM)) &&
+                                                   ((\at(a_9,Old) + i_36).intM <
+                                                     (\at(a_9,Old) + j_18).intM)))))))))))));
+{  
+   (check (disjoint_behaviors : (! (((size_7 :> integer) == 0) &&
+                                     ((size_7 :> integer) > 0)))));
+   
+   (check (complete_behaviors : (((size_7 :> integer) > 0) ||
+                                  ((size_7 :> integer) == 0))));
+   
+   (var uint32 i_9);
+   
+   {  (if (_C_485 : (size_7 > (0 :> uint32))) then 
+      {  (_C_447 : ((_C_446 : min1.int_xM) = (_C_445 : (a_9 + (0 :> int32)))));
+         (_C_450 : ((_C_449 : min2.int_xM) = (_C_448 : min1.int_xM)));
+         (_C_451 : (i_9 = (1 :> uint32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_459 : ((_C_460 : (0 < (i_9 :> integer))) &&
+                                 (_C_461 : (i_9 <= size_7))));
+         behavior default:
+           invariant (_C_458 : (\exists integer j_13;
+                                 (((0 <= j_13) && (j_13 < (i_9 :> integer))) &&
+                                   ((a_9 + j_13) == min1.int_xM))));
+         behavior default:
+           invariant (_C_457 : (\exists integer j_14;
+                                 (((0 <= j_14) && (j_14 < (i_9 :> integer))) &&
+                                   ((a_9 + j_14) == min2.int_xM))));
+         behavior default:
+           invariant (_C_456 : (min1.int_xM.intM <= min2.int_xM.intM));
+         behavior default:
+           invariant (_C_455 : (\forall integer j_15;
+                                 (((0 <= j_15) && (j_15 < (i_9 :> integer))) ==>
+                                   ((a_9 + j_15).intM >= min1.int_xM.intM))));
+         behavior default:
+           invariant (_C_454 : (\exists integer j_16;
+                                 ((((0 <= j_16) && (j_16 < (i_9 :> integer))) &&
+                                    ((a_9 + j_16).intM <= min2.int_xM.intM)) &&
+                                   ((a_9 + j_16).intM == min1.int_xM.intM))));
+         behavior default:
+           invariant (_C_453 : (! (\exists integer j_17;
+                                    (\exists integer k_2;
+                                      ((((((((0 <= j_17) &&
+                                              (j_17 < (i_9 :> integer))) &&
+                                             (0 <= k_2)) &&
+                                            (k_2 < (i_9 :> integer))) &&
+                                           (j_17 != k_2)) &&
+                                          ((a_9 + j_17).intM <
+                                            min2.int_xM.intM)) &&
+                                         ((a_9 + k_2).intM <
+                                           min2.int_xM.intM)) &&
+                                        ((a_9 + k_2).intM <
+                                          (a_9 + j_17).intM))))));
+         behavior default:
+           
+           assigns min1.int_xM,
+           min2.int_xM;
+         variant (_C_452 : ((size_7 :> integer) - (i_9 :> integer)));
+         while (true)
+         {  
+            {  (if (_C_462 : (i_9 < size_7)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_481 : ((_C_480 : (_C_479 : (a_9 + i_9)).intM) <
+                                  (_C_478 : (_C_477 : min1.int_xM).intM))) then 
+                  {  (_C_473 : ((_C_472 : min2.int_xM) = (_C_471 : min1.int_xM)));
+                     (_C_476 : ((_C_475 : min1.int_xM) = (_C_474 : (a_9 +
+                                                                    i_9))))
+                  } else (if (_C_470 : ((_C_469 : (_C_468 : (a_9 + i_9)).intM) <
+                                         (_C_467 : (_C_466 : min2.int_xM).intM))) then 
+                         (_C_465 : ((_C_464 : min2.int_xM) = (_C_463 : 
+                                                             (a_9 +
+                                                               i_9)))) else ()))
+               };
+               (_C_484 : (i_9 = (_C_483 : ((_C_482 : (i_9 + (1 :> uint32))) :> uint32))))
+            }
+         };
+         (while_0_break : ())
+      } else ());
+      
+      (return ())
+   }
+}
+
+int32 palindrome(intP[..] a_10, uint32 size_8)
+  requires (_C_543 : \at((if (\at(0,Here) <=
+                               \at(((size_8 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a_10,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a_10,Here)) >=
+                              \at(((size_8 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp23;
+                             (((\at(0,Here) <= __framac_tmp23) &&
+                                (__framac_tmp23 <=
+                                  \at(((size_8 :> integer) - 1),Here))) ==>
+                               true))) else true),Here));
+behavior default:
+  assigns \nothing;
+  ensures (_C_534 : ((\result == (0 :> int32)) || (\result == (1 :> int32))));
+behavior nil:
+  assumes ((size_8 :> integer) == 0);
+  ensures (_C_535 : (\result == (1 :> int32)));
+behavior palindrome:
+  assumes (((size_8 :> integer) > 0) &&
+            (\forall integer i_38;
+              (((0 <= i_38) && (i_38 < (size_8 :> integer))) ==>
+                ((a_10 + i_38).intM ==
+                  (a_10 + (((size_8 :> integer) - i_38) - 1)).intM))));
+  ensures (_C_536 : (\result == (1 :> int32)));
+behavior non_palindrome:
+  assumes (((size_8 :> integer) > 0) &&
+            (\exists integer i_37;
+              (((0 <= i_37) && (i_37 < (size_8 :> integer))) &&
+                ((a_10 + i_37).intM !=
+                  (a_10 + (((size_8 :> integer) - i_37) - 1)).intM))));
+  ensures (_C_537 : (\result == (0 :> int32)));
+{  
+   (check (disjoint_behaviors : (! ((((size_8 :> integer) > 0) &&
+                                      (\forall integer i_38;
+                                        (((0 <= i_38) &&
+                                           (i_38 < (size_8 :> integer))) ==>
+                                          ((a_10 + i_38).intM ==
+                                            (a_10 +
+                                              (((size_8 :> integer) - i_38) -
+                                                1)).intM)))) &&
+                                     (((size_8 :> integer) > 0) &&
+                                       (\exists integer i_37;
+                                         (((0 <= i_37) &&
+                                            (i_37 < (size_8 :> integer))) &&
+                                           ((a_10 + i_37).intM !=
+                                             (a_10 +
+                                               (((size_8 :> integer) - i_37) -
+                                                 1)).intM))))))));
+   
+   (check (disjoint_behaviors : (! (((size_8 :> integer) == 0) &&
+                                     (((size_8 :> integer) > 0) &&
+                                       (\forall integer i_38;
+                                         (((0 <= i_38) &&
+                                            (i_38 < (size_8 :> integer))) ==>
+                                           ((a_10 + i_38).intM ==
+                                             (a_10 +
+                                               (((size_8 :> integer) - i_38) -
+                                                 1)).intM))))))));
+   
+   (check (disjoint_behaviors : (! (((size_8 :> integer) == 0) &&
+                                     (((size_8 :> integer) > 0) &&
+                                       (\exists integer i_37;
+                                         (((0 <= i_37) &&
+                                            (i_37 < (size_8 :> integer))) &&
+                                           ((a_10 + i_37).intM !=
+                                             (a_10 +
+                                               (((size_8 :> integer) - i_37) -
+                                                 1)).intM))))))));
+   
+   (check (complete_behaviors : ((((size_8 :> integer) > 0) &&
+                                   (\exists integer i_37;
+                                     (((0 <= i_37) &&
+                                        (i_37 < (size_8 :> integer))) &&
+                                       ((a_10 + i_37).intM !=
+                                         (a_10 +
+                                           (((size_8 :> integer) - i_37) - 1)).intM)))) ||
+                                  ((((size_8 :> integer) > 0) &&
+                                     (\forall integer i_38;
+                                       (((0 <= i_38) &&
+                                          (i_38 < (size_8 :> integer))) ==>
+                                         ((a_10 + i_38).intM ==
+                                           (a_10 +
+                                             (((size_8 :> integer) - i_38) -
+                                               1)).intM)))) ||
+                                    ((size_8 :> integer) == 0)))));
+   
+   (var int32 res_0);
+   
+   (var uint32 i_10);
+   
+   {  (_C_510 : (res_0 = (1 :> int32)));
+      (_C_511 : (i_10 = (0 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_515 : ((_C_516 : (0 <= (i_10 :> integer))) &&
+                              (_C_517 : ((i_10 :> integer) <=
+                                          ((size_8 :> integer) / 2)))));
+      behavior default:
+        invariant (_C_514 : ((\forall integer j_19;
+                               (((0 <= j_19) && (j_19 < (i_10 :> integer))) ==>
+                                 ((a_10 + j_19).intM ==
+                                   (a_10 +
+                                     (((size_8 :> integer) - j_19) - 1)).intM))) <==>
+                              (res_0 == (1 :> int32))));
+      behavior default:
+        invariant (_C_513 : ((res_0 == (0 :> int32)) ||
+                              (res_0 == (1 :> int32))));
+      behavior default:
+        
+        assigns res_0;
+      variant (_C_512 : ((size_8 :> integer) - (i_10 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_520 : (i_10 <
+                            (_C_519 : ((_C_518 : (size_8 / (2 :> uint32))) :> uint32)))) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_530 : ((_C_529 : (_C_528 : (a_10 + i_10)).intM) !=
+                               (_C_527 : (_C_526 : (a_10 +
+                                                     (_C_525 : ((_C_524 : 
+                                                                ((_C_523 : (
+                                                                 (_C_522 : 
+                                                                 (size_8 -
+                                                                   i_10)) :> uint32)) -
+                                                                  (1 :> uint32))) :> uint32)))).intM))) then 
+               {  (_C_521 : (res_0 = (0 :> int32)));
+                  
+                  (goto while_0_break)
+               } else ())
+            };
+            (_C_533 : (i_10 = (_C_532 : ((_C_531 : (i_10 + (1 :> uint32))) :> uint32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return res_0)
+   }
+}
+
+unit reverse(intP[..] a_11, intP[..] res, int32 size_9)
+  requires ((_C_566 : (size_9 >= (0 :> int32))) &&
+             ((_C_567 : \at((if (\at(0,Here) <=
+                                  \at(((size_9 :> integer) - 1),Here)) then 
+                            (((\offset_min(\at(a_11,Here)) <= \at(0,Here)) &&
+                               (\offset_max(\at(a_11,Here)) >=
+                                 \at(((size_9 :> integer) - 1),Here))) &&
+                              (\forall integer __framac_tmp24;
+                                (((\at(0,Here) <= __framac_tmp24) &&
+                                   (__framac_tmp24 <=
+                                     \at(((size_9 :> integer) - 1),Here))) ==>
+                                  true))) else true),Here)) &&
+               (_C_568 : \at((if (\at(0,Here) <=
+                                   \at(((size_9 :> integer) - 1),Here)) then 
+                             (((\offset_min(\at(res,Here)) <= \at(0,Here)) &&
+                                (\offset_max(\at(res,Here)) >=
+                                  \at(((size_9 :> integer) - 1),Here))) &&
+                               (\forall integer __framac_tmp25;
+                                 (((\at(0,Here) <= __framac_tmp25) &&
+                                    (__framac_tmp25 <=
+                                      \at(((size_9 :> integer) - 1),Here))) ==>
+                                   true))) else true),Here))));
+behavior default:
+  assigns (res + [0..((size_9 :> integer) - 1)]).intM;
+  ensures (_C_565 : (\forall integer i_39;
+                      (((0 <= i_39) && (i_39 < (\at(size_9,Old) :> integer))) ==>
+                        ((\at(res,Old) + i_39).intM ==
+                          (\at(a_11,Old) +
+                            (((\at(size_9,Old) :> integer) - i_39) - 1)).intM))));
+{  
+   (var int32 i_11);
+   
+   {  (_C_546 : (i_11 = (_C_545 : ((_C_544 : (size_9 - (1 :> int32))) :> int32))));
+      
+      loop 
+      behavior default:
+        invariant (_C_549 : ((_C_550 : ((- 1) <= (i_11 :> integer))) &&
+                              (_C_551 : (i_11 < size_9))));
+      behavior default:
+        invariant (_C_548 : (\forall integer j_20;
+                              ((((i_11 :> integer) < j_20) &&
+                                 (j_20 < (size_9 :> integer))) ==>
+                                ((res + j_20).intM ==
+                                  (a_11 + (((size_9 :> integer) - j_20) - 1)).intM))));
+      behavior default:
+        
+        assigns i_11,
+        (res + [0..((size_9 :> integer) - 1)]).intM;
+      variant (_C_547 : i_11);
+      while (true)
+      {  
+         {  (if (_C_552 : (i_11 >= (0 :> int32))) then () else 
+            (goto while_0_break));
+            (_C_561 : ((_C_560 : (_C_559 : (res + i_11)).intM) = (_C_558 : 
+                                                                 (_C_557 : 
+                                                                 (a_11 +
+                                                                   (_C_556 : (
+                                                                   (_C_555 : 
+                                                                   ((_C_554 : (
+                                                                    (_C_553 : 
+                                                                    (size_9 -
+                                                                    i_11)) :> int32)) -
+                                                                    (1 :> int32))) :> int32)))).intM)));
+            (_C_564 : (i_11 = (_C_563 : ((_C_562 : (i_11 - (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit swap(intP[..] a_17, int32 i_2, int32 j)
+  requires ((_C_572 : \at((((\offset_min(\at((a_17 + (i_2 :> integer)),Here)) <=
+                              \at(0,Here)) &&
+                             (\offset_max(\at((a_17 + (i_2 :> integer)),Here)) >=
+                               \at(0,Here))) &&
+                            true),Here)) &&
+             (_C_573 : \at((((\offset_min(\at((a_17 + (j :> integer)),Here)) <=
+                               \at(0,Here)) &&
+                              (\offset_max(\at((a_17 + (j :> integer)),Here)) >=
+                                \at(0,Here))) &&
+                             true),Here)));
+behavior default:
+  assigns (a_17 + (i_2 :> integer)).intM,
+  (a_17 + (j :> integer)).intM;
+  ensures (_C_569 : ((_C_570 : ((\at(a_17,Old) + (\at(i_2,Old) :> integer)).intM ==
+                                 \at((a_17 + (j :> integer)).intM,Old))) &&
+                      (_C_571 : ((\at(a_17,Old) + (\at(j,Old) :> integer)).intM ==
+                                  \at((a_17 + (i_2 :> integer)).intM,Old)))));
+;
+
+predicate reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer
+{L1, L2}(intP[..] a_7, integer size, integer i_40, integer j_21) =
+(\forall integer k_3;
+  (((i_40 <= k_3) && (k_3 < j_21)) ==>
+    (\at((a_7 + k_3).intM,L1) == \at((a_7 + ((size - k_3) - 1)).intM,L2))))
+
+predicate reverse_0{L1, L2}(intP[..] a_8, integer size_0) =
+reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{L1,
+L2}(a_8, size_0, 0, size_0)
+
+unit reverse_in_place(intP[..] a_12, int32 size_10)
+  requires ((_C_596 : (size_10 >= (0 :> int32))) &&
+             (_C_597 : \at((if (\at(0,Here) <=
+                                 \at(((size_10 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(a_12,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(a_12,Here)) >=
+                                \at(((size_10 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp28;
+                               (((\at(0,Here) <= __framac_tmp28) &&
+                                  (__framac_tmp28 <=
+                                    \at(((size_10 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)));
+behavior default:
+  assigns (a_12 + [0..((size_10 :> integer) - 1)]).intM;
+  ensures (_C_593 : ((_C_594 : reverse_0{Old,
+                     Here}(\at(a_12,Old), (\at(size_10,Old) :> integer))) &&
+                      (_C_595 : (\forall integer i_41;
+                                  (((0 <= i_41) &&
+                                     (i_41 < (\at(size_10,Old) :> integer))) ==>
+                                    (\exists integer j_23;
+                                      (((0 <= j_23) &&
+                                         (j_23 <
+                                           (\at(size_10,Old) :> integer))) &&
+                                        ((\at(a_12,Old) + i_41).intM ==
+                                          (\at(a_12,Old) + j_23).intM))))))));
+{  
+   (var int32 i_12);
+   
+   {  (_C_574 : (i_12 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_579 : ((_C_580 : ((0 :> int32) <= i_12)) &&
+                              (_C_581 : ((i_12 :> integer) <=
+                                          ((size_10 :> integer) / 2)))));
+      behavior default:
+        invariant (_C_578 : reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{Pre,
+                  Here}(a_12, (size_10 :> integer), 0, (i_12 :> integer)));
+      behavior default:
+        invariant (_C_577 : (\forall integer j_22;
+                              ((((i_12 :> integer) <= j_22) &&
+                                 (j_22 <
+                                   ((size_10 :> integer) - (i_12 :> integer)))) ==>
+                                ((a_12 + j_22).intM ==
+                                  \at((a_12 + \at(j_22,Here)).intM,Pre)))));
+      behavior default:
+        invariant (_C_576 : reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{Pre,
+                  Here}(a_12, (size_10 :> integer),
+                        ((size_10 :> integer) - (i_12 :> integer)),
+                        (size_10 :> integer)));
+      behavior default:
+        
+        assigns i_12,
+        (a_12 + [0..((size_10 :> integer) - 1)]).intM;
+      variant (_C_575 : (((size_10 :> integer) / 2) - (i_12 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_584 : (i_12 <
+                            (_C_583 : ((_C_582 : (size_10 / (2 :> int32))) :> int32)))) then () else 
+            (goto while_0_break));
+            (_C_589 : swap(a_12, i_12,
+                           (_C_588 : ((_C_587 : ((_C_586 : ((_C_585 : 
+                                                            (size_10 -
+                                                              i_12)) :> int32)) -
+                                                  (1 :> int32))) :> int32))));
+            (_C_592 : (i_12 = (_C_591 : ((_C_590 : (i_12 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit set_even(intP[..] p, int32 size_11, int32 val_1)
+  requires ((_C_618 : (size_11 >= (0 :> int32))) &&
+             (_C_619 : \at((if (\at(0,Here) <=
+                                 \at(((size_11 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(p,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(p,Here)) >=
+                                \at(((size_11 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp29;
+                               (((\at(0,Here) <= __framac_tmp29) &&
+                                  (__framac_tmp29 <=
+                                    \at(((size_11 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)));
+behavior default:
+  assigns (p + [0..((size_11 :> integer) - 1)]).intM;
+  ensures (_C_615 : ((_C_616 : (\forall integer j_26;
+                                 ((((0 <= j_26) &&
+                                     (j_26 < (\at(size_11,Old) :> integer))) &&
+                                    ((j_26 % 2) == 0)) ==>
+                                   ((\at(p,Old) + j_26).intM ==
+                                     \at(val_1,Old))))) &&
+                      (_C_617 : (\forall integer j_27;
+                                  ((((0 <= j_27) &&
+                                      (j_27 < (\at(size_11,Old) :> integer))) &&
+                                     ((j_27 % 2) != 0)) ==>
+                                    ((\at(p,Old) + j_27).intM ==
+                                      \at((p + j_27).intM,Old)))))));
+{  
+   (var int32 i_13);
+   
+   {  (_C_598 : (i_13 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_602 : ((_C_603 : ((0 :> int32) <= i_13)) &&
+                              (_C_604 : (i_13 <= size_11))));
+      behavior default:
+        invariant (_C_601 : (\forall integer j_24;
+                              ((((0 <= j_24) && (j_24 < (i_13 :> integer))) &&
+                                 ((j_24 % 2) == 0)) ==>
+                                ((p + j_24).intM == val_1))));
+      behavior default:
+        invariant (_C_600 : (\forall integer j_25;
+                              ((((0 <= j_25) && (j_25 < (i_13 :> integer))) &&
+                                 ((j_25 % 2) != 0)) ==>
+                                ((p + j_25).intM ==
+                                  \at((p + \at(j_25,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns i_13,
+        (p + [0..((i_13 :> integer) - 1)]).intM;
+      variant (_C_599 : ((size_11 :> integer) - (i_13 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_605 : (i_13 < size_11)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_611 : ((_C_610 : ((_C_609 : (i_13 % (2 :> int32))) :> int32)) ==
+                               (0 :> int32))) then (_C_608 : ((_C_607 : 
+                                                              (_C_606 : 
+                                                              (p +
+                                                                i_13)).intM) = val_1)) else ())
+            };
+            (_C_614 : (i_13 = (_C_613 : ((_C_612 : (i_13 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit set_odd(intP[..] p_0, int32 size_12, int32 val_2)
+  requires ((_C_640 : (size_12 >= (0 :> int32))) &&
+             (_C_641 : \at((if (\at(0,Here) <=
+                                 \at(((size_12 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(p_0,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(p_0,Here)) >=
+                                \at(((size_12 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp30;
+                               (((\at(0,Here) <= __framac_tmp30) &&
+                                  (__framac_tmp30 <=
+                                    \at(((size_12 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)));
+behavior default:
+  assigns (p_0 + [0..((size_12 :> integer) - 1)]).intM;
+  ensures (_C_637 : ((_C_638 : (\forall integer j_30;
+                                 ((((0 <= j_30) &&
+                                     (j_30 < (\at(size_12,Old) :> integer))) &&
+                                    ((j_30 % 2) != 0)) ==>
+                                   ((\at(p_0,Old) + j_30).intM ==
+                                     \at(val_2,Old))))) &&
+                      (_C_639 : (\forall integer j_31;
+                                  ((((0 <= j_31) &&
+                                      (j_31 < (\at(size_12,Old) :> integer))) &&
+                                     ((j_31 % 2) == 0)) ==>
+                                    ((\at(p_0,Old) + j_31).intM ==
+                                      \at((p_0 + j_31).intM,Old)))))));
+{  
+   (var int32 i_14);
+   
+   {  (_C_620 : (i_14 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_624 : ((_C_625 : ((0 :> int32) <= i_14)) &&
+                              (_C_626 : (i_14 <= size_12))));
+      behavior default:
+        invariant (_C_623 : (\forall integer j_28;
+                              ((((0 <= j_28) && (j_28 < (i_14 :> integer))) &&
+                                 ((j_28 % 2) != 0)) ==>
+                                ((p_0 + j_28).intM == val_2))));
+      behavior default:
+        invariant (_C_622 : (\forall integer j_29;
+                              ((((0 <= j_29) && (j_29 < (i_14 :> integer))) &&
+                                 ((j_29 % 2) == 0)) ==>
+                                ((p_0 + j_29).intM ==
+                                  \at((p_0 + \at(j_29,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns i_14,
+        (p_0 + [0..((i_14 :> integer) - 1)]).intM;
+      variant (_C_621 : ((size_12 :> integer) - (i_14 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_627 : (i_14 < size_12)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_633 : ((_C_632 : ((_C_631 : (i_14 % (2 :> int32))) :> int32)) !=
+                               (0 :> int32))) then (_C_630 : ((_C_629 : 
+                                                              (_C_628 : 
+                                                              (p_0 +
+                                                                i_14)).intM) = val_2)) else ())
+            };
+            (_C_636 : (i_14 = (_C_635 : ((_C_634 : (i_14 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit set_odd_even_skip(intP[..] a_13, uint32 n_11)
+  requires (_C_671 : \at((if (\at(0,Here) <=
+                               \at(((n_11 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a_13,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a_13,Here)) >=
+                              \at(((n_11 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp31;
+                             (((\at(0,Here) <= __framac_tmp31) &&
+                                (__framac_tmp31 <=
+                                  \at(((n_11 :> integer) - 1),Here))) ==>
+                               true))) else true),Here));
+behavior default:
+  assigns (a_13 + [0..((n_11 :> integer) - 1)]).intM;
+  ensures (_C_666 : ((_C_667 : (\forall integer i_42;
+                                 (((((0 <= i_42) &&
+                                      (i_42 < (\at(n_11,Old) :> integer))) &&
+                                     ((i_42 % 2) == 0)) &&
+                                    ((i_42 % 3) != 0)) ==>
+                                   ((\at(a_13,Old) + i_42).intM ==
+                                     (1 :> int32))))) &&
+                      ((_C_669 : (\forall integer i_43;
+                                   (((((0 <= i_43) &&
+                                        (i_43 < (\at(n_11,Old) :> integer))) &&
+                                       ((i_43 % 2) == 1)) &&
+                                      ((i_43 % 3) != 0)) ==>
+                                     ((\at(a_13,Old) + i_43).intM ==
+                                       (0 :> int32))))) &&
+                        (_C_670 : (\forall integer i_44;
+                                    ((((0 <= i_44) &&
+                                        (i_44 < (\at(n_11,Old) :> integer))) &&
+                                       ((i_44 % 3) == 0)) ==>
+                                      ((\at(a_13,Old) + i_44).intM ==
+                                        \at((a_13 + i_44).intM,Old))))))));
+{  
+   (var uint32 i_15);
+   
+   {  (_C_642 : (i_15 = (0 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_647 : ((_C_648 : (0 <= (i_15 :> integer))) &&
+                              (_C_649 : (i_15 <= n_11))));
+      behavior default:
+        invariant (_C_646 : (\forall integer j_32;
+                              (((((0 <= j_32) && (j_32 < (i_15 :> integer))) &&
+                                  ((j_32 % 2) == 0)) &&
+                                 ((j_32 % 3) != 0)) ==>
+                                ((a_13 + j_32).intM == (1 :> int32)))));
+      behavior default:
+        invariant (_C_645 : (\forall integer j_33;
+                              (((((0 <= j_33) && (j_33 < (i_15 :> integer))) &&
+                                  ((j_33 % 2) == 1)) &&
+                                 ((j_33 % 3) != 0)) ==>
+                                ((a_13 + j_33).intM == (0 :> int32)))));
+      behavior default:
+        invariant (_C_644 : (\forall integer j_34;
+                              ((((0 <= j_34) && (j_34 < (i_15 :> integer))) &&
+                                 ((j_34 % 3) == 0)) ==>
+                                ((a_13 + j_34).intM ==
+                                  \at((a_13 + \at(j_34,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns (a_13 + [0..((i_15 :> integer) - 1)]).intM;
+      variant (_C_643 : ((n_11 :> integer) - (i_15 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_650 : (i_15 < n_11)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_662 : ((_C_661 : ((_C_660 : (i_15 % (3 :> uint32))) :> uint32)) ==
+                               (0 :> uint32))) then 
+               (goto __Cont) else (if (_C_659 : ((_C_658 : ((_C_657 : 
+                                                            (i_15 %
+                                                              (2 :> uint32))) :> uint32)) ==
+                                                  (0 :> uint32))) then 
+                                  (_C_656 : ((_C_655 : (_C_654 : (a_13 +
+                                                                   i_15)).intM) = (1 :> int32))) else 
+                                  (_C_653 : ((_C_652 : (_C_651 : (a_13 +
+                                                                   i_15)).intM) = (0 :> int32)))))
+            };
+            (__Cont : (_C_665 : (i_15 = (_C_664 : ((_C_663 : (i_15 +
+                                                               (1 :> uint32))) :> uint32)))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit set_only_third(intP[..] p_1, int32 size_13, int32 val_3)
+  requires ((_C_692 : (size_13 >= (0 :> int32))) &&
+             (_C_693 : \at((if (\at(0,Here) <=
+                                 \at(((size_13 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(p_1,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(p_1,Here)) >=
+                                \at(((size_13 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp32;
+                               (((\at(0,Here) <= __framac_tmp32) &&
+                                  (__framac_tmp32 <=
+                                    \at(((size_13 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)));
+behavior default:
+  assigns (p_1 + [0..((size_13 :> integer) - 1)]).intM;
+  ensures (_C_689 : ((_C_690 : (\forall integer j_37;
+                                 ((((0 <= j_37) &&
+                                     (j_37 < (\at(size_13,Old) :> integer))) &&
+                                    ((j_37 % 3) == 0)) ==>
+                                   ((\at(p_1,Old) + j_37).intM ==
+                                     \at(val_3,Old))))) &&
+                      (_C_691 : (\forall integer j_38;
+                                  ((((0 <= j_38) &&
+                                      (j_38 < (\at(size_13,Old) :> integer))) &&
+                                     ((j_38 % 3) != 0)) ==>
+                                    ((\at(p_1,Old) + j_38).intM ==
+                                      \at((p_1 + j_38).intM,Old)))))));
+{  
+   (var int32 i_16);
+   
+   {  (_C_672 : (i_16 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_676 : ((_C_677 : ((0 :> int32) <= i_16)) &&
+                              (_C_678 : (i_16 <= size_13))));
+      behavior default:
+        invariant (_C_675 : (\forall integer j_35;
+                              ((((0 <= j_35) && (j_35 < (i_16 :> integer))) &&
+                                 ((j_35 % 3) == 0)) ==>
+                                ((p_1 + j_35).intM == val_3))));
+      behavior default:
+        invariant (_C_674 : (\forall integer j_36;
+                              ((((0 <= j_36) && (j_36 < (i_16 :> integer))) &&
+                                 ((j_36 % 3) != 0)) ==>
+                                ((p_1 + j_36).intM ==
+                                  \at((p_1 + \at(j_36,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns i_16,
+        (p_1 + [0..((i_16 :> integer) - 1)]).intM;
+      variant (_C_673 : ((size_13 :> integer) - (i_16 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_679 : (i_16 < size_13)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_685 : ((_C_684 : ((_C_683 : (i_16 % (3 :> int32))) :> int32)) ==
+                               (0 :> int32))) then (_C_682 : ((_C_681 : 
+                                                              (_C_680 : 
+                                                              (p_1 +
+                                                                i_16)).intM) = val_3)) else ())
+            };
+            (_C_688 : (i_16 = (_C_687 : ((_C_686 : (i_16 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+unit set_skip_third(intP[..] p_2, int32 size_14, int32 val_4)
+  requires ((_C_718 : (size_14 >= (0 :> int32))) &&
+             ((_C_719 : \at((if (\at(0,Here) <=
+                                  \at(((size_14 :> integer) - 1),Here)) then 
+                            (((\offset_min(\at(p_2,Here)) <= \at(0,Here)) &&
+                               (\offset_max(\at(p_2,Here)) >=
+                                 \at(((size_14 :> integer) - 1),Here))) &&
+                              (\forall integer __framac_tmp33;
+                                (((\at(0,Here) <= __framac_tmp33) &&
+                                   (__framac_tmp33 <=
+                                     \at(((size_14 :> integer) - 1),Here))) ==>
+                                  true))) else true),Here)) &&
+               (_C_720 : (((val_4 :> integer) + 2) < 32767))));
+behavior default:
+  assigns (p_2 + [0..((size_14 :> integer) - 1)]).intM;
+  ensures (_C_715 : ((_C_716 : (\forall integer j_41;
+                                 ((((0 <= j_41) &&
+                                     (j_41 < (\at(size_14,Old) :> integer))) &&
+                                    ((j_41 % 3) != 0)) ==>
+                                   (((\at(p_2,Old) + j_41).intM :> integer) ==
+                                     ((\at(val_4,Old) :> integer) +
+                                       (j_41 % 3)))))) &&
+                      (_C_717 : (\forall integer j_42;
+                                  ((((0 <= j_42) &&
+                                      (j_42 < (\at(size_14,Old) :> integer))) &&
+                                     ((j_42 % 3) == 0)) ==>
+                                    ((\at(p_2,Old) + j_42).intM ==
+                                      \at((p_2 + j_42).intM,Old)))))));
+{  
+   (var int32 i_17);
+   
+   {  (_C_694 : (i_17 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_698 : ((_C_699 : ((0 :> int32) <= i_17)) &&
+                              (_C_700 : (i_17 <= size_14))));
+      behavior default:
+        invariant (_C_697 : (\forall integer j_39;
+                              ((((0 <= j_39) && (j_39 < (i_17 :> integer))) &&
+                                 ((j_39 % 3) != 0)) ==>
+                                (((p_2 + j_39).intM :> integer) ==
+                                  ((val_4 :> integer) + (j_39 % 3))))));
+      behavior default:
+        invariant (_C_696 : (\forall integer j_40;
+                              ((((0 <= j_40) && (j_40 < (i_17 :> integer))) &&
+                                 ((j_40 % 3) == 0)) ==>
+                                ((p_2 + j_40).intM ==
+                                  \at((p_2 + \at(j_40,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns i_17,
+        (p_2 + [0..((i_17 :> integer) - 1)]).intM;
+      variant (_C_695 : ((size_14 :> integer) - (i_17 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_701 : (i_17 < size_14)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_711 : ((_C_710 : ((_C_709 : (i_17 % (3 :> int32))) :> int32)) !=
+                               (0 :> int32))) then (_C_708 : ((_C_707 : 
+                                                              (_C_706 : 
+                                                              (p_2 +
+                                                                i_17)).intM) = 
+                                                   (_C_705 : ((_C_704 : 
+                                                              (val_4 +
+                                                                (_C_703 : (
+                                                                (_C_702 : 
+                                                                (i_17 %
+                                                                  (3 :> int32))) :> int32)))) :> int32)))) else ())
+            };
+            (_C_714 : (i_17 = (_C_713 : ((_C_712 : (i_17 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
+
+int32 spec_sign(int32 x)
+behavior default:
+  assigns \nothing;
+  ensures (_C_726 : (((\result == (0 :> int32)) || (\result == (1 :> int32))) ||
+                      ((\result :> integer) == (- 1))));
+behavior positive:
+  assumes (x > (0 :> int32));
+  ensures (_C_727 : (\result == (1 :> int32)));
+behavior zero:
+  assumes (x == (0 :> int32));
+  ensures (_C_728 : (\result == (0 :> int32)));
+behavior negative:
+  assumes (x < (0 :> int32));
+  ensures (_C_729 : ((\result :> integer) == (- 1)));
+{  
+   (check (disjoint_behaviors : (! ((x == (0 :> int32)) &&
+                                     (x < (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((x > (0 :> int32)) &&
+                                     (x == (0 :> int32))))));
+   
+   (check (disjoint_behaviors : (! ((x > (0 :> int32)) && (x < (0 :> int32))))));
+   
+   (check (complete_behaviors : ((x < (0 :> int32)) ||
+                                  ((x == (0 :> int32)) || (x > (0 :> int32))))));
+   
+   (var int32 __retres_3);
+   
+   {  (_C_725 : (__retres_3 = (_C_724 : ((_C_723 : ((_C_722 : ((if (x >
+                                                                    (0 :> int32)) then 1 else 0) :> int32)) -
+                                                     (_C_721 : ((if (x <
+                                                                    (0 :> int32)) then 1 else 0) :> int32)))) :> int32))));
+      
+      (return __retres_3)
+   }
+}
+
+axiomatic Sum {
+
+  logic integer sum(integer a_9, integer b_16)
+   
+  axiom sum_init :
+  (_C_733 : (\forall integer a_10;
+              (\forall integer b_17;
+                ((((a_10 >= 0) && (b_17 >= 0)) && (b_17 <= a_10)) ==>
+                  (sum(a_10, b_17) == a_10)))))
+   
+  axiom sum_step_dec :
+  (_C_734 : (\forall integer a_11;
+              (\forall integer b_18;
+                ((((a_11 >= 0) && (b_18 >= 0)) && (b_18 > a_11)) ==>
+                  (sum(a_11, b_18) == (sum(a_11, (b_18 - 1)) + b_18))))))
+   
+  lemma sum_lower_bound :
+  (_C_735 : (\forall integer a_12;
+              (\forall integer b_19;
+                (((a_12 >= 0) && (b_19 >= 0)) ==> (sum(a_12, b_19) >= a_12)))))
+   
+  lemma sum_increases :
+  (_C_736 : (\forall integer i_45;
+              (\forall integer a_13;
+                (\forall integer b_20;
+                  ((((((a_13 >= 0) && (b_20 >= 0)) && (b_20 > a_13)) &&
+                      (a_13 <= i_45)) &&
+                     (i_45 <= b_20)) ==>
+                    (sum(a_13, i_45) <= sum(a_13, b_20)))))))
+  
+}
+
+int32 sum(int32 a_16, int32 b_4)
+  requires ((_C_754 : (a_16 < b_4)) &&
+             ((_C_755 : ((_C_756 : (a_16 >= (0 :> int32))) &&
+                          (_C_757 : (b_4 >= (0 :> int32))))) &&
+               (_C_758 : (sum((a_16 :> integer), (b_4 :> integer)) < 32767))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_753 : ((\result :> integer) ==
+                      sum((\at(a_16,Old) :> integer),
+                          (\at(b_4,Old) :> integer))));
+{  
+   (var int32 i_18);
+   
+   (var int32 sum_0_1);
+   
+   {  (_C_737 : (sum_0_1 = a_16));
+      (_C_740 : (i_18 = (_C_739 : ((_C_738 : (a_16 + (1 :> int32))) :> int32))));
+      
+      loop 
+      behavior default:
+        invariant (_C_743 : ((_C_744 : (a_16 < i_18)) &&
+                              (_C_745 : ((i_18 :> integer) <=
+                                          ((b_4 :> integer) + 1)))));
+      behavior default:
+        invariant (_C_742 : ((sum_0_1 :> integer) ==
+                              sum((a_16 :> integer), ((i_18 :> integer) - 1))));
+      variant (_C_741 : ((b_4 :> integer) - (i_18 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_746 : (i_18 <= b_4)) then () else 
+            (goto while_0_break));
+            (_C_749 : (sum_0_1 = (_C_748 : ((_C_747 : (sum_0_1 + i_18)) :> int32))));
+            (_C_752 : (i_18 = (_C_751 : ((_C_750 : (i_18 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return sum_0_1)
+   }
+}

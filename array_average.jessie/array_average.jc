@@ -1,0 +1,100 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+axiomatic ASum {
+
+  logic integer asum{L}(intP[..] a, integer b)
+   
+  axiom asum_init{L} :
+  (_C_1 : (\forall intP[..] a_0;
+            (\forall integer b_0;
+              ((b_0 <= 0) ==> (asum{L}(a_0, b_0) == 0)))))
+   
+  axiom asum_step_dec{L} :
+  (_C_2 : (\forall intP[..] a_1;
+            (\forall integer b_1;
+              (asum{L}(a_1, b_1) ==
+                (asum{L}(a_1, (b_1 - 1)) + ((a_1 + b_1).intM :> integer))))))
+  
+}
+
+int32 array_average(intP[..] a, int32 size_0)
+  requires ((_C_23 : (size_0 > (0 :> int32))) &&
+             ((_C_24 : \at((if (\at(0,Here) <=
+                                 \at(((size_0 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(a,Here)) >=
+                                \at(((size_0 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp1;
+                               (((\at(0,Here) <= __framac_tmp1) &&
+                                  (__framac_tmp1 <=
+                                    \at(((size_0 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)) &&
+               (_C_25 : ((_C_26 : ((- 2147483648) <=
+                                    asum{Here}(a, ((size_0 :> integer) - 1)))) &&
+                          (_C_27 : (asum{Here}(a, ((size_0 :> integer) - 1)) <=
+                                     2147483647))))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_22 : ((\result :> integer) ==
+                     (asum{Here}(\at(a,Old),
+                                 ((\at(size_0,Old) :> integer) - 1)) /
+                       (\at(size_0,Old) :> integer))));
+{  
+   (var int32 i);
+   
+   (var int32 sum);
+   
+   (var int32 __retres);
+   
+   {  (_C_3 : (sum = (0 :> int32)));
+      (_C_4 : (i = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_7 : ((_C_8 : ((0 :> int32) <= i)) &&
+                            (_C_9 : (i <= size_0))));
+      behavior default:
+        invariant (_C_6 : ((sum :> integer) ==
+                            asum{Here}(a, ((i :> integer) - 1))));
+      variant (_C_5 : ((size_0 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_10 : (i < size_0)) then () else 
+            (goto while_0_break));
+            (_C_15 : (sum = (_C_14 : ((_C_13 : (sum +
+                                                 (_C_12 : (_C_11 : (a + i)).intM))) :> int32))));
+            (_C_18 : (i = (_C_17 : ((_C_16 : (i + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      (_C_21 : (__retres = (_C_20 : ((_C_19 : (sum / size_0)) :> int32))));
+      
+      (return __retres)
+   }
+}

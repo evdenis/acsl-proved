@@ -1,0 +1,79 @@
+[_C_4]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 18
+begin = 10
+end = 27
+
+[spec_sign]
+name = "Function spec_sign"
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 16
+begin = 4
+end = 20
+
+[_C_5]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 18
+begin = 3
+end = 28
+
+[_C_12]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 5
+begin = 15
+end = 20
+
+[_C_9]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 12
+begin = 15
+end = 28
+
+[_C_6]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 3
+begin = 12
+end = 57
+
+[_C_3]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 18
+begin = 10
+end = 27
+
+[_C_7]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 6
+begin = 15
+end = 27
+
+[_C_10]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 11
+begin = 15
+end = 20
+
+[_C_8]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 9
+begin = 15
+end = 27
+
+[_C_2]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 18
+begin = 11
+end = 16
+
+[_C_1]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 18
+begin = 21
+end = 26
+
+[_C_11]
+file = "/home/work/workspace/education/acsl-exam/./sign.c"
+line = 8
+begin = 15
+end = 21
+

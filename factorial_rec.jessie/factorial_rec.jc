@@ -1,0 +1,74 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+predicate factorial_ind(integer i_1, integer f) {
+case nil: factorial_ind(0, 1);
+  
+  case step_inc: (\forall integer i_2;
+                   (\forall integer f_0;
+                     (factorial_ind((i_2 - 1), f_0) ==>
+                       factorial_ind(i_2, (f_0 * i_2)))));
+  
+}
+
+lemma factorial_ind_20 :
+(_C_1 : factorial_ind(20, 2432902008176640000))
+
+lemma increasing :
+(_C_2 : (\forall integer i1;
+          (\forall integer i2;
+            (\forall integer f1;
+              (\forall integer f2;
+                ((((i2 >= i1) && factorial_ind(i1, f1)) &&
+                   factorial_ind(i2, f2)) ==>
+                  (f2 >= f1)))))))
+
+uint64 factorial_rec(uint32 i)
+  requires (_C_14 : ((i :> integer) <= 20));
+  decreases (_C_15 : i);
+behavior default:
+  assigns \nothing;
+  ensures (_C_13 : factorial_ind((\at(i,Old) :> integer),
+                                 (\result :> integer)));
+{  
+   (var uint64 tmp);
+   
+   (var uint64 __retres);
+   
+   {  (if (_C_12 : (i == (0 :> uint32))) then 
+      {  (_C_11 : (__retres = (1 :> uint64)));
+         
+         (goto return_label)
+      } else 
+      {  
+         {  (_C_6 : (tmp = (_C_5 : factorial_rec((_C_4 : ((_C_3 : (i -
+                                                                    (1 :> uint32))) :> uint32))))));
+            ()
+         };
+         (_C_10 : (__retres = (_C_9 : ((_C_8 : (tmp * (_C_7 : (i :> uint64)))) :> uint64))));
+         
+         (goto return_label)
+      });
+      (return_label : 
+      (return __retres))
+   }
+}

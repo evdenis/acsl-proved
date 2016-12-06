@@ -1,0 +1,113 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+unit arrays_sum(intP[..] result, intP[..] a, intP[..] b, int32 size_0)
+  requires ((_C_21 : (size_0 >= (0 :> int32))) &&
+             ((_C_22 : \at((if (\at(0,Here) <=
+                                 \at(((size_0 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(result,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(result,Here)) >=
+                                \at(((size_0 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp1;
+                               (((\at(0,Here) <= __framac_tmp1) &&
+                                  (__framac_tmp1 <=
+                                    \at(((size_0 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)) &&
+               ((_C_23 : \at((if (\at(0,Here) <=
+                                   \at(((size_0 :> integer) - 1),Here)) then 
+                             (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                                (\offset_max(\at(a,Here)) >=
+                                  \at(((size_0 :> integer) - 1),Here))) &&
+                               (\forall integer __framac_tmp2;
+                                 (((\at(0,Here) <= __framac_tmp2) &&
+                                    (__framac_tmp2 <=
+                                      \at(((size_0 :> integer) - 1),Here))) ==>
+                                   true))) else true),Here)) &&
+                 ((_C_24 : \at((if (\at(0,Here) <=
+                                     \at(((size_0 :> integer) - 1),Here)) then 
+                               (((\offset_min(\at(b,Here)) <= \at(0,Here)) &&
+                                  (\offset_max(\at(b,Here)) >=
+                                    \at(((size_0 :> integer) - 1),Here))) &&
+                                 (\forall integer __framac_tmp3;
+                                   (((\at(0,Here) <= __framac_tmp3) &&
+                                      (__framac_tmp3 <=
+                                        \at(((size_0 :> integer) - 1),Here))) ==>
+                                     true))) else true),Here)) &&
+                   (_C_25 : (\forall integer i_1;
+                              (((0 <= i_1) && (i_1 < (size_0 :> integer))) ==>
+                                (((- 2147483648) <=
+                                   (((a + i_1).intM :> integer) +
+                                     ((b + i_1).intM :> integer))) &&
+                                  ((((a + i_1).intM :> integer) +
+                                     ((b + i_1).intM :> integer)) <=
+                                    2147483647)))))))));
+behavior default:
+  assigns (result + [0..((size_0 :> integer) - 1)]).intM;
+  ensures (_C_20 : (\forall integer i_2;
+                     (((0 <= i_2) && (i_2 < (\at(size_0,Old) :> integer))) ==>
+                       (((\at(result,Old) + i_2).intM :> integer) ==
+                         (((\at(a,Old) + i_2).intM :> integer) +
+                           ((\at(b,Old) + i_2).intM :> integer))))));
+{  
+   (var int32 i);
+   
+   {  (_C_1 : (i = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_4 : ((_C_5 : ((0 :> int32) <= i)) &&
+                            (_C_6 : (i <= size_0))));
+      behavior default:
+        invariant (_C_3 : (\forall integer j_0;
+                            (((0 <= j_0) && (j_0 < (i :> integer))) ==>
+                              (((result + j_0).intM :> integer) ==
+                                (((a + j_0).intM :> integer) +
+                                  ((b + j_0).intM :> integer))))));
+      variant (_C_2 : ((size_0 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_7 : (i < size_0)) then () else 
+            (goto while_0_break));
+            (_C_16 : ((_C_15 : (_C_14 : (result + i)).intM) = (_C_13 : (
+                                                              (_C_12 : 
+                                                              ((_C_11 : 
+                                                               (_C_10 : 
+                                                               (a +
+                                                                 i)).intM) +
+                                                                (_C_9 : 
+                                                                (_C_8 : 
+                                                                (b +
+                                                                  i)).intM))) :> int32))));
+            (_C_19 : (i = (_C_18 : ((_C_17 : (i + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}

@@ -1,0 +1,110 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+unit set_odd_even_skip(intP[..] a, uint32 n_9)
+  requires (_C_30 : \at((if (\at(0,Here) <= \at(((n_9 :> integer) - 1),Here)) then 
+                        (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                           (\offset_max(\at(a,Here)) >=
+                             \at(((n_9 :> integer) - 1),Here))) &&
+                          (\forall integer __framac_tmp1;
+                            (((\at(0,Here) <= __framac_tmp1) &&
+                               (__framac_tmp1 <=
+                                 \at(((n_9 :> integer) - 1),Here))) ==>
+                              true))) else true),Here));
+behavior default:
+  assigns (a + [0..((n_9 :> integer) - 1)]).intM;
+  ensures (_C_25 : ((_C_26 : (\forall integer i_1;
+                               (((((0 <= i_1) &&
+                                    (i_1 < (\at(n_9,Old) :> integer))) &&
+                                   ((i_1 % 2) == 0)) &&
+                                  ((i_1 % 3) != 0)) ==>
+                                 ((\at(a,Old) + i_1).intM == (1 :> int32))))) &&
+                     ((_C_28 : (\forall integer i_2;
+                                 (((((0 <= i_2) &&
+                                      (i_2 < (\at(n_9,Old) :> integer))) &&
+                                     ((i_2 % 2) == 1)) &&
+                                    ((i_2 % 3) != 0)) ==>
+                                   ((\at(a,Old) + i_2).intM == (0 :> int32))))) &&
+                       (_C_29 : (\forall integer i_3;
+                                  ((((0 <= i_3) &&
+                                      (i_3 < (\at(n_9,Old) :> integer))) &&
+                                     ((i_3 % 3) == 0)) ==>
+                                    ((\at(a,Old) + i_3).intM ==
+                                      \at((a + i_3).intM,Old))))))));
+{  
+   (var uint32 i);
+   
+   {  (_C_1 : (i = (0 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_6 : ((_C_7 : (0 <= (i :> integer))) &&
+                            (_C_8 : (i <= n_9))));
+      behavior default:
+        invariant (_C_5 : (\forall integer j_0;
+                            (((((0 <= j_0) && (j_0 < (i :> integer))) &&
+                                ((j_0 % 2) == 0)) &&
+                               ((j_0 % 3) != 0)) ==>
+                              ((a + j_0).intM == (1 :> int32)))));
+      behavior default:
+        invariant (_C_4 : (\forall integer j_1;
+                            (((((0 <= j_1) && (j_1 < (i :> integer))) &&
+                                ((j_1 % 2) == 1)) &&
+                               ((j_1 % 3) != 0)) ==>
+                              ((a + j_1).intM == (0 :> int32)))));
+      behavior default:
+        invariant (_C_3 : (\forall integer j_2;
+                            ((((0 <= j_2) && (j_2 < (i :> integer))) &&
+                               ((j_2 % 3) == 0)) ==>
+                              ((a + j_2).intM ==
+                                \at((a + \at(j_2,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns (a + [0..((i :> integer) - 1)]).intM;
+      variant (_C_2 : ((n_9 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_9 : (i < n_9)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_21 : ((_C_20 : ((_C_19 : (i % (3 :> uint32))) :> uint32)) ==
+                              (0 :> uint32))) then 
+               (goto __Cont) else (if (_C_18 : ((_C_17 : ((_C_16 : (i %
+                                                                    (2 :> uint32))) :> uint32)) ==
+                                                 (0 :> uint32))) then 
+                                  (_C_15 : ((_C_14 : (_C_13 : (a + i)).intM) = (1 :> int32))) else 
+                                  (_C_12 : ((_C_11 : (_C_10 : (a + i)).intM) = (0 :> int32)))))
+            };
+            (__Cont : (_C_24 : (i = (_C_23 : ((_C_22 : (i + (1 :> uint32))) :> uint32)))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}

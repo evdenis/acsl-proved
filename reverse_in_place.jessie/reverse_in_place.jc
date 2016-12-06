@@ -1,0 +1,129 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+unit swap(intP[..] a_0, int32 i, int32 j)
+  requires ((_C_4 : \at((((\offset_min(\at((a_0 + (i :> integer)),Here)) <=
+                            \at(0,Here)) &&
+                           (\offset_max(\at((a_0 + (i :> integer)),Here)) >=
+                             \at(0,Here))) &&
+                          true),Here)) &&
+             (_C_5 : \at((((\offset_min(\at((a_0 + (j :> integer)),Here)) <=
+                             \at(0,Here)) &&
+                            (\offset_max(\at((a_0 + (j :> integer)),Here)) >=
+                              \at(0,Here))) &&
+                           true),Here)));
+behavior default:
+  assigns (a_0 + (i :> integer)).intM,
+  (a_0 + (j :> integer)).intM;
+  ensures (_C_1 : ((_C_2 : ((\at(a_0,Old) + (\at(i,Old) :> integer)).intM ==
+                             \at((a_0 + (j :> integer)).intM,Old))) &&
+                    (_C_3 : ((\at(a_0,Old) + (\at(j,Old) :> integer)).intM ==
+                              \at((a_0 + (i :> integer)).intM,Old)))));
+;
+
+predicate reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer
+{L1, L2}(intP[..] a, integer size, integer i_1, integer j_0) =
+(\forall integer k_1;
+  (((i_1 <= k_1) && (k_1 < j_0)) ==>
+    (\at((a + k_1).intM,L1) == \at((a + ((size - k_1) - 1)).intM,L2))))
+
+predicate reverse_0{L1, L2}(intP[..] a_0, integer size_0) =
+reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{L1,
+L2}(a_0, size_0, 0, size_0)
+
+unit reverse_in_place(intP[..] a, int32 size_2)
+  requires ((_C_28 : (size_2 >= (0 :> int32))) &&
+             (_C_29 : \at((if (\at(0,Here) <=
+                                \at(((size_2 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(a,Here)) >=
+                               \at(((size_2 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp3;
+                              (((\at(0,Here) <= __framac_tmp3) &&
+                                 (__framac_tmp3 <=
+                                   \at(((size_2 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)));
+behavior default:
+  assigns (a + [0..((size_2 :> integer) - 1)]).intM;
+  ensures (_C_25 : ((_C_26 : reverse_0{Old,
+                    Here}(\at(a,Old), (\at(size_2,Old) :> integer))) &&
+                     (_C_27 : (\forall integer i_2;
+                                (((0 <= i_2) &&
+                                   (i_2 < (\at(size_2,Old) :> integer))) ==>
+                                  (\exists integer j_2;
+                                    (((0 <= j_2) &&
+                                       (j_2 < (\at(size_2,Old) :> integer))) &&
+                                      ((\at(a,Old) + i_2).intM ==
+                                        (\at(a,Old) + j_2).intM))))))));
+{  
+   (var int32 i_0);
+   
+   {  (_C_6 : (i_0 = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_11 : ((_C_12 : ((0 :> int32) <= i_0)) &&
+                             (_C_13 : ((i_0 :> integer) <=
+                                        ((size_2 :> integer) / 2)))));
+      behavior default:
+        invariant (_C_10 : reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{Pre,
+                  Here}(a, (size_2 :> integer), 0, (i_0 :> integer)));
+      behavior default:
+        invariant (_C_9 : (\forall integer j_1;
+                            ((((i_0 :> integer) <= j_1) &&
+                               (j_1 <
+                                 ((size_2 :> integer) - (i_0 :> integer)))) ==>
+                              ((a + j_1).intM ==
+                                \at((a + \at(j_1,Here)).intM,Pre)))));
+      behavior default:
+        invariant (_C_8 : reverse_struct_intP___attribute______wrapper_____x_integer_integer_integer{Pre,
+                  Here}(a, (size_2 :> integer),
+                        ((size_2 :> integer) - (i_0 :> integer)),
+                        (size_2 :> integer)));
+      behavior default:
+        
+        assigns i_0,
+        (a + [0..((size_2 :> integer) - 1)]).intM;
+      variant (_C_7 : (((size_2 :> integer) / 2) - (i_0 :> integer)));
+      while (true)
+      {  
+         {  (if (_C_16 : (i_0 <
+                           (_C_15 : ((_C_14 : (size_2 / (2 :> int32))) :> int32)))) then () else 
+            (goto while_0_break));
+            (_C_21 : swap(a, i_0,
+                          (_C_20 : ((_C_19 : ((_C_18 : ((_C_17 : (size_2 -
+                                                                   i_0)) :> int32)) -
+                                               (1 :> int32))) :> int32))));
+            (_C_24 : (i_0 = (_C_23 : ((_C_22 : (i_0 + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}

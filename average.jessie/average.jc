@@ -1,0 +1,96 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+int32 average(int32 a, int32 b)
+behavior default:
+  assigns \nothing;
+  ensures (_C_34 : ((\result :> integer) ==
+                     (((\at(a,Old) :> integer) + (\at(b,Old) :> integer)) /
+                       2)));
+{  
+   (var int32 average_0);
+   
+   (var int32 greater);
+   
+   (var int32 smaller);
+   
+   {  (_C_1 : (average_0 = (0 :> int32)));
+      (if (_C_6 : (a > b)) then 
+      {  (_C_4 : (greater = a));
+         (_C_5 : (smaller = b))
+      } else 
+      {  (_C_2 : (greater = b));
+         (_C_3 : (smaller = a))
+      });
+      (if (_C_15 : (a >= (0 :> int32))) then (if (_C_14 : (b >= (0 :> int32))) then 
+                                             (_C_13 : (average_0 = (_C_12 : (
+                                                                   (_C_11 : 
+                                                                   (smaller +
+                                                                    (_C_10 : (
+                                                                    (_C_9 : 
+                                                                    ((_C_8 : (
+                                                                    (_C_7 : 
+                                                                    (greater -
+                                                                    smaller)) :> int32)) /
+                                                                    (2 :> int32))) :> int32)))) :> int32)))) else 
+                                             (goto _LAND_3)) else 
+      (goto _LAND_3));
+      
+      (goto _LAND_4);
+      (_LAND_3 : ());
+      (if (_C_24 : (a < (0 :> int32))) then (if (_C_23 : (b < (0 :> int32))) then 
+                                            (_C_22 : (average_0 = (_C_21 : (
+                                                                  (_C_20 : 
+                                                                  (greater +
+                                                                    (_C_19 : (
+                                                                    (_C_18 : 
+                                                                    ((_C_17 : (
+                                                                    (_C_16 : 
+                                                                    (smaller -
+                                                                    greater)) :> int32)) /
+                                                                    (2 :> int32))) :> int32)))) :> int32)))) else 
+                                            (goto _LAND_1)) else 
+      (goto _LAND_1));
+      
+      (goto _LAND_2);
+      (_LAND_1 : ());
+      (if (_C_26 : (a >= (0 :> int32))) then (if (_C_25 : (b <= (0 :> int32))) then 
+                                             (goto _LOR) else 
+                                             (goto _LAND)) else 
+      (goto _LAND));
+      (_LAND : ());
+      (if (_C_28 : (a <= (0 :> int32))) then (if (_C_27 : (b >= (0 :> int32))) then 
+                                             (goto _LOR) else ()) else ());
+      
+      (goto _LOR_0);
+      (_LOR : (_LOR : (_C_33 : (average_0 = (_C_32 : ((_C_31 : ((_C_30 : (
+                                                                (_C_29 : 
+                                                                (a +
+                                                                  b)) :> int32)) /
+                                                                 (2 :> int32))) :> int32))))));
+      (_LOR_0 : ());
+      (_LAND_2 : ());
+      (_LAND_4 : ());
+      
+      (return average_0)
+   }
+}

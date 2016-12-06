@@ -1,0 +1,93 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+axiomatic Sum {
+
+  logic integer sum(integer a, integer b)
+   
+  axiom sum_init :
+  (_C_1 : (\forall integer a_0;
+            (\forall integer b_0;
+              ((((a_0 >= 0) && (b_0 >= 0)) && (b_0 <= a_0)) ==>
+                (sum(a_0, b_0) == a_0)))))
+   
+  axiom sum_step_dec :
+  (_C_2 : (\forall integer a_1;
+            (\forall integer b_1;
+              ((((a_1 >= 0) && (b_1 >= 0)) && (b_1 > a_1)) ==>
+                (sum(a_1, b_1) == (sum(a_1, (b_1 - 1)) + b_1))))))
+   
+  lemma sum_lower_bound :
+  (_C_3 : (\forall integer a_2;
+            (\forall integer b_2;
+              (((a_2 >= 0) && (b_2 >= 0)) ==> (sum(a_2, b_2) >= a_2)))))
+   
+  lemma sum_increases :
+  (_C_4 : (\forall integer i_1;
+            (\forall integer a_3;
+              (\forall integer b_3;
+                ((((((a_3 >= 0) && (b_3 >= 0)) && (b_3 > a_3)) &&
+                    (a_3 <= i_1)) &&
+                   (i_1 <= b_3)) ==>
+                  (sum(a_3, i_1) <= sum(a_3, b_3)))))))
+  
+}
+
+int32 sum(int32 a, int32 b)
+  requires ((_C_22 : (a < b)) &&
+             ((_C_23 : ((_C_24 : (a >= (0 :> int32))) &&
+                         (_C_25 : (b >= (0 :> int32))))) &&
+               (_C_26 : (sum((a :> integer), (b :> integer)) < 32767))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_21 : ((\result :> integer) ==
+                     sum((\at(a,Old) :> integer), (\at(b,Old) :> integer))));
+{  
+   (var int32 i);
+   
+   (var int32 sum_0);
+   
+   {  (_C_5 : (sum_0 = a));
+      (_C_8 : (i = (_C_7 : ((_C_6 : (a + (1 :> int32))) :> int32))));
+      
+      loop 
+      behavior default:
+        invariant (_C_11 : ((_C_12 : (a < i)) &&
+                             (_C_13 : ((i :> integer) <=
+                                        ((b :> integer) + 1)))));
+      behavior default:
+        invariant (_C_10 : ((sum_0 :> integer) ==
+                             sum((a :> integer), ((i :> integer) - 1))));
+      variant (_C_9 : ((b :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_14 : (i <= b)) then () else 
+            (goto while_0_break));
+            (_C_17 : (sum_0 = (_C_16 : ((_C_15 : (sum_0 + i)) :> int32))));
+            (_C_20 : (i = (_C_19 : ((_C_18 : (i + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return sum_0)
+   }
+}

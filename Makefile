@@ -1,18 +1,24 @@
-CC         := gcc
-CFLAGS     := -Wall -Werror
-EXT_CFLAGS := -DOUT_OF_TASK
-BINDIR     := bin
+CC            := gcc
+CFLAGS        := -Wall -Werror
+EXT_CFLAGS    := -DOUT_OF_TASK
+BINDIR        := bin
+GENDIR        := gen
+FRAMAC        := frama-c
+FRAMAC_DFLAGS := -jessie
 
 CFLAGS += $(EXT_CFLAGS)
 
-BINFILES := $(sort $(shell find . -maxdepth 1 -type f -name '*.c'))
-BINFILES := $(patsubst ./%.c, $(BINDIR)/%, $(BINFILES))
+SRCFILES := $(sort $(shell find . -maxdepth 1 -type f -name '*.c'))
+BINFILES := $(patsubst ./%.c, $(BINDIR)/%, $(SRCFILES))
 
 
 all: $(BINDIR) $(BINFILES)
 
 $(BINDIR):
-	-mkdir $(BINDIR)
+	@-mkdir $(BINDIR)
+
+$(GENDIR):
+	@-mkdir $(GENDIR)
 
 $(BINDIR)/%: %.c
 	$(CC) $(CFLAGS) $< -o $@
@@ -20,7 +26,16 @@ $(BINDIR)/%: %.c
 run: $(BINDIR) $(BINFILES)
 	@for i in $(BINFILES); do echo $$i; ./$$i; done
 
-clean:
-	rm -fr $(BINDIR)
+verify:
+	@$(FRAMAC) $(FRAMAC_DFLAGS) $(SRCFILES)
 
-.PHONY: all clean
+verify-separatedly:
+	@for i in $(SRCFILES); do echo $$i; $(FRAMAC) $(FRAMAC_DFLAGS) $$i; done
+
+verify-%:
+	@$(FRAMAC) $(FRAMAC_DFLAGS) $*.c
+
+clean:
+	-rm -fr $(BINDIR)
+
+.PHONY: all run verify verify-separatedly clean

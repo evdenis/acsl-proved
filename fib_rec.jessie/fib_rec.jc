@@ -1,0 +1,182 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+axiomatic Power {
+
+  logic integer power_int_pos(integer b, integer p)
+   
+  axiom power_nil :
+  (_C_1 : (\forall integer b_0;
+            (power_int_pos(b_0, 0) == 1)))
+   
+  axiom power_step :
+  (_C_2 : (\forall integer b_1;
+            (\forall integer p_0;
+              ((p_0 >= 0) ==>
+                (power_int_pos(b_1, (p_0 + 1)) ==
+                  (b_1 * power_int_pos(b_1, p_0)))))))
+   
+  lemma power_alt_step :
+  (_C_3 : (\forall integer b_2;
+            (\forall integer p_1;
+              ((p_1 > 0) ==>
+                (power_int_pos(b_2, p_1) ==
+                  (b_2 * power_int_pos(b_2, (p_1 - 1))))))))
+   
+  lemma power_one :
+  (_C_4 : (\forall integer b_3;
+            (power_int_pos(b_3, 1) == b_3)))
+   
+  lemma power_sum :
+  (_C_5 : (\forall integer b_4;
+            (\forall integer p1_1;
+              (\forall integer p2_1;
+                (((p1_1 >= 0) && (p2_1 >= 0)) ==>
+                  (power_int_pos(b_4, (p1_1 + p2_1)) ==
+                    (power_int_pos(b_4, p1_1) * power_int_pos(b_4, p2_1))))))))
+   
+  lemma power_mult_1 :
+  (_C_6 : (\forall integer b_5;
+            (\forall integer p1_2;
+              (\forall integer p2_2;
+                (((p1_2 >= 0) && (p2_2 >= 0)) ==>
+                  (power_int_pos(b_5, (p1_2 * p2_2)) ==
+                    power_int_pos(power_int_pos(b_5, p1_2), p2_2)))))))
+   
+  lemma power_mult_2 :
+  (_C_7 : (\forall integer b1;
+            (\forall integer b2;
+              (\forall integer p_2;
+                ((p_2 >= 0) ==>
+                  (power_int_pos((b1 * b2), p_2) ==
+                    (power_int_pos(b1, p_2) * power_int_pos(b2, p_2))))))))
+   
+  lemma power_non_negative :
+  (_C_8 : (\forall integer b_6;
+            (\forall integer p_3;
+              (((b_6 >= 0) && (p_3 >= 0)) ==> (power_int_pos(b_6, p_3) >= 0)))))
+   
+  lemma power_monotonic :
+  (_C_9 : (\forall integer b_7;
+            (\forall integer p1_3;
+              (\forall integer p2_3;
+                ((((b_7 > 0) && (0 <= p1_3)) && (p1_3 <= p2_3)) ==>
+                  (power_int_pos(b_7, p1_3) <= power_int_pos(b_7, p2_3)))))))
+  
+}
+
+axiomatic Fib {
+
+  logic integer fib(integer i_1)
+   
+  axiom fib_nil :
+  (_C_10 : (fib(0) == 0))
+   
+  axiom fib_one :
+  (_C_11 : (fib(1) == 1))
+   
+  axiom fib_step_positive :
+  (_C_12 : (\forall integer i_2;
+             ((i_2 >= 2) ==> (fib(i_2) == (fib((i_2 - 1)) + fib((i_2 - 2)))))))
+   
+  axiom fib_step_negative :
+  (_C_13 : (\forall integer i_3;
+             ((i_3 < 0) ==> (fib(i_3) == (fib((i_3 + 2)) - fib((i_3 + 1)))))))
+   
+  lemma fib_non_negative :
+  (_C_14 : (\forall integer i_4;
+             ((i_4 >= 0) ==> (fib(i_4) >= 0))))
+   
+  lemma fib_non_negative_increasing :
+  (_C_15 : (\forall integer i_5;
+             (\forall integer j_0;
+               ((((i_5 >= 0) && (j_0 >= 0)) && (i_5 >= j_0)) ==>
+                 (fib(i_5) >= fib(j_0))))))
+   
+  lemma fib_negative_positive_1 :
+  (_C_16 : (\forall integer i_6;
+             ((i_6 < 0) ==>
+               (fib(i_6) == (power_int_pos((- 1), (i_6 + 1)) * fib((- i_6)))))))
+   
+  lemma fib_negative_positive_2 :
+  (_C_17 : (\forall integer i_7;
+             ((i_7 < 0) ==> (\integer_abs(fib(i_7)) == fib((- i_7))))))
+  
+}
+
+int32 fib_rec(int32 i)
+  requires (_C_48 : ((_C_49 : ((- 2147483648) <= fib((i :> integer)))) &&
+                      (_C_50 : (fib((i :> integer)) <= 2147483647))));
+  decreases (_C_51 : \integer_abs((i :> integer)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_47 : ((\result :> integer) == fib((\at(i,Old) :> integer))));
+{  
+   (var int32 tmp);
+   
+   (var int32 tmp_0);
+   
+   (var int32 tmp_1);
+   
+   (var int32 tmp_2);
+   
+   (var int32 __retres);
+   
+   {  (if (_C_21 : (i == (0 :> int32))) then 
+      {  (_C_20 : (__retres = i));
+         
+         (goto return_label)
+      } else (if (_C_19 : (i == (1 :> int32))) then 
+             {  (_C_18 : (__retres = i));
+                
+                (goto return_label)
+             } else ()));
+      (if (_C_23 : (i == (-1 :> int32))) then 
+      {  (_C_22 : (__retres = (1 :> int32)));
+         
+         (goto return_label)
+      } else ());
+      (if (_C_46 : (i > (0 :> int32))) then 
+      {  
+         {  (_C_38 : (tmp = (_C_37 : fib_rec((_C_36 : ((_C_35 : (i -
+                                                                  (1 :> int32))) :> int32))))));
+            (_C_42 : (tmp_0 = (_C_41 : fib_rec((_C_40 : ((_C_39 : (i -
+                                                                    (2 :> int32))) :> int32))))))
+         };
+         (_C_45 : (__retres = (_C_44 : ((_C_43 : (tmp + tmp_0)) :> int32))));
+         
+         (goto return_label)
+      } else 
+      {  
+         {  (_C_27 : (tmp_1 = (_C_26 : fib_rec((_C_25 : ((_C_24 : (i +
+                                                                    (2 :> int32))) :> int32))))));
+            (_C_31 : (tmp_2 = (_C_30 : fib_rec((_C_29 : ((_C_28 : (i +
+                                                                    (1 :> int32))) :> int32))))))
+         };
+         (_C_34 : (__retres = (_C_33 : ((_C_32 : (tmp_1 - tmp_2)) :> int32))));
+         
+         (goto return_label)
+      });
+      (return_label : 
+      (return __retres))
+   }
+}

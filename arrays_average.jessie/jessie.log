@@ -1,0 +1,841 @@
+WHYLIB is not set, using /home/work/.opam/infer-4.02.3/lib/jessie as default
+Parsing
+Normalization
+Typing logic labels
+Typing code
+Typing axiomatic Padding
+Typing logic type declaration padding
+Typing axiomatic Padding
+Typing tag voidP
+Typing tag charP
+Typing tag unsigned_charP
+Typing tag intP
+Computation of call graph
+***********************************
+Logic call graph: has 0 components
+***********************************
+******************************
+Call graph: has 1 components
+******************************
+Component 0:
+ arrays_average calls: 
+
+Adding invariants
+Computation of regions
+Separation: treating function arrays_average
+Separation: treating function arrays_average
+Computation of effects
+Effects: doing one iteration...
+Effects: doing one iteration...
+Effects: doing one iteration...
+Effects: doing one iteration...
+Effects: fixpoint reached
+Effects for function arrays_average:
+ reads:  alloc_table: (b_4 : alloc-root "intP") at (Here),
+                      (a_3 : alloc-root "intP") at (Here),
+                      (result_2 : alloc-root "intP") at (Here, Old)
+         tag_table: (b_4 : intP) at (Here), (a_3 : intP) at (Here),
+                    (result_2 : intP) at (Here)
+         memories: (b_4 : mem-field "intM") at (Here),
+                   (a_3 : mem-field "intM") at (Here),
+                   (result_2 : mem-field "intM") at (Here)
+         raw memories: (b_4 : mem-field "intM") at (Here),
+                       (a_3 : mem-field "intM") at (Here),
+                       (result_2 : mem-field "intM") at (Here)
+         precise memories: 
+         globals: 
+         locals: i at (Here), size_0 at (Here), b at (Here), a at (Here),
+                 result at (Here)
+
+ writes:  alloc_table: 
+          tag_table: 
+          memories: (result_2 : mem-field "intM") at (Here, Old)
+          raw memories: (result_2 : mem-field "intM") at (Here, Old)
+          precise memories: 
+          globals: 
+          locals: i at (Here)
+
+ raises: 
+Translate logic types
+Translate structures
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_tags(tag charP):
+  Found 1 tags.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag charP):
+  Found 0 memories.
+all_allocs(tag charP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_tags(tag intP):
+  Found 1 tags.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_memories(tag intP):
+  Found 0 memories.
+all_allocs(tag intP):
+  Found 1 allocs.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_tags(tag unsigned_charP):
+  Found 1 tags.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_memories(tag unsigned_charP):
+  Found 0 memories.
+all_allocs(tag unsigned_charP):
+  Found 1 allocs.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_tags(tag voidP):
+  Found 1 tags.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+all_memories(tag voidP):
+  Found 0 memories.
+all_allocs(tag voidP):
+  Found 1 allocs.
+Translate variants
+Translate global regions
+Translate exceptions
+Translate enumerated types
+Translate dummies
+Translate standalone logic functions
+Translate axiomatic declarations
+Axiomatic Padding
+Translate lemmas
+Translate functions
+Pre-treatement Function arrays_average
+Function arrays_average
+Produce makefile

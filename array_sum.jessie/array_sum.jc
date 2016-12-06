@@ -1,0 +1,105 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag unsigned_intP = {
+  uint32 unsigned_intM: 32;
+}
+
+type unsigned_intP = [unsigned_intP]
+
+axiomatic Array_Sum {
+
+  logic integer array_sum{L}(unsigned_intP[..] a, integer b)
+   
+  axiom array_sum_init{L} :
+  (_C_1 : (\forall unsigned_intP[..] a_0;
+            (\forall integer b_0;
+              ((b_0 <= 0) ==> (array_sum{L}(a_0, b_0) == 0)))))
+   
+  axiom array_sum_step_dec{L} :
+  (_C_2 : (\forall unsigned_intP[..] a_1;
+            (\forall integer b_1;
+              (array_sum{L}(a_1, b_1) ==
+                (array_sum{L}(a_1, (b_1 - 1)) +
+                  ((a_1 + b_1).unsigned_intM :> integer))))))
+   
+  lemma array_sum_lower_bound{L} :
+  (_C_3 : (\forall unsigned_intP[..] a_2;
+            (\forall integer b_2;
+              (array_sum{L}(a_2, b_2) >= 0))))
+   
+  lemma array_sum_increases{L} :
+  (_C_4 : (\forall unsigned_intP[..] a_3;
+            (\forall integer i_1;
+              (\forall integer b_3;
+                (((0 <= i_1) && (i_1 <= b_3)) ==>
+                  (array_sum{L}(a_3, i_1) <= array_sum{L}(a_3, b_3)))))))
+  
+}
+
+uint32 array_sum(unsigned_intP[..] a, uint32 n_1)
+  requires ((_C_22 : \at((if (\at(0,Here) <=
+                               \at(((n_1 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a,Here)) >=
+                              \at(((n_1 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp1;
+                             (((\at(0,Here) <= __framac_tmp1) &&
+                                (__framac_tmp1 <=
+                                  \at(((n_1 :> integer) - 1),Here))) ==>
+                               true))) else true),Here)) &&
+             (_C_23 : (array_sum{Here}(a, (n_1 :> integer)) < 32767)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_21 : ((\result :> integer) ==
+                     array_sum{Here}(\at(a,Old),
+                                     ((\at(n_1,Old) :> integer) - 1))));
+{  
+   (var uint32 i);
+   
+   (var uint32 sum);
+   
+   {  (_C_5 : (sum = (0 :> uint32)));
+      (_C_6 : (i = (0 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_9 : ((_C_10 : (0 <= (i :> integer))) &&
+                            (_C_11 : (i <= n_1))));
+      behavior default:
+        invariant (_C_8 : ((sum :> integer) ==
+                            array_sum{Here}(a, ((i :> integer) - 1))));
+      variant (_C_7 : ((n_1 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_12 : (i < n_1)) then () else 
+            (goto while_0_break));
+            (_C_17 : (sum = (_C_16 : ((_C_15 : (sum +
+                                                 (_C_14 : (_C_13 : (a + i)).unsigned_intM))) :> uint32))));
+            (_C_20 : (i = (_C_19 : ((_C_18 : (i + (1 :> uint32))) :> uint32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return sum)
+   }
+}

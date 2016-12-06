@@ -1,0 +1,111 @@
+[_C_4]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 27
+end = 32
+
+[factorial_ind_20]
+name = "Lemma factorial_ind_20"
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 9
+begin = 4
+end = 218
+
+[factorial_rec]
+name = "Function factorial_rec"
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 23
+begin = 14
+end = 39
+
+[_C_13]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 21
+begin = 12
+end = 37
+
+[_C_5]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 13
+end = 33
+
+[_C_12]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 25
+begin = 7
+end = 13
+
+[_C_9]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 13
+end = 37
+
+[_C_6]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 13
+end = 33
+
+[_C_3]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 27
+end = 32
+
+[_C_7]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 36
+end = 37
+
+[_C_15]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 19
+begin = 14
+end = 15
+
+[_C_10]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 6
+end = 38
+
+[_C_8]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 28
+begin = 13
+end = 37
+
+[_C_14]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 18
+begin = 13
+end = 20
+
+[increasing]
+name = "Lemma increasing"
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 11
+begin = 4
+end = 143
+
+[_C_2]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 12
+begin = 7
+end = 120
+
+[_C_1]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 10
+begin = 7
+end = 45
+
+[_C_11]
+file = "/home/work/workspace/education/acsl-exam/./factorial_rec.c"
+line = 26
+begin = 6
+end = 15
+

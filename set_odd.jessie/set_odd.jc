@@ -1,0 +1,95 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+unit set_odd(intP[..] p, int32 size_2, int32 val_1)
+  requires ((_C_21 : (size_2 >= (0 :> int32))) &&
+             (_C_22 : \at((if (\at(0,Here) <=
+                                \at(((size_2 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(p,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(p,Here)) >=
+                               \at(((size_2 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp1;
+                              (((\at(0,Here) <= __framac_tmp1) &&
+                                 (__framac_tmp1 <=
+                                   \at(((size_2 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)));
+behavior default:
+  assigns (p + [0..((size_2 :> integer) - 1)]).intM;
+  ensures (_C_18 : ((_C_19 : (\forall integer j_2;
+                               ((((0 <= j_2) &&
+                                   (j_2 < (\at(size_2,Old) :> integer))) &&
+                                  ((j_2 % 2) != 0)) ==>
+                                 ((\at(p,Old) + j_2).intM == \at(val_1,Old))))) &&
+                     (_C_20 : (\forall integer j_3;
+                                ((((0 <= j_3) &&
+                                    (j_3 < (\at(size_2,Old) :> integer))) &&
+                                   ((j_3 % 2) == 0)) ==>
+                                  ((\at(p,Old) + j_3).intM ==
+                                    \at((p + j_3).intM,Old)))))));
+{  
+   (var int32 i);
+   
+   {  (_C_1 : (i = (0 :> int32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_5 : ((_C_6 : ((0 :> int32) <= i)) &&
+                            (_C_7 : (i <= size_2))));
+      behavior default:
+        invariant (_C_4 : (\forall integer j_0;
+                            ((((0 <= j_0) && (j_0 < (i :> integer))) &&
+                               ((j_0 % 2) != 0)) ==>
+                              ((p + j_0).intM == val_1))));
+      behavior default:
+        invariant (_C_3 : (\forall integer j_1;
+                            ((((0 <= j_1) && (j_1 < (i :> integer))) &&
+                               ((j_1 % 2) == 0)) ==>
+                              ((p + j_1).intM ==
+                                \at((p + \at(j_1,Here)).intM,Pre)))));
+      behavior default:
+        
+        assigns i,
+        (p + [0..((i :> integer) - 1)]).intM;
+      variant (_C_2 : ((size_2 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_8 : (i < size_2)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_14 : ((_C_13 : ((_C_12 : (i % (2 :> int32))) :> int32)) !=
+                              (0 :> int32))) then (_C_11 : ((_C_10 : 
+                                                            (_C_9 : (p + i)).intM) = val_1)) else ())
+            };
+            (_C_17 : (i = (_C_16 : ((_C_15 : (i + (1 :> int32))) :> int32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
