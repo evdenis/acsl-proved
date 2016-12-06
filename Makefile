@@ -22,7 +22,6 @@ BINFILES    := $(patsubst ./%.c, $(BINDIR)/%,    $(SRCFILES))
 GENFILES    := $(patsubst ./%.c, $(GENDIR)/%.c,  $(SRCFILES))
 GENBINFILES := $(patsubst $(GENDIR)/%.c,   $(GENBINDIR)/%, $(GENFILES))
 
-
 all: build ## Default target. Build each program.
 
 build: $(BINDIR) $(BINFILES) ## Build each program.
@@ -49,11 +48,17 @@ $(GENDIR)/%.c: %.c
 $(GENBINDIR)/%: $(GENDIR)/%.c
 	$(CC) $(GEN_CFLAGS) $(FRAMAC_EACSL_LIB) $< -o $@
 
-run: build ## Run each program.
+run: build ## Run each program. You can also type run-<target>.
 	@for i in $(BINFILES); do echo $$i; ./$$i; done
 
-eacsl-run: eacsl-build ## Run each E-ACSL program.
+run-%: $(BINDIR) $(BINDIR)/%
+	$(BINDIR)/$*
+
+eacsl-run: eacsl-build ## Run each E-ACSL program. You can also type eacsl-run-<target>.
 	@for i in $(GENBINFILES); do echo $$i; ./$$i; done
+
+eacsl-run-%: $(GENDIR) $(GENBINDIR) $(GENBINDIR)/%
+	$(GENBINDIR)/$*
 
 verify: ## Run Frama-C on all files simultaneously. You can also type verify-<target>.
 	@$(FRAMAC) $(FRAMAC_DFLAGS) $(SRCFILES)
