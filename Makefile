@@ -5,6 +5,7 @@ BINDIR        := bin
 GENDIR        := gen
 FRAMAC        := frama-c
 FRAMAC_DFLAGS := -jessie
+FRAMAC_REPLAY := -jessie-target why3autoreplay
 
 CFLAGS += $(EXT_CFLAGS)
 
@@ -35,7 +36,16 @@ verify-separatedly:
 verify-%:
 	@$(FRAMAC) $(FRAMAC_DFLAGS) $*.c
 
+replay:
+	@$(FRAMAC) $(FRAMAC_DFLAGS) $(FRAMAC_REPLAY) $(SRCFILES)
+
+replay-separatedly:
+	@for i in $(SRCFILES); do echo $$i; $(FRAMAC) $(FRAMAC_DFLAGS) $(FRAMAC_REPLAY) $$i; done
+
+replay-%:
+	@$(FRAMAC) $(FRAMAC_DFLAGS) $(FRAMAC_REPLAY) $*.c
+
 clean:
 	-rm -fr $(BINDIR)
 
-.PHONY: all run verify verify-separatedly clean
+.PHONY: all run verify verify-separatedly replay replay-separatedly clean
