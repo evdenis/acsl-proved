@@ -4,12 +4,19 @@ GEN_CFLAGS       := -w
 EXT_CFLAGS       := -DOUT_OF_TASK
 BINDIR           := bin
 GENDIR           := gen
-GENBINDIR        := bin/gen
+EACSLDIR         := $(GENDIR)/eacsl
+RTEDIR           := $(GENDIR)/rte
+VALDIR           := $(GENDIR)/val
+GENBINDIR        := $(BINDIR)/gen
+EACSLBINDIR      := $(GENBINDIR)/eacsl
 FRAMAC           := frama-c
 FRAMAC_DFLAGS    := -jessie
 FRAMAC_REPLAY    := -jessie-target why3autoreplay
 FRAMAC_EFLAGS    := -e-acsl -pp-annot -cpp-extra-args " -C -E -x c $(EXT_CFLAGS) "
 FRAMAC_EGEN      := -then-last -print -ocode
+FRAMAC_RTEFLAGS  := -rte -rte-all -rte-precond -pp-annot -cpp-extra-args " -C -E -x c $(EXT_CFLAGS) "
+FRAMAC_VALFLAGS  := -val -pp-annot -cpp-extra-args " -C -E -x c $(EXT_CFLAGS) "
+FRAMAC_VALGEN    := -print -ocode
 FRAMAC_ESHARE    := $(shell frama-c -print-share-path)/e-acsl
 FRAMAC_EMSHARE   := $(shell frama-c -print-share-path)/e-acsl/memory_model
 FRAMAC_EACSL_LIB := $(FRAMAC_ESHARE)/e_acsl.c $(FRAMAC_EMSHARE)/e_acsl_bittree.c $(FRAMAC_EMSHARE)/e_acsl_mmodel.c
@@ -17,18 +24,24 @@ FRAMAC_EACSL_LIB := $(FRAMAC_ESHARE)/e_acsl.c $(FRAMAC_EMSHARE)/e_acsl_bittree.c
 
 CFLAGS += $(EXT_CFLAGS)
 
-SRCFILES    := $(sort $(shell find . -maxdepth 1 -type f -name '*.c'))
-BINFILES    := $(patsubst ./%.c, $(BINDIR)/%,    $(SRCFILES))
-GENFILES    := $(patsubst ./%.c, $(GENDIR)/%.c,  $(SRCFILES))
-GENBINFILES := $(patsubst $(GENDIR)/%.c,   $(GENBINDIR)/%, $(GENFILES))
+SRCFILES      := $(sort $(shell find . -maxdepth 1 -type f -name '*.c'))
+BINFILES      := $(patsubst ./%.c, $(BINDIR)/%,     $(SRCFILES))
+EACSLFILES    := $(patsubst ./%.c, $(EACSLDIR)/%.c, $(SRCFILES))
+RTEFILES      := $(patsubst ./%.c, $(RTEDIR)/%.c,   $(SRCFILES))
+VALFILES      := $(patsubst ./%.c, $(VALDIR)/%.c,   $(SRCFILES))
+EACSLBINFILES := $(patsubst $(EACSLDIR)/%.c, $(EACSLBINDIR)/%, $(EACSLFILES))
 
 all: build ## Default target. Build each program.
 
 build: $(BINDIR) $(BINFILES) ## Build each program.
 
-eacsl: $(GENDIR) $(GENFILES) ## Generate E-ACSL programs.
+eacsl: $(GENDIR) $(EACSLDIR) $(EACSLFILES) ## Generate E-ACSL programs.
 
-eacsl-build: eacsl $(GENBINDIR) $(GENBINFILES) ## Build generated E-ACSL programs.
+eacsl-build: eacsl $(GENBINDIR) $(EACSLBINDIR) $(EACSLBINFILES) ## Build generated E-ACSL programs.
+
+rte: $(GENDIR) $(RTEDIR) $(RTEFILES) ## Generate RTE specifications.
+
+val: $(GENDIR) $(VALDIR) $(VALFILES) ## Run value analysis.
 
 $(BINDIR):
 	@-mkdir -p $(BINDIR)
@@ -36,14 +49,32 @@ $(BINDIR):
 $(GENDIR):
 	@-mkdir -p $(GENDIR)
 
+$(EACSLDIR):
+	@-mkdir -p $(EACSLDIR)
+
+$(RTEDIR):
+	@-mkdir -p $(RTEDIR)
+
+$(VALDIR):
+	@-mkdir -p $(VALDIR)
+
 $(GENBINDIR):
 	@-mkdir -p $(GENBINDIR)
+
+$(EACSLBINDIR):
+	@-mkdir -p $(EACSLBINDIR)
 
 $(BINDIR)/%: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
-$(GENDIR)/%.c: %.c
+$(EACSLDIR)/%.c: %.c
 	$(FRAMAC) $(FRAMAC_EFLAGS) $< $(FRAMAC_EGEN) $@
+
+$(RTEDIR)/%.c: %.c
+	$(FRAMAC) $(FRAMAC_RTEFLAGS) $< $(FRAMAC_RTEGEN) $@
+
+$(VALDIR)/%.c: %.c
+	$(FRAMAC) $(FRAMAC_VALFLAGS) $< $(FRAMAC_VALGEN) $@
 
 $(GENBINDIR)/%: $(GENDIR)/%.c
 	$(CC) $(GEN_CFLAGS) $(FRAMAC_EACSL_LIB) $< -o $@
@@ -79,9 +110,9 @@ replay-%:
 	@$(FRAMAC) $(FRAMAC_DFLAGS) $(FRAMAC_REPLAY) $*.c
 
 clean: ## Remove all binary and generated files.
-	-rm -fr $(GENBINDIR) $(BINDIR) $(GENDIR)
+	-rm -fr $(GENBINDIR) $(RTEDIR) $(VALDIR) $(EACSLDIR) $(BINDIR) $(GENDIR)
 
-.PHONY: all build eacsl eacsl-build run eacsl-run verify verify-separatedly replay replay-separatedly clean
+.PHONY: all build eacsl eacsl-build rte val run eacsl-run verify verify-separatedly replay replay-separatedly clean
 
 #COLORS
 GREEN  := $(shell tput -Txterm setaf 2)
