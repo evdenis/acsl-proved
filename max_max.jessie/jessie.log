@@ -1,4 +1,4 @@
-WHYLIB is not set, using /home/work/.opam/infer-4.02.3/lib/jessie as default
+WHYLIB is not set, using /home/work/.opam/4.02.3/lib/jessie as default
 Parsing
 Normalization
 Typing logic labels
@@ -44,8 +44,8 @@ Effects for function max_max:
                        (a_2 : mem-field "intM") at (Here)
          precise memories: 
          globals: 
-         locals: i at (Here), max2 at (Here), max1 at (Here),
-                 size_2 at (Here), a at (Here)
+         locals: y at (Here), x at (Here), i at (Here), max2 at (Here),
+                 max1 at (Here), size_2 at (Here), a at (Here)
 
  writes:  alloc_table: 
           tag_table: 
@@ -55,7 +55,7 @@ Effects for function max_max:
                         (max1_3 : mem-field "int_xM") at (Here, Old)
           precise memories: 
           globals: 
-          locals: i at (Here)
+          locals: y at (Here), x at (Here), i at (Here)
 
  raises: 
 Translate logic types
