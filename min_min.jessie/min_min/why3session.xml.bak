@@ -2,6 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
+<prover id="0" name="CVC4" version="1.4" timelimit="1" steplimit="0" memlimit="1000"/>
 <prover id="1" name="Alt-Ergo" version="1.30" timelimit="1" steplimit="0" memlimit="1000"/>
 <file name="../min_min.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
@@ -322,12 +323,12 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_min_min_safety" sum="fee735305f0f5f011bf7dd4d25a2c814">
- <goal name="WP_parameter min_min" expl="Function min_min, safety">
- <proof prover="1"><result status="valid" time="0.54" steps="1133"/></proof>
+<theory name="Function_min_min_safety" sum="676d62194dd3ae4faf1e6058d2957994" expanded="true">
+ <goal name="WP_parameter min_min" expl="Function min_min, safety" expanded="true">
+ <proof prover="1"><result status="valid" time="0.54" steps="1090"/></proof>
  </goal>
 </theory>
-<theory name="Function_min_min_behaviors" sum="79bb957411c70448c11a77efc6c0cb9b" expanded="true">
+<theory name="Function_min_min_behaviors" sum="1a7edb9f16a0f8f60771f8f7c61fce37" expanded="true">
  <goal name="WP_parameter min_min_ensures_default" expl="Function min_min, default behavior">
  <transf name="split_goal_wp">
   <goal name="WP_parameter min_min_ensures_default.1" expl="1. Behavior disjointness check">
@@ -342,293 +343,363 @@
   <goal name="WP_parameter min_min_ensures_default.4" expl="4. Behavior completeness check">
   <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_default.5" expl="5. Assertion in line 36">
-  <proof prover="1"><result status="valid" time="0.03" steps="24"/></proof>
+  <goal name="WP_parameter min_min_ensures_default.5" expl="5. Assertion in line 33">
+  <proof prover="1"><result status="valid" time="0.03" steps="22"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_default.6" expl="6. Assertion in line 39">
-  <proof prover="1"><result status="valid" time="0.02" steps="26"/></proof>
+  <goal name="WP_parameter min_min_ensures_default.6" expl="6. Assertion in line 36">
+  <proof prover="1"><result status="valid" time="0.02" steps="24"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.7" expl="7. loop invariant init">
-  <proof prover="1"><result status="valid" time="0.20" steps="455"/></proof>
+  <proof prover="1"><result status="valid" time="0.22" steps="423"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.8" expl="8. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.8.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.10" steps="177"/></proof>
+   <proof prover="1"><result status="valid" time="0.08" steps="169"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="198"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="190"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="63"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="61"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="63"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="61"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.11" steps="122"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="120"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.15" steps="223"/></proof>
+   <proof prover="1"><result status="valid" time="0.12" steps="215"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.60" steps="354"/></proof>
+   <proof prover="1"><result status="valid" time="0.52" steps="352"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.04" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="59"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.8.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.04" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="59"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.9" expl="9. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.9.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="56"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="54"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="175"/></proof>
+   <proof prover="1"><result status="valid" time="0.07" steps="167"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.12" steps="196"/></proof>
+   <proof prover="1"><result status="valid" time="0.11" steps="188"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="64"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="62"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.05" steps="69"/></proof>
+   <proof prover="1"><result status="valid" time="0.08" steps="67"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.06" steps="93"/></proof>
+   <proof prover="1"><result status="valid" time="0.05" steps="91"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.12" steps="221"/></proof>
+   <proof prover="1"><result status="valid" time="0.13" steps="213"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.50" steps="365"/></proof>
+   <proof prover="1"><result status="valid" time="0.46" steps="363"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.03" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.9.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.03" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.05" steps="59"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.10" expl="10. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.10.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.12" steps="175"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="167"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.08" steps="196"/></proof>
+   <proof prover="1"><result status="valid" time="0.11" steps="188"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="62"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="60"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.07" steps="62"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="60"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.06" steps="91"/></proof>
+   <proof prover="1"><result status="valid" time="0.05" steps="89"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.12" steps="219"/></proof>
+   <proof prover="1"><result status="valid" time="0.13" steps="211"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.11" steps="138"/></proof>
+   <proof prover="1"><result status="valid" time="0.11" steps="136"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.04" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.10.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.05" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="WP_parameter min_min_ensures_default.11" expl="11. Assertion in line 36">
-  <proof prover="1"><result status="valid" time="0.02" steps="24"/></proof>
+  <goal name="WP_parameter min_min_ensures_default.11" expl="11. Assertion in line 33">
+  <proof prover="1"><result status="valid" time="0.02" steps="22"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_default.12" expl="12. Assertion in line 39">
-  <proof prover="1"><result status="valid" time="0.03" steps="26"/></proof>
+  <goal name="WP_parameter min_min_ensures_default.12" expl="12. Assertion in line 36">
+  <proof prover="1"><result status="valid" time="0.03" steps="24"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.13" expl="13. loop invariant init">
-  <proof prover="1"><result status="valid" time="0.22" steps="541"/></proof>
+  <proof prover="1"><result status="valid" time="0.20" steps="504"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.14" expl="14. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.14.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="177"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="169"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.08" steps="198"/></proof>
+   <proof prover="1"><result status="valid" time="0.10" steps="190"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="63"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="61"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="63"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="61"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="122"/></proof>
+   <proof prover="1"><result status="valid" time="0.11" steps="120"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.12" steps="223"/></proof>
+   <proof prover="1"><result status="valid" time="0.15" steps="215"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.52" steps="358"/></proof>
+   <proof prover="1"><result status="valid" time="0.60" steps="356"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.04" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="59"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.14.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.04" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="59"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.15" expl="15. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.15.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="56"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="54"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="175"/></proof>
+   <proof prover="1"><result status="valid" time="0.08" steps="167"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.11" steps="196"/></proof>
+   <proof prover="1"><result status="valid" time="0.12" steps="188"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.04" steps="64"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="62"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="69"/></proof>
+   <proof prover="1"><result status="valid" time="0.07" steps="67"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.05" steps="93"/></proof>
+   <proof prover="1"><result status="valid" time="0.06" steps="91"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.13" steps="221"/></proof>
+   <proof prover="1"><result status="valid" time="0.12" steps="213"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.51" steps="365"/></proof>
+   <proof prover="1"><result status="valid" time="0.50" steps="363"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.03" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.15.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.03" steps="61"/></proof>
+   <proof prover="1"><result status="valid" time="0.05" steps="59"/></proof>
    </goal>
   </transf>
   </goal>
   <goal name="WP_parameter min_min_ensures_default.16" expl="16. loop invariant preservation">
   <transf name="split_goal_wp">
    <goal name="WP_parameter min_min_ensures_default.16.1" expl="1. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.2" expl="2. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="55"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="53"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.3" expl="3. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.11" steps="175"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="167"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.4" expl="4. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.07" steps="196"/></proof>
+   <proof prover="1"><result status="valid" time="0.12" steps="188"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.5" expl="5. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.03" steps="62"/></proof>
+   <proof prover="1"><result status="valid" time="0.04" steps="60"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.6" expl="6. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.08" steps="62"/></proof>
+   <proof prover="1"><result status="valid" time="0.05" steps="60"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.7" expl="7. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.05" steps="91"/></proof>
+   <proof prover="1"><result status="valid" time="0.06" steps="89"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.8" expl="8. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.13" steps="219"/></proof>
+   <proof prover="1"><result status="valid" time="0.12" steps="211"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.9" expl="9. Function min_min, default behavior">
-   <proof prover="1"><result status="valid" time="0.09" steps="138"/></proof>
+   <proof prover="1"><result status="valid" time="0.09" steps="136"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.10" expl="10. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.03" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
    <goal name="WP_parameter min_min_ensures_default.16.11" expl="11. Assigns clause">
-   <proof prover="1"><result status="valid" time="0.05" steps="54"/></proof>
+   <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
    </goal>
   </transf>
   </goal>
  </transf>
  </goal>
- <goal name="WP_parameter min_min_ensures_one_size" expl="Function min_min, behavior one_size">
- <proof prover="1"><result status="valid" time="0.05" steps="71"/></proof>
+ <goal name="WP_parameter min_min_ensures_one_size" expl="Function min_min, behavior one_size" expanded="true">
+ <proof prover="0"><result status="unknown" time="1.14"/></proof>
+ <proof prover="1"><result status="unknown" time="0.08"/></proof>
+ <transf name="split_goal_wp" expanded="true">
+  <goal name="WP_parameter min_min_ensures_one_size.1" expl="1. loop invariant init">
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.2" expl="2. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.3" expl="3. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.4" expl="4. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.5" expl="5. Postcondition">
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.6" expl="6. loop invariant init">
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.7" expl="7. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.8" expl="8. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.9" expl="9. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.10" expl="10. Postcondition">
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+  </goal>
+  <goal name="WP_parameter min_min_ensures_one_size.11" expl="11. Postcondition" expanded="true">
+  <proof prover="0"><result status="unknown" time="1.16"/></proof>
+  <proof prover="1"><result status="unknown" time="0.04"/></proof>
+  <transf name="split_goal_wp" expanded="true">
+   <goal name="WP_parameter min_min_ensures_one_size.11.1" expl="1. Assigns clause">
+   <proof prover="1"><result status="valid" time="0.02" steps="13"/></proof>
+   </goal>
+   <goal name="WP_parameter min_min_ensures_one_size.11.2" expl="2. Assigns clause">
+   <proof prover="1"><result status="valid" time="0.02" steps="13"/></proof>
+   </goal>
+   <goal name="WP_parameter min_min_ensures_one_size.11.3" expl="3. Ensures clause">
+   <proof prover="0"><result status="unknown" time="1.38"/></proof>
+   <proof prover="1"><result status="unknown" time="0.05"/></proof>
+   <transf name="inline_all">
+    <goal name="WP_parameter min_min_ensures_one_size.11.3.1" expl="1. Ensures clause">
+    <transf name="remove_triggers">
+     <goal name="WP_parameter min_min_ensures_one_size.11.3.1.1" expl="1. Ensures clause">
+     <proof prover="0" timelimit="30" memlimit="4000"><undone/></proof>
+     <proof prover="1" timelimit="30" memlimit="4000"><result status="timeout" time="29.81"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+   <goal name="WP_parameter min_min_ensures_one_size.11.4" expl="4. Ensures clause">
+   <proof prover="0"><result status="unknown" time="1.24"/></proof>
+   <proof prover="1"><result status="unknown" time="0.05"/></proof>
+   <transf name="inline_all">
+    <goal name="WP_parameter min_min_ensures_one_size.11.4.1" expl="1. Ensures clause">
+    <transf name="remove_triggers">
+     <goal name="WP_parameter min_min_ensures_one_size.11.4.1.1" expl="1. Ensures clause">
+     <proof prover="0" timelimit="30" memlimit="4000"><undone/></proof>
+     <proof prover="1" timelimit="30" memlimit="4000"><result status="timeout" time="29.83"/></proof>
+     </goal>
+    </transf>
+    </goal>
+   </transf>
+   </goal>
+  </transf>
+  </goal>
+ </transf>
  </goal>
  <goal name="WP_parameter min_min_ensures_size" expl="Function min_min, behavior size">
  <transf name="split_goal_wp">
-  <goal name="WP_parameter min_min_ensures_size.1" expl="1. Postcondition">
-  <proof prover="1"><result status="valid" time="0.02" steps="11"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.1" expl="1. loop invariant init">
+  <proof prover="1"><result status="valid" time="0.09" steps="212"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_size.2" expl="2. loop invariant init">
-  <proof prover="1"><result status="valid" time="0.07" steps="222"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.2" expl="2. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.21" steps="406"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_size.3" expl="3. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.22" steps="426"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="59"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_size.4" expl="4. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.05" steps="61"/></proof>
+  <proof prover="1"><result status="valid" time="0.03" steps="52"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_size.5" expl="5. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.04" steps="54"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.5" expl="5. Postcondition">
+  <proof prover="1"><result status="valid" time="0.59" steps="913"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_size.6" expl="6. Postcondition">
-  <proof prover="1"><result status="valid" time="0.51" steps="941"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.6" expl="6. loop invariant init">
+  <proof prover="1"><result status="valid" time="0.07" steps="212"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_size.7" expl="7. loop invariant init">
-  <proof prover="1"><result status="valid" time="0.09" steps="222"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.7" expl="7. loop invariant preservation">
+  <proof prover="1"><result status="valid" time="0.19" steps="406"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_size.8" expl="8. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.21" steps="426"/></proof>
+  <proof prover="1"><result status="valid" time="0.05" steps="59"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_size.9" expl="9. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.05" steps="61"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="52"/></proof>
   </goal>
-  <goal name="WP_parameter min_min_ensures_size.10" expl="10. loop invariant preservation">
-  <proof prover="1"><result status="valid" time="0.03" steps="54"/></proof>
+  <goal name="WP_parameter min_min_ensures_size.10" expl="10. Postcondition">
+  <proof prover="1"><result status="valid" time="0.62" steps="914"/></proof>
   </goal>
   <goal name="WP_parameter min_min_ensures_size.11" expl="11. Postcondition">
-  <proof prover="1"><result status="valid" time="0.59" steps="941"/></proof>
-  </goal>
-  <goal name="WP_parameter min_min_ensures_size.12" expl="12. Postcondition">
-  <proof prover="1"><result status="valid" time="0.03" steps="14"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
   </goal>
  </transf>
  </goal>
  <goal name="WP_parameter min_min_ensures_zero_size" expl="Function min_min, behavior zero_size">
- <proof prover="1"><result status="valid" time="0.03" steps="14"/></proof>
+ <proof prover="1"><result status="valid" time="0.03" steps="12"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

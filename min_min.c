@@ -5,12 +5,16 @@
        assigns \nothing;
        ensures min1 == \old(min1);
        ensures min2 == \old(min2);
-    behavior positive_size:
-       assumes size > 0;
+    behavior one_size:
+       assumes size == 1;
+       assigns *min1, *min2;
+       ensures **min1 == **min2;
+       ensures *min1 == *min2;
+    behavior size:
+       assumes size > 1;
        assigns *min1, *min2;
        ensures \valid(min1) && \valid(min2);
-       ensures \exists integer i; 0 <= i < size && (a + i) == *min1;
-       ensures \exists integer i; 0 <= i < size && (a + i) == *min2;
+       ensures \exists integer i, j; 0 <= i < size && 0 <= j < size && i != j && (a + i) == *min1 && (a + j) == *min2;
        ensures **min1 <= **min2;
        ensures \forall integer i; 0 <= i < size ==> a[i] >= **min1;
        ensures \exists integer i; 0 <= i < size && a[i] <= **min2 && a[i] == **min1;
@@ -20,24 +24,33 @@
  */
 void min_min(int *a, unsigned size, int **min1, int **min2)
 {
-
-   if (size > 0) {
+   if (size == 1) {
+      *min1 = a;
+      *min2 = *min1;
+   } else if (size > 1) {
       //int i; Найдите ошибку
       unsigned i;
-      *min1 = &a[0];
-      *min2 = *min1;
+      {
+         unsigned x, y;
+         (a[0] < a[1]) ? (x = 0, y = 1) : (x = 1, y = 0);
+         //@ assert a[x] <= a[y];
+         *min1 = &a[x];
+         *min2 = &a[y];
+         //@ assert **min1 <= **min2;
+      }
 
-      /*@ loop invariant 0 < i <= size;
+      /*@ loop invariant 2 <= i <= size;
           loop invariant \exists integer j; 0 <= j < i && (a + j) == *min1;
           loop invariant \exists integer j; 0 <= j < i && (a + j) == *min2;
           loop invariant **min1 <= **min2;
+          loop invariant *min1 != *min2;
           loop invariant \forall integer j; 0 <= j < i ==> a[j] >= **min1;
           loop invariant \exists integer j; 0 <= j < i && a[j] <= **min2 && a[j] == **min1;
           loop invariant ! (\exists integer j,k; 0 <= j < i && 0 <= k < i && j != k && (a[j] < **min2 && a[k] < **min2 && a[k] < a[j]));
           loop assigns *min1, *min2;
           loop variant size - i;
        */
-      for(i = 1; i < size; ++i) {
+      for(i = 2; i < size; ++i) {
          if (a[i] < **min1) {
             *min2 = *min1;
             *min1 = &a[i];
