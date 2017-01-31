@@ -5,8 +5,14 @@
        assumes size == 0;
        assigns \nothing;
        ensures max == \old(max) && min == \old(min);
-    behavior positive_size:
-       assumes size > 0;
+    behavior one_size:
+       assumes size == 1;
+       assigns *max, *min;
+       ensures *max == a;
+       ensures *max == *min;
+       ensures **max == **min;
+    behavior size:
+       assumes size > 1;
        assigns *max, *min;
        ensures \exists integer i; 0 <= i < size && (a + i) == *max;
        ensures \exists integer i; 0 <= i < size && (a + i) == *min;

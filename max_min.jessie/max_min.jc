@@ -33,7 +33,7 @@ tag int_xP = {
 type int_xP = [int_xP]
 
 unit max_min(intP[..] a, uint32 size_2, int_xP[..] max, int_xP[..] min)
-  requires ((_C_49 : \at((if (\at(0,Here) <=
+  requires ((_C_55 : \at((if (\at(0,Here) <=
                                \at(((size_2 :> integer) - 1),Here)) then 
                          (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
                             (\offset_max(\at(a,Here)) >=
@@ -43,10 +43,10 @@ unit max_min(intP[..] a, uint32 size_2, int_xP[..] max, int_xP[..] min)
                                 (__framac_tmp1 <=
                                   \at(((size_2 :> integer) - 1),Here))) ==>
                                true))) else true),Here)) &&
-             ((_C_50 : \at((((\offset_min(\at(max,Here)) <= \at(0,Here)) &&
+             ((_C_56 : \at((((\offset_min(\at(max,Here)) <= \at(0,Here)) &&
                               (\offset_max(\at(max,Here)) >= \at(0,Here))) &&
                              true),Here)) &&
-               (_C_51 : \at((((\offset_min(\at(min,Here)) <= \at(0,Here)) &&
+               (_C_57 : \at((((\offset_min(\at(min,Here)) <= \at(0,Here)) &&
                                (\offset_max(\at(min,Here)) >= \at(0,Here))) &&
                               true),Here))));
 behavior default:
@@ -56,22 +56,30 @@ behavior zero_size:
   assigns \nothing;
   ensures (_C_37 : ((_C_38 : (\at(max,Old) == \at(max,Old))) &&
                      (_C_39 : (\at(min,Old) == \at(min,Old)))));
-behavior positive_size:
-  assumes ((size_2 :> integer) > 0);
+behavior one_size:
+  assumes ((size_2 :> integer) == 1);
   assigns max.int_xM,
   min.int_xM;
-  ensures (_C_40 : ((_C_41 : (\exists integer i_1;
+  ensures (_C_40 : ((_C_41 : (\at(max,Old).int_xM == \at(a,Old))) &&
+                     ((_C_43 : (\at(max,Old).int_xM == \at(min,Old).int_xM)) &&
+                       (_C_44 : (\at(max,Old).int_xM.intM ==
+                                  \at(min,Old).int_xM.intM)))));
+behavior size:
+  assumes ((size_2 :> integer) > 1);
+  assigns max.int_xM,
+  min.int_xM;
+  ensures (_C_45 : ((_C_46 : (\exists integer i_1;
                                (((0 <= i_1) &&
                                   (i_1 < (\at(size_2,Old) :> integer))) &&
                                  ((\at(a,Old) + i_1) == \at(max,Old).int_xM)))) &&
-                     ((_C_43 : (\exists integer i_2;
+                     ((_C_48 : (\exists integer i_2;
                                  (((0 <= i_2) &&
                                     (i_2 < (\at(size_2,Old) :> integer))) &&
                                    ((\at(a,Old) + i_2) ==
                                      \at(min,Old).int_xM)))) &&
-                       ((_C_45 : (\at(max,Old).int_xM.intM >=
+                       ((_C_50 : (\at(max,Old).int_xM.intM >=
                                    \at(min,Old).int_xM.intM)) &&
-                         (_C_46 : (\forall integer i_3;
+                         (_C_51 : (\forall integer i_3;
                                     (((0 <= i_3) &&
                                        (i_3 < (\at(size_2,Old) :> integer))) ==>
                                       ((\at(max,Old).int_xM.intM >=
@@ -79,11 +87,18 @@ behavior positive_size:
                                         ((\at(a,Old) + i_3).intM >=
                                           \at(min,Old).int_xM.intM)))))))));
 {  
-   (check (disjoint_behaviors : (! (((size_2 :> integer) == 0) &&
-                                     ((size_2 :> integer) > 0)))));
+   (check (disjoint_behaviors : (! (((size_2 :> integer) == 1) &&
+                                     ((size_2 :> integer) > 1)))));
    
-   (check (complete_behaviors : (((size_2 :> integer) > 0) ||
-                                  ((size_2 :> integer) == 0))));
+   (check (disjoint_behaviors : (! (((size_2 :> integer) == 0) &&
+                                     ((size_2 :> integer) == 1)))));
+   
+   (check (disjoint_behaviors : (! (((size_2 :> integer) == 0) &&
+                                     ((size_2 :> integer) > 1)))));
+   
+   (check (complete_behaviors : (((size_2 :> integer) > 1) ||
+                                  (((size_2 :> integer) == 1) ||
+                                    ((size_2 :> integer) == 0)))));
    
    (var uint32 i);
    

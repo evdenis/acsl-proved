@@ -1871,8 +1871,7 @@ module Function_max_min_safety
   
   use why3.Bool.Bool 
   
-  let max_min
-  #"/home/work/workspace/education/acsl-exam/./max_min.c" 18 5 58#
+  let max_min #"/home/work/workspace/education/acsl-exam/max_min.c" 24 5 58#
   "expl:Function max_min, safety" =
   fun
    (a : (pointer intP)) (size_2 : Uint32.t) (max : (pointer int_xP)) (min :
@@ -1891,7 +1890,7 @@ module Function_max_min_safety
        ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 1 13 34#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
     (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
      (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max intP_a_2_alloc_table a)
@@ -1903,7 +1902,7 @@ module Function_max_min_safety
        ((=) true true))))) else ((=) true true)))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 2 13 24#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
     (#"max_min.jc" 36 12 1027#
     ((#"max_min.jc" 36 12 1027#
      ((<=) (offset_min int_xP_max_3_alloc_table max) (0)))
@@ -1913,7 +1912,7 @@ module Function_max_min_safety
      ((>=) (offset_max int_xP_max_3_alloc_table max) (0)))
     /\ (#"max_min.jc" 36 12 1027# ((=) true true)))))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./max_min.c" 3 13 24#
+   (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
    (#"max_min.jc" 36 12 1027#
    ((#"max_min.jc" 36 12 1027#
     ((<=) (offset_min int_xP_min_4_alloc_table min) (0)))
@@ -1926,72 +1925,72 @@ module Function_max_min_safety
    'Init:
    try
     begin
-    (); ();
+    (); (); (); ();
      (let i = ref (Safe_uint32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 20 7 15#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 26 7 15#
      (Safe_uint32.(>)  size_2
-      (#"max_min.jc" 90 29 42# "expl:Integer cast" (Safe_uint32.of_int (0)))
+      (#"max_min.jc" 105 29 42# "expl:Integer cast" (Safe_uint32.of_int (0)))
       ))
      then
       try
        begin
-       (let _jessie_88 =
-       (let _jessie_87 =
+       (let _jessie_110 =
+       (let _jessie_109 =
        (shift_typesafe  a
         (Safe_int32.to_int 
-         (#"max_min.jc" 91 53 65# "expl:Integer cast"
+         (#"max_min.jc" 106 53 65# "expl:Integer cast"
          (Safe_int32.of_int (0))) ) ) in
        begin
        (assert {
-       (#"/home/work/workspace/education/acsl-exam/./max_min.c" 22 6 18#
-       "expl:Pointer index bounds" true) }); _jessie_87 end) in
-       (let _jessie_89 = max in
-       (let _jessie_90 = (0) in
-       (let _jessie_91 = _jessie_89 in
-       (#"/home/work/workspace/education/acsl-exam/./max_min.c" 22 6 18#
+       (#"/home/work/workspace/education/acsl-exam/max_min.c" 28 6 18#
+       "expl:Pointer index bounds" true) }); _jessie_109 end) in
+       (let _jessie_111 = max in
+       (let _jessie_112 = (0) in
+       (let _jessie_113 = _jessie_111 in
+       (#"/home/work/workspace/education/acsl-exam/max_min.c" 28 6 18#
        "expl:Pointer dereference"
-       (upd  int_xP_max_3_alloc_table int_xP_int_xM_max_3 _jessie_89
-        _jessie_88 ))))));
+       (upd  int_xP_max_3_alloc_table int_xP_int_xM_max_3 _jessie_111
+        _jessie_110 ))))));
         begin
-        (let _jessie_83 =
-        (let _jessie_82 =
-        (#"/home/work/workspace/education/acsl-exam/./max_min.c" 23 13 17#
+        (let _jessie_105 =
+        (let _jessie_104 =
+        (#"/home/work/workspace/education/acsl-exam/max_min.c" 29 13 17#
         "expl:Pointer dereference"
         (acc  int_xP_max_3_alloc_table !int_xP_int_xM_max_3 max )) in
         begin
         (assert {
-        (#"/home/work/workspace/education/acsl-exam/./max_min.c" 23 6 17#
-        "expl:Pointer index bounds" true) }); _jessie_82 end) in
-        (let _jessie_84 = min in
-        (let _jessie_85 = (0) in
-        (let _jessie_86 = _jessie_84 in
-        (#"/home/work/workspace/education/acsl-exam/./max_min.c" 23 6 17#
+        (#"/home/work/workspace/education/acsl-exam/max_min.c" 29 6 17#
+        "expl:Pointer index bounds" true) }); _jessie_104 end) in
+        (let _jessie_106 = min in
+        (let _jessie_107 = (0) in
+        (let _jessie_108 = _jessie_106 in
+        (#"/home/work/workspace/education/acsl-exam/max_min.c" 29 6 17#
         "expl:Pointer dereference"
-        (upd  int_xP_min_4_alloc_table int_xP_int_xM_min_4 _jessie_84
-         _jessie_83 ))))));
+        (upd  int_xP_min_4_alloc_table int_xP_int_xM_min_4 _jessie_106
+         _jessie_105 ))))));
          begin
          (i :=
-          (let _jessie_70 =
-          (#"max_min.jc" 93 22 35# "expl:Integer cast"
+          (let _jessie_92 =
+          (#"max_min.jc" 108 22 35# "expl:Integer cast"
           (Safe_uint32.of_int (1))) in
           begin
           (assert {
-          (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 10 15#
-          "expl:Pointer index bounds" true) }); _jessie_70 end));
-          'Loop_4:
+          (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 10 15#
+          "expl:Pointer index bounds" true) }); _jessie_92 end));
+          'Loop_5:
           loop
-          invariant { (#"max_min.jc" 95 9 1876# true) }
+          invariant { (#"max_min.jc" 110 9 1876# true) }
             variant {
-              (#"/home/work/workspace/education/acsl-exam/./max_min.c" 30 23 31#
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 36 23 31#
               (Int.(-) (Uint32.to_int size_2) (Uint32.to_int !i))) }
            begin
            any unit
            requires { true } reads { a, int_xP_int_xM_max_3,
            int_xP_int_xM_min_4, max, min, size_2 }
            ensures {
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 28 25 81#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 34 25 81#
               (forall j_2 : int.
                ((((<=) (0) j_2) /\ ((<) j_2 (Uint32.to_int !i))) ->
                 ((Int32.(>=)
@@ -2001,103 +2000,103 @@ module Function_max_min_safety
                 (Int32.(>=) (select intP_intM_a_2 (shift a j_2))
                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 27 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 33 25 39#
               (Int32.(>=)
               (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
               (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 26 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 32 25 71#
               (exists j_1 : int.
                (((<=) (0) j_1) /\
                (((<) j_1 (Uint32.to_int !i)) /\
                ((=) (shift a j_1) (select !int_xP_int_xM_min_4 min))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 25 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 31 25 71#
               (exists j_0 : int.
                (((<=) (0) j_0) /\
                (((<) j_0 (Uint32.to_int !i)) /\
                ((=) (shift a j_0) (select !int_xP_int_xM_max_3 max))))))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 31#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 31#
               ((<=) (1) (Uint32.to_int !i)))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 30 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 30 39#
              (Uint32.(<=) !i size_2))))))))) } ;
             try
              begin
              begin
              (if
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 17 25#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 17 25#
              (Safe_uint32.(<)  !i size_2 )) then ()
              else (raise (Goto_while_0_break_exc ())));
               (if
-              (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 13 25#
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 25#
               (Safe_int32.(<) 
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 13 18#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 18#
                "expl:Pointer dereference"
                (acc  intP_a_2_alloc_table intP_intM_a_2
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 14 18#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 14 18#
                 "expl:Pointer dereference"
                 (acc  int_xP_max_3_alloc_table !int_xP_int_xM_max_3 max )) ))
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 21 25#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 21 25#
                "expl:Pointer dereference"
                (acc_offset_typesafe  intP_a_2_alloc_table intP_intM_a_2 a
                 (Safe_uint32.to_int  !i ) )) ))
               then
-               (let _jessie_77 =
-               (let _jessie_76 =
+               (let _jessie_99 =
+               (let _jessie_98 =
                (shift_typesafe  a (Safe_uint32.to_int  !i ) ) in
                begin
                (assert {
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 34 12 24#
-               "expl:Pointer index bounds" true) }); _jessie_76 end) in
-               (let _jessie_78 = max in
-               (let _jessie_79 = (0) in
-               (let _jessie_80 = _jessie_78 in
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 34 12 24#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 40 12 24#
+               "expl:Pointer index bounds" true) }); _jessie_98 end) in
+               (let _jessie_100 = max in
+               (let _jessie_101 = (0) in
+               (let _jessie_102 = _jessie_100 in
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 40 12 24#
                "expl:Pointer dereference"
-               (upd  int_xP_max_3_alloc_table int_xP_int_xM_max_3 _jessie_78
-                _jessie_77 ))))))
+               (upd  int_xP_max_3_alloc_table int_xP_int_xM_max_3 _jessie_100
+                _jessie_99 ))))))
               else
                (if
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 20 32#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 32#
                (Safe_int32.(>) 
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 20 25#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 25#
                 "expl:Pointer dereference"
                 (acc  intP_a_2_alloc_table intP_intM_a_2
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 21 25#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 21 25#
                  "expl:Pointer dereference"
                  (acc  int_xP_min_4_alloc_table !int_xP_int_xM_min_4 min )) ))
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 28 32#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 28 32#
                 "expl:Pointer dereference"
                 (acc_offset_typesafe  intP_a_2_alloc_table intP_intM_a_2 a
                  (Safe_uint32.to_int  !i ) )) ))
                then
-                (let _jessie_72 =
-                (let _jessie_71 =
+                (let _jessie_94 =
+                (let _jessie_93 =
                 (shift_typesafe  a (Safe_uint32.to_int  !i ) ) in
                 begin
                 (assert {
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 36 12 24#
-                "expl:Pointer index bounds" true) }); _jessie_71 end) in
-                (let _jessie_73 = min in
-                (let _jessie_74 = (0) in
-                (let _jessie_75 = _jessie_73 in
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 36 12 24#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 42 12 24#
+                "expl:Pointer index bounds" true) }); _jessie_93 end) in
+                (let _jessie_95 = min in
+                (let _jessie_96 = (0) in
+                (let _jessie_97 = _jessie_95 in
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 42 12 24#
                 "expl:Pointer dereference"
-                (upd  int_xP_min_4_alloc_table int_xP_int_xM_min_4 _jessie_73
-                 _jessie_72 )))))) else ()));
+                (upd  int_xP_min_4_alloc_table int_xP_int_xM_min_4 _jessie_95
+                 _jessie_94 )))))) else ()));
               (i :=
-               (let _jessie_81 =
+               (let _jessie_103 =
                (Safe_uint32.(+)  !i
-                (#"max_min.jc" 131 53 66# "expl:Integer cast"
+                (#"max_min.jc" 146 53 66# "expl:Integer cast"
                 (Safe_uint32.of_int (1))) ) in
                begin
                (assert {
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 27 30#
-               "expl:Pointer index bounds" true) }); _jessie_81 end)) end;
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 27 30#
+               "expl:Pointer index bounds" true) }); _jessie_103 end)) end;
               (raise (Loop_continue_exc ())) end with Loop_continue_exc
              _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
          end end end with Goto_while_0_break_exc _jessie_1 ->
@@ -2153,7 +2152,7 @@ module Function_max_min_behaviors
   use why3.Bool.Bool 
   
   let max_min_ensures_default
-  #"/home/work/workspace/education/acsl-exam/./max_min.c" 18 5 58#
+  #"/home/work/workspace/education/acsl-exam/max_min.c" 24 5 58#
   "expl:Function max_min, default behavior" =
   fun
    (a : (pointer intP)) (size_2 : Uint32.t) (max : (pointer int_xP)) (min :
@@ -2172,7 +2171,7 @@ module Function_max_min_behaviors
        ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 1 13 34#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
     (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
      (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max intP_a_2_alloc_table a)
@@ -2184,7 +2183,7 @@ module Function_max_min_behaviors
        ((=) true true))))) else ((=) true true)))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 2 13 24#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
     (#"max_min.jc" 36 12 1027#
     ((#"max_min.jc" 36 12 1027#
      ((<=) (offset_min int_xP_max_3_alloc_table max) (0)))
@@ -2194,7 +2193,7 @@ module Function_max_min_behaviors
      ((>=) (offset_max int_xP_max_3_alloc_table max) (0)))
     /\ (#"max_min.jc" 36 12 1027# ((=) true true)))))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./max_min.c" 3 13 24#
+   (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
    (#"max_min.jc" 36 12 1027#
    ((#"max_min.jc" 36 12 1027#
     ((<=) (offset_min int_xP_min_4_alloc_table min) (0)))
@@ -2209,20 +2208,31 @@ module Function_max_min_behaviors
    try
     begin
     (check {
-    (#"max_min.jc" 82 10 131# "expl:Behavior disjointness check"
+    (#"max_min.jc" 90 10 131# "expl:Behavior disjointness check"
     (not
-    (((=) (Uint32.to_int size_2) (0)) /\ ((>) (Uint32.to_int size_2) (0)))))
+    (((=) (Uint32.to_int size_2) (1)) /\ ((>) (Uint32.to_int size_2) (1)))))
     });
      (check {
-     (#"max_min.jc" 85 10 124# "expl:Behavior completeness check"
-     (((>) (Uint32.to_int size_2) (0)) \/ ((=) (Uint32.to_int size_2) (0))))
+     (#"max_min.jc" 93 10 132# "expl:Behavior disjointness check"
+     (not
+     (((=) (Uint32.to_int size_2) (0)) /\ ((=) (Uint32.to_int size_2) (1)))))
+     });
+     (check {
+     (#"max_min.jc" 96 10 131# "expl:Behavior disjointness check"
+     (not
+     (((=) (Uint32.to_int size_2) (0)) /\ ((>) (Uint32.to_int size_2) (1)))))
+     });
+     (check {
+     (#"max_min.jc" 99 10 192# "expl:Behavior completeness check"
+     (((>) (Uint32.to_int size_2) (1)) \/
+     (((=) (Uint32.to_int size_2) (1)) \/ ((=) (Uint32.to_int size_2) (0)))))
      });
      (let i = ref (Unsafe_uint32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 20 7 15#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 26 7 15#
      (Unsafe_uint32.(>)  size_2
-      (#"max_min.jc" 90 29 42# "expl:Integer cast"
+      (#"max_min.jc" 105 29 42# "expl:Integer cast"
       (Unsafe_uint32.of_int (0))) ))
      then
       try
@@ -2230,7 +2240,7 @@ module Function_max_min_behaviors
        (let _jessie_22 =
        (shift_  a
         (Unsafe_int32.to_int 
-         (#"max_min.jc" 91 53 65# "expl:Integer cast"
+         (#"max_min.jc" 106 53 65# "expl:Integer cast"
          (Unsafe_int32.of_int (0))) ) ) in
        (let _jessie_23 = max in
        (let _jessie_24 = (0) in
@@ -2244,37 +2254,37 @@ module Function_max_min_behaviors
         (upd  int_xP_int_xM_min_4 _jessie_20 _jessie_17 )))));
          begin
          (i :=
-          (#"max_min.jc" 93 22 35# "expl:Integer cast"
+          (#"max_min.jc" 108 22 35# "expl:Integer cast"
           (Unsafe_uint32.of_int (1))));
           'Loop_1:
           loop
           invariant
-            { (((#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-                ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 31#
+            { (((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+                ((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 31#
                  ((<=) (1) (Uint32.to_int !i)))
                 /\
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 30 39#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 30 39#
                 (Uint32.(<=) !i size_2)))))
                &&
-               ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 25 25 71#
+               ((#"/home/work/workspace/education/acsl-exam/max_min.c" 31 25 71#
                 (exists j_0 : int.
                  (((<=) (0) j_0) /\
                  (((<) j_0 (Uint32.to_int !i)) /\
                  ((=) (shift a j_0) (select !int_xP_int_xM_max_3 max))))))
                &&
-               ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 26 25 71#
+               ((#"/home/work/workspace/education/acsl-exam/max_min.c" 32 25 71#
                 (exists j_1 : int.
                  (((<=) (0) j_1) /\
                  (((<) j_1 (Uint32.to_int !i)) /\
                  ((=) (shift a j_1) (select !int_xP_int_xM_min_4 min))))))
                &&
-               ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 27 25 39#
+               ((#"/home/work/workspace/education/acsl-exam/max_min.c" 33 25 39#
                 (Int32.(>=)
                 (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
                &&
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 28 25 81#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 34 25 81#
                (forall j_2 : int.
                 ((((<=) (0) j_2) /\ ((<) j_2 (Uint32.to_int !i))) ->
                  ((Int32.(>=)
@@ -2284,13 +2294,13 @@ module Function_max_min_behaviors
                  (Int32.(>=) (select intP_intM_a_2 (shift a j_2))
                  (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))))))
               /\
-              (#"max_min.jc" 95 9 1876#
-              ((#"max_min.jc" 95 9 1876# "expl:Assigns clause"
+              (#"max_min.jc" 110 9 1876#
+              ((#"max_min.jc" 110 9 1876# "expl:Assigns clause"
                (not_assigns int_xP_max_3_alloc_table int_xP_max_3_alloc_table
                (at !int_xP_int_xM_max_3 'Loop_1) !int_xP_int_xM_max_3
                (pset_singleton max)))
               /\
-              (#"max_min.jc" 95 9 1876# "expl:Assigns clause"
+              (#"max_min.jc" 110 9 1876# "expl:Assigns clause"
               (not_assigns int_xP_min_4_alloc_table int_xP_min_4_alloc_table
               (at !int_xP_int_xM_min_4 'Loop_1) !int_xP_int_xM_min_4
               (pset_singleton min)))))) } 
@@ -2300,11 +2310,11 @@ module Function_max_min_behaviors
              begin
              begin
              (if
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 17 25#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 17 25#
              (Unsafe_uint32.(<)  !i size_2 )) then ()
              else (raise (Goto_while_0_break_exc ())));
               (if
-              (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 13 25#
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 25#
               (Unsafe_int32.(<) 
                (acc  intP_intM_a_2 (acc  !int_xP_int_xM_max_3 max ) )
                (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) ) )
@@ -2317,7 +2327,7 @@ module Function_max_min_behaviors
                (upd  int_xP_int_xM_max_3 _jessie_14 _jessie_11 )))))
               else
                (if
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 20 32#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 32#
                (Unsafe_int32.(>) 
                 (acc  intP_intM_a_2 (acc  !int_xP_int_xM_min_4 min ) )
                 (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) )
@@ -2330,7 +2340,7 @@ module Function_max_min_behaviors
                 (upd  int_xP_int_xM_min_4 _jessie_9 _jessie_6 ))))) else ()));
               (i :=
                (Unsafe_uint32.(+)  !i
-                (#"max_min.jc" 131 53 66# "expl:Integer cast"
+                (#"max_min.jc" 146 53 66# "expl:Integer cast"
                 (Unsafe_uint32.of_int (1))) )) end;
               (raise (Loop_continue_exc ())) end with Loop_continue_exc
              _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
@@ -2338,9 +2348,9 @@ module Function_max_min_behaviors
        'While_0_break: 'While_0_break: () end else ()); (raise Return) end);
      (raise Return) end with Return -> () end
   
-  let max_min_ensures_positive_size
-  #"/home/work/workspace/education/acsl-exam/./max_min.c" 18 5 58#
-  "expl:Function max_min, behavior positive_size" =
+  let max_min_ensures_one_size
+  #"/home/work/workspace/education/acsl-exam/max_min.c" 24 5 58#
+  "expl:Function max_min, behavior one_size" =
   fun
    (a : (pointer intP)) (size_2 : Uint32.t) (max : (pointer int_xP)) (min :
    (pointer int_xP)) (int_xP_int_xM_max_3 : ref (memory int_xP (pointer
@@ -2350,7 +2360,7 @@ module Function_max_min_behaviors
    (intP_a_2_tag_table : (tag_table intP)) (intP_intM_a_2 : (memory intP
    Int32.t)) 
    requires {
-   (((>) (Uint32.to_int size_2) (0)) /\
+   (((=) (Uint32.to_int size_2) (1)) /\
    (((allocated intP_a_2_alloc_table a) ->
      (((=) (typeof intP_a_2_tag_table a) intP_tag) /\
      (forall i : int.
@@ -2359,7 +2369,7 @@ module Function_max_min_behaviors
        ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 1 13 34#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
     (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
      (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max intP_a_2_alloc_table a)
@@ -2371,7 +2381,7 @@ module Function_max_min_behaviors
        ((=) true true))))) else ((=) true true)))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 2 13 24#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
     (#"max_min.jc" 36 12 1027#
     ((#"max_min.jc" 36 12 1027#
      ((<=) (offset_min int_xP_max_3_alloc_table max) (0)))
@@ -2381,7 +2391,7 @@ module Function_max_min_behaviors
      ((>=) (offset_max int_xP_max_3_alloc_table max) (0)))
     /\ (#"max_min.jc" 36 12 1027# ((=) true true)))))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./max_min.c" 3 13 24#
+   (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
    (#"max_min.jc" 36 12 1027#
    ((#"max_min.jc" 36 12 1027#
     ((<=) (offset_min int_xP_min_4_alloc_table min) (0)))
@@ -2400,53 +2410,35 @@ module Function_max_min_behaviors
       (not_assigns int_xP_min_4_alloc_table int_xP_min_4_alloc_table (old
       !int_xP_int_xM_min_4) !int_xP_int_xM_min_4 (pset_singleton min))))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
      "expl:Ensures clause"
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
      "expl:Ensures clause"
-     ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
-      "expl:Ensures clause"
-      (exists i_1 : int.
-       (((<=) (0) i_1) /\
-       (((<) i_1 (Uint32.to_int size_2)) /\
-       ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
+      "expl:Ensures clause" ((=) (select !int_xP_int_xM_max_3 max) a))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
      "expl:Ensures clause"
-     ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 12 15 66#
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 12 15 27#
       "expl:Ensures clause"
-      (exists i_2 : int.
-       (((<=) (0) i_2) /\
-       (((<) i_2 (Uint32.to_int size_2)) /\
-       ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+      ((=) (select !int_xP_int_xM_max_3 max)
+      (select !int_xP_int_xM_min_4 min)))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 13 15 29#
      "expl:Ensures clause"
-     ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 13 15 29#
-      "expl:Ensures clause"
-      (Int32.(>=) (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-      (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
-     /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 14 15 74#
-     "expl:Ensures clause"
-     (forall i_3 : int.
-      ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
-       ((Int32.(>=) (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-        (select intP_intM_a_2 (shift a i_3)))
-       /\
-       (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
-       (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
-     } diverges  ->
+     (Int32.(=) (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+     (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))) }
+   diverges  ->
    'Init:
    try
     begin
-    (); ();
+    (); (); (); ();
      (let i = ref (Unsafe_uint32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 20 7 15#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 26 7 15#
      (Unsafe_uint32.(>)  size_2
-      (#"max_min.jc" 90 29 42# "expl:Integer cast"
+      (#"max_min.jc" 105 29 42# "expl:Integer cast"
       (Unsafe_uint32.of_int (0))) ))
      then
       try
@@ -2454,7 +2446,7 @@ module Function_max_min_behaviors
        (let _jessie_66 =
        (shift_  a
         (Unsafe_int32.to_int 
-         (#"max_min.jc" 91 53 65# "expl:Integer cast"
+         (#"max_min.jc" 106 53 65# "expl:Integer cast"
          (Unsafe_int32.of_int (0))) ) ) in
        (let _jessie_67 = max in
        (let _jessie_68 = (0) in
@@ -2468,12 +2460,12 @@ module Function_max_min_behaviors
         (upd  int_xP_int_xM_min_4 _jessie_64 _jessie_61 )))));
          begin
          (i :=
-          (#"max_min.jc" 93 22 35# "expl:Integer cast"
+          (#"max_min.jc" 108 22 35# "expl:Integer cast"
           (Unsafe_uint32.of_int (1))));
           'Loop_3:
           loop
           invariant
-            { (#"max_min.jc" 95 9 1876#
+            { (#"max_min.jc" 110 9 1876#
               ((#"max_min.jc" 61 10 34# "expl:Assigns clause"
                (not_assigns int_xP_max_3_alloc_table int_xP_max_3_alloc_table
                (at !int_xP_int_xM_max_3 'Init) !int_xP_int_xM_max_3
@@ -2488,7 +2480,7 @@ module Function_max_min_behaviors
            requires { true } reads { a, int_xP_int_xM_max_3,
            int_xP_int_xM_min_4, max, min, size_2 }
            ensures {
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 28 25 81#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 34 25 81#
               (forall j_2 : int.
                ((((<=) (0) j_2) /\ ((<) j_2 (Uint32.to_int !i))) ->
                 ((Int32.(>=)
@@ -2498,39 +2490,39 @@ module Function_max_min_behaviors
                 (Int32.(>=) (select intP_intM_a_2 (shift a j_2))
                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 27 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 33 25 39#
               (Int32.(>=)
               (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
               (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 26 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 32 25 71#
               (exists j_1 : int.
                (((<=) (0) j_1) /\
                (((<) j_1 (Uint32.to_int !i)) /\
                ((=) (shift a j_1) (select !int_xP_int_xM_min_4 min))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 25 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 31 25 71#
               (exists j_0 : int.
                (((<=) (0) j_0) /\
                (((<) j_0 (Uint32.to_int !i)) /\
                ((=) (shift a j_0) (select !int_xP_int_xM_max_3 max))))))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 31#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 31#
               ((<=) (1) (Uint32.to_int !i)))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 30 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 30 39#
              (Uint32.(<=) !i size_2))))))))) } ;
             try
              begin
              begin
              (if
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 17 25#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 17 25#
              (Unsafe_uint32.(<)  !i size_2 )) then ()
              else (raise (Goto_while_0_break_exc ())));
               (if
-              (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 13 25#
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 25#
               (Unsafe_int32.(<) 
                (acc  intP_intM_a_2 (acc  !int_xP_int_xM_max_3 max ) )
                (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) ) )
@@ -2543,7 +2535,7 @@ module Function_max_min_behaviors
                (upd  int_xP_int_xM_max_3 _jessie_58 _jessie_55 )))))
               else
                (if
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 20 32#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 32#
                (Unsafe_int32.(>) 
                 (acc  intP_intM_a_2 (acc  !int_xP_int_xM_min_4 min ) )
                 (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) )
@@ -2557,7 +2549,234 @@ module Function_max_min_behaviors
                else ()));
               (i :=
                (Unsafe_uint32.(+)  !i
-                (#"max_min.jc" 131 53 66# "expl:Integer cast"
+                (#"max_min.jc" 146 53 66# "expl:Integer cast"
+                (Unsafe_uint32.of_int (1))) )) end;
+              (raise (Loop_continue_exc ())) end with Loop_continue_exc
+             _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
+         end end end with Goto_while_0_break_exc _jessie_1 ->
+       'While_0_break: 'While_0_break: () end else ()); (raise Return) end);
+     (raise Return) end with Return -> () end
+  
+  let max_min_ensures_size
+  #"/home/work/workspace/education/acsl-exam/max_min.c" 24 5 58#
+  "expl:Function max_min, behavior size" =
+  fun
+   (a : (pointer intP)) (size_2 : Uint32.t) (max : (pointer int_xP)) (min :
+   (pointer int_xP)) (int_xP_int_xM_max_3 : ref (memory int_xP (pointer
+   intP))) (int_xP_int_xM_min_4 : ref (memory int_xP (pointer intP)))
+   (intP_a_2_alloc_table : (alloc_table intP)) (int_xP_max_3_alloc_table :
+   (alloc_table int_xP)) (int_xP_min_4_alloc_table : (alloc_table int_xP))
+   (intP_a_2_tag_table : (tag_table intP)) (intP_intM_a_2 : (memory intP
+   Int32.t)) 
+   requires {
+   (((>) (Uint32.to_int size_2) (1)) /\
+   (((allocated intP_a_2_alloc_table a) ->
+     (((=) (typeof intP_a_2_tag_table a) intP_tag) /\
+     (forall i : int.
+      ((((<=) (offset_min intP_a_2_alloc_table a) i) /\
+       ((<) i (offset_max intP_a_2_alloc_table a))) ->
+       ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
+   /\
+   (#"max_min.jc" 36 12 1027#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
+    (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
+     (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
+     (((>=) (offset_max intP_a_2_alloc_table a)
+      (Int.(-) (Uint32.to_int size_2) (1)))
+     /\
+     (forall __framac_tmp1 : int.
+      ((((<=) (0) __framac_tmp1) /\
+       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int size_2) (1)))) ->
+       ((=) true true))))) else ((=) true true)))
+   /\
+   (#"max_min.jc" 36 12 1027#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
+    (#"max_min.jc" 36 12 1027#
+    ((#"max_min.jc" 36 12 1027#
+     ((<=) (offset_min int_xP_max_3_alloc_table max) (0)))
+    /\
+    (#"max_min.jc" 36 12 1027#
+    ((#"max_min.jc" 36 12 1027#
+     ((>=) (offset_max int_xP_max_3_alloc_table max) (0)))
+    /\ (#"max_min.jc" 36 12 1027# ((=) true true)))))))
+   /\
+   (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
+   (#"max_min.jc" 36 12 1027#
+   ((#"max_min.jc" 36 12 1027#
+    ((<=) (offset_min int_xP_min_4_alloc_table min) (0)))
+   /\
+   (#"max_min.jc" 36 12 1027#
+   ((#"max_min.jc" 36 12 1027#
+    ((>=) (offset_max int_xP_min_4_alloc_table min) (0)))
+   /\ (#"max_min.jc" 36 12 1027# ((=) true true))))))))))))) }
+   ensures {
+     ("expl:Postcondition"
+     (((#"max_min.jc" 69 10 34# "expl:Assigns clause"
+       (not_assigns int_xP_max_3_alloc_table int_xP_max_3_alloc_table (old
+       !int_xP_int_xM_max_3) !int_xP_int_xM_max_3 (pset_singleton max)))
+      /\
+      (#"max_min.jc" 69 10 34# "expl:Assigns clause"
+      (not_assigns int_xP_min_4_alloc_table int_xP_min_4_alloc_table (old
+      !int_xP_int_xM_min_4) !int_xP_int_xM_min_4 (pset_singleton min))))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+     "expl:Ensures clause"
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+      "expl:Ensures clause"
+      (exists i_1 : int.
+       (((<=) (0) i_1) /\
+       (((<) i_1 (Uint32.to_int size_2)) /\
+       ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 18 15 66#
+      "expl:Ensures clause"
+      (exists i_2 : int.
+       (((<=) (0) i_2) /\
+       (((<) i_2 (Uint32.to_int size_2)) /\
+       ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 19 15 29#
+      "expl:Ensures clause"
+      (Int32.(>=) (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+      (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 20 15 74#
+     "expl:Ensures clause"
+     (forall i_3 : int.
+      ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
+       ((Int32.(>=) (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+        (select intP_intM_a_2 (shift a i_3)))
+       /\
+       (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
+       (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
+     } diverges  ->
+   'Init:
+   try
+    begin
+    (); (); (); ();
+     (let i = ref (Unsafe_uint32.any_  () ) in
+     begin
+     (if
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 26 7 15#
+     (Unsafe_uint32.(>)  size_2
+      (#"max_min.jc" 105 29 42# "expl:Integer cast"
+      (Unsafe_uint32.of_int (0))) ))
+     then
+      try
+       begin
+       (let _jessie_88 =
+       (shift_  a
+        (Unsafe_int32.to_int 
+         (#"max_min.jc" 106 53 65# "expl:Integer cast"
+         (Unsafe_int32.of_int (0))) ) ) in
+       (let _jessie_89 = max in
+       (let _jessie_90 = (0) in
+       (let _jessie_91 = _jessie_89 in
+       (upd  int_xP_int_xM_max_3 _jessie_91 _jessie_88 )))));
+        begin
+        (let _jessie_83 = (acc  !int_xP_int_xM_max_3 max ) in
+        (let _jessie_84 = min in
+        (let _jessie_85 = (0) in
+        (let _jessie_86 = _jessie_84 in
+        (upd  int_xP_int_xM_min_4 _jessie_86 _jessie_83 )))));
+         begin
+         (i :=
+          (#"max_min.jc" 108 22 35# "expl:Integer cast"
+          (Unsafe_uint32.of_int (1))));
+          'Loop_4:
+          loop
+          invariant
+            { (#"max_min.jc" 110 9 1876#
+              ((#"max_min.jc" 69 10 34# "expl:Assigns clause"
+               (not_assigns int_xP_max_3_alloc_table int_xP_max_3_alloc_table
+               (at !int_xP_int_xM_max_3 'Init) !int_xP_int_xM_max_3
+               (pset_singleton max)))
+              /\
+              (#"max_min.jc" 69 10 34# "expl:Assigns clause"
+              (not_assigns int_xP_min_4_alloc_table int_xP_min_4_alloc_table
+              (at !int_xP_int_xM_min_4 'Init) !int_xP_int_xM_min_4
+              (pset_singleton min))))) } 
+           begin
+           any unit
+           requires { true } reads { a, int_xP_int_xM_max_3,
+           int_xP_int_xM_min_4, max, min, size_2 }
+           ensures {
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 34 25 81#
+              (forall j_2 : int.
+               ((((<=) (0) j_2) /\ ((<) j_2 (Uint32.to_int !i))) ->
+                ((Int32.(>=)
+                 (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                 (select intP_intM_a_2 (shift a j_2)))
+                /\
+                (Int32.(>=) (select intP_intM_a_2 (shift a j_2))
+                (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))
+             /\
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 33 25 39#
+              (Int32.(>=)
+              (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+              (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
+             /\
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 32 25 71#
+              (exists j_1 : int.
+               (((<=) (0) j_1) /\
+               (((<) j_1 (Uint32.to_int !i)) /\
+               ((=) (shift a j_1) (select !int_xP_int_xM_min_4 min))))))
+             /\
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 31 25 71#
+              (exists j_0 : int.
+               (((<=) (0) j_0) /\
+               (((<) j_0 (Uint32.to_int !i)) /\
+               ((=) (shift a j_0) (select !int_xP_int_xM_max_3 max))))))
+             /\
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 31#
+              ((<=) (1) (Uint32.to_int !i)))
+             /\
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 30 39#
+             (Uint32.(<=) !i size_2))))))))) } ;
+            try
+             begin
+             begin
+             (if
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 17 25#
+             (Unsafe_uint32.(<)  !i size_2 )) then ()
+             else (raise (Goto_while_0_break_exc ())));
+              (if
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 25#
+              (Unsafe_int32.(<) 
+               (acc  intP_intM_a_2 (acc  !int_xP_int_xM_max_3 max ) )
+               (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) ) )
+               ))
+              then
+               (let _jessie_77 = (shift_  a (Unsafe_uint32.to_int  !i ) ) in
+               (let _jessie_78 = max in
+               (let _jessie_79 = (0) in
+               (let _jessie_80 = _jessie_78 in
+               (upd  int_xP_int_xM_max_3 _jessie_80 _jessie_77 )))))
+              else
+               (if
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 32#
+               (Unsafe_int32.(>) 
+                (acc  intP_intM_a_2 (acc  !int_xP_int_xM_min_4 min ) )
+                (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) )
+                 ) ))
+               then
+                (let _jessie_72 = (shift_  a (Unsafe_uint32.to_int  !i ) ) in
+                (let _jessie_73 = min in
+                (let _jessie_74 = (0) in
+                (let _jessie_75 = _jessie_73 in
+                (upd  int_xP_int_xM_min_4 _jessie_75 _jessie_72 )))))
+               else ()));
+              (i :=
+               (Unsafe_uint32.(+)  !i
+                (#"max_min.jc" 146 53 66# "expl:Integer cast"
                 (Unsafe_uint32.of_int (1))) )) end;
               (raise (Loop_continue_exc ())) end with Loop_continue_exc
              _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
@@ -2566,7 +2785,7 @@ module Function_max_min_behaviors
      (raise Return) end with Return -> () end
   
   let max_min_ensures_zero_size
-  #"/home/work/workspace/education/acsl-exam/./max_min.c" 18 5 58#
+  #"/home/work/workspace/education/acsl-exam/max_min.c" 24 5 58#
   "expl:Function max_min, behavior zero_size" =
   fun
    (a : (pointer intP)) (size_2 : Uint32.t) (max : (pointer int_xP)) (min :
@@ -2586,7 +2805,7 @@ module Function_max_min_behaviors
        ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 1 13 34#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
     (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
      (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max intP_a_2_alloc_table a)
@@ -2598,7 +2817,7 @@ module Function_max_min_behaviors
        ((=) true true))))) else ((=) true true)))
    /\
    (#"max_min.jc" 36 12 1027#
-   ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 2 13 24#
+   ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
     (#"max_min.jc" 36 12 1027#
     ((#"max_min.jc" 36 12 1027#
      ((<=) (offset_min int_xP_max_3_alloc_table max) (0)))
@@ -2608,7 +2827,7 @@ module Function_max_min_behaviors
      ((>=) (offset_max int_xP_max_3_alloc_table max) (0)))
     /\ (#"max_min.jc" 36 12 1027# ((=) true true)))))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./max_min.c" 3 13 24#
+   (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
    (#"max_min.jc" 36 12 1027#
    ((#"max_min.jc" 36 12 1027#
     ((<=) (offset_min int_xP_min_4_alloc_table min) (0)))
@@ -2627,25 +2846,25 @@ module Function_max_min_behaviors
       (not_assigns int_xP_min_4_alloc_table int_xP_min_4_alloc_table (old
       !int_xP_int_xM_min_4) !int_xP_int_xM_min_4 pset_empty)))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
      "expl:Ensures clause"
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
      "expl:Ensures clause"
-     ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 31#
+     ((#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 31#
       "expl:Ensures clause" ((=) max max))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 35 51#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 35 51#
      "expl:Ensures clause" ((=) min min))))))) } diverges  ->
    'Init:
    try
     begin
-    (); ();
+    (); (); (); ();
      (let i = ref (Unsafe_uint32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/./max_min.c" 20 7 15#
+     (#"/home/work/workspace/education/acsl-exam/max_min.c" 26 7 15#
      (Unsafe_uint32.(>)  size_2
-      (#"max_min.jc" 90 29 42# "expl:Integer cast"
+      (#"max_min.jc" 105 29 42# "expl:Integer cast"
       (Unsafe_uint32.of_int (0))) ))
      then
       try
@@ -2653,7 +2872,7 @@ module Function_max_min_behaviors
        (let _jessie_44 =
        (shift_  a
         (Unsafe_int32.to_int 
-         (#"max_min.jc" 91 53 65# "expl:Integer cast"
+         (#"max_min.jc" 106 53 65# "expl:Integer cast"
          (Unsafe_int32.of_int (0))) ) ) in
        (let _jessie_45 = max in
        (let _jessie_46 = (0) in
@@ -2667,12 +2886,12 @@ module Function_max_min_behaviors
         (upd  int_xP_int_xM_min_4 _jessie_42 _jessie_39 )))));
          begin
          (i :=
-          (#"max_min.jc" 93 22 35# "expl:Integer cast"
+          (#"max_min.jc" 108 22 35# "expl:Integer cast"
           (Unsafe_uint32.of_int (1))));
           'Loop_2:
           loop
           invariant
-            { (#"max_min.jc" 95 9 1876#
+            { (#"max_min.jc" 110 9 1876#
               ((#"max_min.jc" 56 10 18# "expl:Assigns clause"
                (not_assigns int_xP_max_3_alloc_table int_xP_max_3_alloc_table
                (at !int_xP_int_xM_max_3 'Init) !int_xP_int_xM_max_3
@@ -2687,7 +2906,7 @@ module Function_max_min_behaviors
            requires { true } reads { a, int_xP_int_xM_max_3,
            int_xP_int_xM_min_4, max, min, size_2 }
            ensures {
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 28 25 81#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 34 25 81#
               (forall j_2 : int.
                ((((<=) (0) j_2) /\ ((<) j_2 (Uint32.to_int !i))) ->
                 ((Int32.(>=)
@@ -2697,39 +2916,39 @@ module Function_max_min_behaviors
                 (Int32.(>=) (select intP_intM_a_2 (shift a j_2))
                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 27 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 33 25 39#
               (Int32.(>=)
               (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
               (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 26 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 32 25 71#
               (exists j_1 : int.
                (((<=) (0) j_1) /\
                (((<) j_1 (Uint32.to_int !i)) /\
                ((=) (shift a j_1) (select !int_xP_int_xM_min_4 min))))))
              /\
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 25 25 71#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 31 25 71#
               (exists j_0 : int.
                (((<=) (0) j_0) /\
                (((<) j_0 (Uint32.to_int !i)) /\
                ((=) (shift a j_0) (select !int_xP_int_xM_max_3 max))))))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 39#
-             ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 25 31#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 39#
+             ((#"/home/work/workspace/education/acsl-exam/max_min.c" 30 25 31#
               ((<=) (1) (Uint32.to_int !i)))
              /\
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 24 30 39#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 30 30 39#
              (Uint32.(<=) !i size_2))))))))) } ;
             try
              begin
              begin
              (if
-             (#"/home/work/workspace/education/acsl-exam/./max_min.c" 32 17 25#
+             (#"/home/work/workspace/education/acsl-exam/max_min.c" 38 17 25#
              (Unsafe_uint32.(<)  !i size_2 )) then ()
              else (raise (Goto_while_0_break_exc ())));
               (if
-              (#"/home/work/workspace/education/acsl-exam/./max_min.c" 33 13 25#
+              (#"/home/work/workspace/education/acsl-exam/max_min.c" 39 13 25#
               (Unsafe_int32.(<) 
                (acc  intP_intM_a_2 (acc  !int_xP_int_xM_max_3 max ) )
                (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) ) )
@@ -2742,7 +2961,7 @@ module Function_max_min_behaviors
                (upd  int_xP_int_xM_max_3 _jessie_36 _jessie_33 )))))
               else
                (if
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 35 20 32#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 41 20 32#
                (Unsafe_int32.(>) 
                 (acc  intP_intM_a_2 (acc  !int_xP_int_xM_min_4 min ) )
                 (acc  intP_intM_a_2 (shift_  a (Unsafe_uint32.to_int  !i ) )
@@ -2756,7 +2975,7 @@ module Function_max_min_behaviors
                else ()));
               (i :=
                (Unsafe_uint32.(+)  !i
-                (#"max_min.jc" 131 53 66# "expl:Integer cast"
+                (#"max_min.jc" 146 53 66# "expl:Integer cast"
                 (Unsafe_uint32.of_int (1))) )) end;
               (raise (Loop_continue_exc ())) end with Loop_continue_exc
              _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
@@ -8771,7 +8990,57 @@ module Function_max_min
              int_xP_int_xM_min_4 } writes { int_xP_int_xM_max_3,
              int_xP_int_xM_min_4 }
              ensures {
-               ((((>) (Uint32.to_int size_2) (0)) ->
+               ((((>) (Uint32.to_int size_2) (1)) ->
+                 (((#"max_min.jc" 69 10 34# "expl:Assigns clause"
+                   (not_assigns int_xP_max_3_alloc_table
+                   int_xP_max_3_alloc_table (old !int_xP_int_xM_max_3)
+                   !int_xP_int_xM_max_3 (pset_singleton max)))
+                  /\
+                  (#"max_min.jc" 69 10 34# "expl:Assigns clause"
+                  (not_assigns int_xP_min_4_alloc_table
+                  int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
+                  !int_xP_int_xM_min_4 (pset_singleton min))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                  "expl:Ensures clause"
+                  (exists i_1 : int.
+                   (((<=) (0) i_1) /\
+                   (((<) i_1 (Uint32.to_int size_2)) /\
+                   ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 18 15 66#
+                  "expl:Ensures clause"
+                  (exists i_2 : int.
+                   (((<=) (0) i_2) /\
+                   (((<) i_2 (Uint32.to_int size_2)) /\
+                   ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 19 15 29#
+                  "expl:Ensures clause"
+                  (Int32.(>=)
+                  (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                  (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 20 15 74#
+                 "expl:Ensures clause"
+                 (forall i_3 : int.
+                  ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
+                   ((Int32.(>=)
+                    (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                    (select intP_intM_a_2 (shift a i_3)))
+                   /\
+                   (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
+                   (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
+               /\
+               ((((=) (Uint32.to_int size_2) (1)) ->
                  (((#"max_min.jc" 61 10 34# "expl:Assigns clause"
                    (not_assigns int_xP_max_3_alloc_table
                    int_xP_max_3_alloc_table (old !int_xP_int_xM_max_3)
@@ -8782,44 +9051,26 @@ module Function_max_min
                   int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
                   !int_xP_int_xM_min_4 (pset_singleton min))))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                   "expl:Ensures clause"
-                  (exists i_1 : int.
-                   (((<=) (0) i_1) /\
-                   (((<) i_1 (Uint32.to_int size_2)) /\
-                   ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+                  ((=) (select !int_xP_int_xM_max_3 max) a))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 12 15 66#
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 12 15 27#
                   "expl:Ensures clause"
-                  (exists i_2 : int.
-                   (((<=) (0) i_2) /\
-                   (((<) i_2 (Uint32.to_int size_2)) /\
-                   ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+                  ((=) (select !int_xP_int_xM_max_3 max)
+                  (select !int_xP_int_xM_min_4 min)))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 13 15 29#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 13 15 29#
-                  "expl:Ensures clause"
-                  (Int32.(>=)
-                  (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-                  (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
-                 /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 14 15 74#
-                 "expl:Ensures clause"
-                 (forall i_3 : int.
-                  ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
-                   ((Int32.(>=)
-                    (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-                    (select intP_intM_a_2 (shift a i_3)))
-                   /\
-                   (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
-                   (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
+                 (Int32.(=)
+                 (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))))))
                /\
                (((=) (Uint32.to_int size_2) (0)) ->
                 (((#"max_min.jc" 56 10 18# "expl:Assigns clause"
@@ -8832,15 +9083,15 @@ module Function_max_min
                  int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
                  !int_xP_int_xM_min_4 pset_empty)))
                 /\
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
                 "expl:Ensures clause"
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
                 "expl:Ensures clause"
-                ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 31#
+                ((#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 31#
                  "expl:Ensures clause" ((=) max max))
                 /\
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 35 51#
-                "expl:Ensures clause" ((=) min min)))))))) }
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 35 51#
+                "expl:Ensures clause" ((=) min min))))))))) }
   
 end
 
@@ -8887,7 +9138,7 @@ module Function_max_min_safe
              requires {
                ("expl:Internal"
                (#"max_min.jc" 36 12 1027# "expl:Requires clause"
-               ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 1 13 34#
+               ((#"/home/work/workspace/education/acsl-exam/max_min.c" 1 13 34#
                 "expl:Requires clause"
                 (if ((<=) (0) (Int.(-) (Uint32.to_int size_2) (1))) then
                  (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
@@ -8900,7 +9151,7 @@ module Function_max_min_safe
                    -> ((=) true true))))) else ((=) true true)))
                /\
                (#"max_min.jc" 36 12 1027# "expl:Requires clause"
-               ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 2 13 24#
+               ((#"/home/work/workspace/education/acsl-exam/max_min.c" 2 13 24#
                 "expl:Requires clause"
                 (#"max_min.jc" 36 12 1027# "expl:Requires clause"
                 ((#"max_min.jc" 36 12 1027# "expl:Requires clause"
@@ -8913,7 +9164,7 @@ module Function_max_min_safe
                 (#"max_min.jc" 36 12 1027# "expl:Requires clause"
                 ((=) true true)))))))
                /\
-               (#"/home/work/workspace/education/acsl-exam/./max_min.c" 3 13 24#
+               (#"/home/work/workspace/education/acsl-exam/max_min.c" 3 13 24#
                "expl:Requires clause"
                (#"max_min.jc" 36 12 1027# "expl:Requires clause"
                ((#"max_min.jc" 36 12 1027# "expl:Requires clause"
@@ -8928,7 +9179,57 @@ module Function_max_min_safe
              reads { int_xP_int_xM_max_3, int_xP_int_xM_min_4 } writes {
              int_xP_int_xM_max_3, int_xP_int_xM_min_4 }
              ensures {
-               ((((>) (Uint32.to_int size_2) (0)) ->
+               ((((>) (Uint32.to_int size_2) (1)) ->
+                 (((#"max_min.jc" 69 10 34# "expl:Assigns clause"
+                   (not_assigns int_xP_max_3_alloc_table
+                   int_xP_max_3_alloc_table (old !int_xP_int_xM_max_3)
+                   !int_xP_int_xM_max_3 (pset_singleton max)))
+                  /\
+                  (#"max_min.jc" 69 10 34# "expl:Assigns clause"
+                  (not_assigns int_xP_min_4_alloc_table
+                  int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
+                  !int_xP_int_xM_min_4 (pset_singleton min))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                  "expl:Ensures clause"
+                  (exists i_1 : int.
+                   (((<=) (0) i_1) /\
+                   (((<) i_1 (Uint32.to_int size_2)) /\
+                   ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 18 15 66#
+                  "expl:Ensures clause"
+                  (exists i_2 : int.
+                   (((<=) (0) i_2) /\
+                   (((<) i_2 (Uint32.to_int size_2)) /\
+                   ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 17 15 66#
+                 "expl:Ensures clause"
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 19 15 29#
+                  "expl:Ensures clause"
+                  (Int32.(>=)
+                  (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                  (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
+                 /\
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 20 15 74#
+                 "expl:Ensures clause"
+                 (forall i_3 : int.
+                  ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
+                   ((Int32.(>=)
+                    (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                    (select intP_intM_a_2 (shift a i_3)))
+                   /\
+                   (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
+                   (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
+               /\
+               ((((=) (Uint32.to_int size_2) (1)) ->
                  (((#"max_min.jc" 61 10 34# "expl:Assigns clause"
                    (not_assigns int_xP_max_3_alloc_table
                    int_xP_max_3_alloc_table (old !int_xP_int_xM_max_3)
@@ -8939,44 +9240,26 @@ module Function_max_min_safe
                   int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
                   !int_xP_int_xM_min_4 (pset_singleton min))))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                   "expl:Ensures clause"
-                  (exists i_1 : int.
-                   (((<=) (0) i_1) /\
-                   (((<) i_1 (Uint32.to_int size_2)) /\
-                   ((=) (shift a i_1) (select !int_xP_int_xM_max_3 max))))))
+                  ((=) (select !int_xP_int_xM_max_3 max) a))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 11 15 24#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 12 15 66#
+                 ((#"/home/work/workspace/education/acsl-exam/max_min.c" 12 15 27#
                   "expl:Ensures clause"
-                  (exists i_2 : int.
-                   (((<=) (0) i_2) /\
-                   (((<) i_2 (Uint32.to_int size_2)) /\
-                   ((=) (shift a i_2) (select !int_xP_int_xM_min_4 min))))))
+                  ((=) (select !int_xP_int_xM_max_3 max)
+                  (select !int_xP_int_xM_min_4 min)))
                  /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 11 15 66#
+                 (#"/home/work/workspace/education/acsl-exam/max_min.c" 13 15 29#
                  "expl:Ensures clause"
-                 ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 13 15 29#
-                  "expl:Ensures clause"
-                  (Int32.(>=)
-                  (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-                  (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))
-                 /\
-                 (#"/home/work/workspace/education/acsl-exam/./max_min.c" 14 15 74#
-                 "expl:Ensures clause"
-                 (forall i_3 : int.
-                  ((((<=) (0) i_3) /\ ((<) i_3 (Uint32.to_int size_2))) ->
-                   ((Int32.(>=)
-                    (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
-                    (select intP_intM_a_2 (shift a i_3)))
-                   /\
-                   (Int32.(>=) (select intP_intM_a_2 (shift a i_3))
-                   (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min))))))))))))))))
+                 (Int32.(=)
+                 (select intP_intM_a_2 (select !int_xP_int_xM_max_3 max))
+                 (select intP_intM_a_2 (select !int_xP_int_xM_min_4 min)))))))))))
                /\
                (((=) (Uint32.to_int size_2) (0)) ->
                 (((#"max_min.jc" 56 10 18# "expl:Assigns clause"
@@ -8989,14 +9272,14 @@ module Function_max_min_safe
                  int_xP_min_4_alloc_table (old !int_xP_int_xM_min_4)
                  !int_xP_int_xM_min_4 pset_empty)))
                 /\
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
                 "expl:Ensures clause"
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 51#
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 51#
                 "expl:Ensures clause"
-                ((#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 15 31#
+                ((#"/home/work/workspace/education/acsl-exam/max_min.c" 7 15 31#
                  "expl:Ensures clause" ((=) max max))
                 /\
-                (#"/home/work/workspace/education/acsl-exam/./max_min.c" 7 35 51#
-                "expl:Ensures clause" ((=) min min)))))))) }
+                (#"/home/work/workspace/education/acsl-exam/max_min.c" 7 35 51#
+                "expl:Ensures clause" ((=) min min))))))))) }
   
 end
