@@ -99,7 +99,7 @@ end = 32
 file = "/home/work/workspace/education/acsl-exam/./reverse_in_place.c"
 line = 28
 begin = 12
-end = 121
+end = 137
 
 [_C_15]
 file = "/home/work/workspace/education/acsl-exam/./reverse_in_place.c"

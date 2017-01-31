@@ -27,7 +27,7 @@ void swap(int a[], int i, int j)
     ensures reverse{Pre,Here}(a, size);
     ensures \forall integer i; 0 <= i < size ==>
             \exists integer j; 0 <= j < size &&
-            a[i] == a[j];
+            \old(a[\at(i,Here)]) == a[j];
  */
 void reverse_in_place(int a[], int size)
 {

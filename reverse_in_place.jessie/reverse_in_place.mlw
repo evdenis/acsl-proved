@@ -2114,14 +2114,14 @@ module Function_reverse_in_place_behaviors
       (reverse_0 a_1 (Int32.to_int size_2) !intP_intM_a_5 (old
       !intP_intM_a_5)))
      /\
-     (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 121#
+     (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 137#
      "expl:Ensures clause"
      (forall i_2 : int.
       ((((<=) (0) i_2) /\ ((<) i_2 (Int32.to_int size_2))) ->
        (exists j_2 : int.
         (((<=) (0) j_2) /\
         (((<) j_2 (Int32.to_int size_2)) /\
-        (Int32.(=) (select !intP_intM_a_5 (shift a_1 i_2))
+        (Int32.(=) (select (old !intP_intM_a_5) (shift a_1 i_2))
         (select !intP_intM_a_5 (shift a_1 j_2)))))))))))))) } diverges  ->
    'Init:
    try
@@ -8090,14 +8090,14 @@ module Function_reverse_in_place
          (reverse_0 a_1 (Int32.to_int size_2) !intP_intM_a_5 (old
          !intP_intM_a_5)))
         /\
-        (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 121#
+        (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 137#
         "expl:Ensures clause"
         (forall i_2 : int.
          ((((<=) (0) i_2) /\ ((<) i_2 (Int32.to_int size_2))) ->
           (exists j_2 : int.
            (((<=) (0) j_2) /\
            (((<) j_2 (Int32.to_int size_2)) /\
-           (Int32.(=) (select !intP_intM_a_5 (shift a_1 i_2))
+           (Int32.(=) (select (old !intP_intM_a_5) (shift a_1 i_2))
            (select !intP_intM_a_5 (shift a_1 j_2))))))))))))) }
   
 end
@@ -8169,14 +8169,14 @@ module Function_reverse_in_place_safe
          (reverse_0 a_1 (Int32.to_int size_2) !intP_intM_a_5 (old
          !intP_intM_a_5)))
         /\
-        (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 121#
+        (#"/home/work/workspace/education/acsl-exam/./reverse_in_place.c" 28 12 137#
         "expl:Ensures clause"
         (forall i_2 : int.
          ((((<=) (0) i_2) /\ ((<) i_2 (Int32.to_int size_2))) ->
           (exists j_2 : int.
            (((<=) (0) j_2) /\
            (((<) j_2 (Int32.to_int size_2)) /\
-           (Int32.(=) (select !intP_intM_a_5 (shift a_1 i_2))
+           (Int32.(=) (select (old !intP_intM_a_5) (shift a_1 i_2))
            (select !intP_intM_a_5 (shift a_1 j_2))))))))))))) }
   
 end

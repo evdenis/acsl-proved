@@ -2,6 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
+<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" steplimit="0" memlimit="8000"/>
 <prover id="1" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
 <file name="../reverse_in_place.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
@@ -320,6 +321,7 @@
 </theory>
 <theory name="Function_reverse_in_place_safety" sum="4ac01d76b31e40cb0eeb2faa6409a874" expanded="true">
  <goal name="WP_parameter reverse_in_place" expl="Function reverse_in_place, safety" expanded="true">
+ <proof prover="0" obsolete="true"><result status="valid" time="0.57" steps="974"/></proof>
  <proof prover="1"><result status="valid" time="0.64" steps="974"/></proof>
  </goal>
 </theory>
@@ -327,46 +329,44 @@
 </theory>
 <theory name="Logic_reverse_0" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_reverse_in_place_behaviors" sum="3eddcd8a1ec69d36942741dd388e7725" expanded="true">
+<theory name="Function_reverse_in_place_behaviors" sum="f61b1500904a26ff485c5c25ef2fdf57" expanded="true">
  <goal name="WP_parameter reverse_in_place_ensures_default" expl="Function reverse_in_place, default behavior" expanded="true">
  <transf name="split_goal_wp" expanded="true">
   <goal name="WP_parameter reverse_in_place_ensures_default.1" expl="1. loop invariant init">
+  <proof prover="0" obsolete="true"><result status="valid" time="0.10" steps="121"/></proof>
   <proof prover="1"><result status="valid" time="0.12" steps="121"/></proof>
   </goal>
   <goal name="WP_parameter reverse_in_place_ensures_default.2" expl="2. loop invariant preservation" expanded="true">
   <transf name="split_goal_wp" expanded="true">
    <goal name="WP_parameter reverse_in_place_ensures_default.2.1" expl="1. Function reverse_in_place, default behavior">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="23"/></proof>
    <proof prover="1"><result status="valid" time="0.03" steps="23"/></proof>
    </goal>
    <goal name="WP_parameter reverse_in_place_ensures_default.2.2" expl="2. Function reverse_in_place, default behavior">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.02" steps="22"/></proof>
    <proof prover="1"><result status="valid" time="0.02" steps="22"/></proof>
    </goal>
    <goal name="WP_parameter reverse_in_place_ensures_default.2.3" expl="3. Function reverse_in_place, default behavior">
+   <proof prover="0" obsolete="true"><result status="valid" time="1.90" steps="1145"/></proof>
    <proof prover="1"><result status="valid" time="2.02" steps="1145"/></proof>
    </goal>
    <goal name="WP_parameter reverse_in_place_ensures_default.2.4" expl="4. Function reverse_in_place, default behavior">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.89" steps="491"/></proof>
    <proof prover="1"><result status="valid" time="0.96" steps="491"/></proof>
    </goal>
    <goal name="WP_parameter reverse_in_place_ensures_default.2.5" expl="5. Function reverse_in_place, default behavior">
+   <proof prover="0" obsolete="true"><result status="valid" time="2.53" steps="1296"/></proof>
    <proof prover="1"><result status="valid" time="2.73" steps="1296"/></proof>
    </goal>
    <goal name="WP_parameter reverse_in_place_ensures_default.2.6" expl="6. Assigns clause">
+   <proof prover="0" obsolete="true"><result status="valid" time="0.55" steps="412"/></proof>
    <proof prover="1"><result status="valid" time="0.65" steps="412"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="WP_parameter reverse_in_place_ensures_default.3" expl="3. Postcondition" expanded="true">
-  <transf name="split_goal_wp" expanded="true">
-   <goal name="WP_parameter reverse_in_place_ensures_default.3.1" expl="1. Assigns clause">
-   <proof prover="1" timelimit="1" memlimit="1000"><result status="valid" time="0.02" steps="13"/></proof>
-   </goal>
-   <goal name="WP_parameter reverse_in_place_ensures_default.3.2" expl="2. Ensures clause">
-   <proof prover="1" timelimit="1" memlimit="1000"><result status="valid" time="0.78" steps="571"/></proof>
-   </goal>
-   <goal name="WP_parameter reverse_in_place_ensures_default.3.3" expl="3. Ensures clause">
-   <proof prover="1" timelimit="1" memlimit="1000"><result status="valid" time="0.06" steps="97"/></proof>
-   </goal>
-  </transf>
+  <goal name="WP_parameter reverse_in_place_ensures_default.3" expl="3. Postcondition">
+  <proof prover="0" obsolete="true"><result status="valid" time="1.04" steps="722"/></proof>
+  <proof prover="1"><result status="valid" time="1.14" steps="723"/></proof>
   </goal>
  </transf>
  </goal>

@@ -78,7 +78,7 @@ behavior default:
                                   (\exists integer j_2;
                                     (((0 <= j_2) &&
                                        (j_2 < (\at(size_2,Old) :> integer))) &&
-                                      ((\at(a,Old) + i_2).intM ==
+                                      (\at((a + \at(i_2,Here)).intM,Old) ==
                                         (\at(a,Old) + j_2).intM))))))));
 {  
    (var int32 i_0);
