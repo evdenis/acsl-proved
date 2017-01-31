@@ -1,0 +1,86 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+uint32 average_smart(uint32 a, uint32 b)
+behavior default:
+  assigns \nothing;
+  ensures (_C_25 : ((\result :> integer) ==
+                     (((\at(a,Old) :> integer) + (\at(b,Old) :> integer)) /
+                       2)));
+{  
+   (var uint32 a1);
+   
+   (var uint32 b1);
+   
+   (var uint32 __retres);
+   
+   {  
+      {  
+         (assert for default: (_C_1 : (jessie : (((a >> (1U :> uint32)) :> integer) ==
+                                                  ((a :> integer) / 2)))));
+         ()
+      };
+      
+      {  
+         (assert for default: (_C_2 : (jessie : (((b >> (1U :> uint32)) :> integer) ==
+                                                  ((b :> integer) / 2)))));
+         ()
+      };
+      (_C_5 : (a1 = (_C_4 : ((_C_3 : (a % (2 :> uint32))) :> uint32))));
+      (_C_8 : (b1 = (_C_7 : ((_C_6 : (b % (2 :> uint32))) :> uint32))));
+      
+      {  
+         (assert for default: (_C_9 : (jessie : ((a & (1U :> uint32)) == a1))));
+         ()
+      };
+      
+      {  
+         (assert for default: (_C_10 : (jessie : ((b & (1U :> uint32)) == b1))));
+         ()
+      };
+      
+      {  
+         (assert for default: (_C_11 : (jessie : ((((a & b) & (1U :> uint32)) :> integer) ==
+                                                   ((((a :> integer) +
+                                                       (b :> integer)) /
+                                                      2) -
+                                                     (((a :> integer) / 2) +
+                                                       ((b :> integer) / 2)))))));
+         ()
+      };
+      (_C_24 : (__retres = (_C_23 : ((_C_22 : ((_C_21 : ((_C_20 : ((_C_19 : (
+                                                                   (_C_18 : 
+                                                                   (a /
+                                                                    (2 :> uint32))) :> uint32)) +
+                                                                    (_C_17 : (
+                                                                    (_C_16 : 
+                                                                    (b /
+                                                                    (2 :> uint32))) :> uint32)))) :> uint32)) +
+                                                (_C_15 : ((_C_14 : ((_C_13 : (
+                                                                    (_C_12 : 
+                                                                    (a &
+                                                                    b)) :> uint32)) &
+                                                                    (1U :> uint32))) :> uint32)))) :> uint32))));
+      
+      (return __retres)
+   }
+}
