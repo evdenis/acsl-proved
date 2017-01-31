@@ -1,0 +1,226 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+predicate is_divisor(integer m, integer n_1) =
+((m != 0) ==> ((n_1 % m) == 0))
+
+predicate is_gcd(integer z, integer x1, integer x2) =
+((is_divisor(z, x1) && is_divisor(z, x2)) &&
+  (\forall integer i_1;
+    ((is_divisor(i_1, x1) && is_divisor(i_1, x2)) ==> (i_1 <= z))))
+
+axiomatic gcd {
+
+  logic integer gcd(integer a, integer b)
+   
+  axiom nil :
+  (_C_1 : (\forall integer n_2;
+            (gcd(n_2, 0) == n_2)))
+   
+  axiom next :
+  (_C_2 : (\forall integer a_0;
+            (\forall integer b_0;
+              (gcd(b_0, (a_0 % b_0)) == gcd(a_0, b_0)))))
+   
+  lemma gcd_def :
+  (_C_3 : (\forall integer a_1;
+            (\forall integer b_1;
+              is_gcd(gcd(a_1, b_1), a_1, b_1))))
+  
+}
+
+uint32 gcd(uint32 x1, uint32 x2)
+  requires (_C_26 : ((_C_27 : ((x1 :> integer) > 0)) &&
+                      (_C_28 : ((x2 :> integer) > 0))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_25 : is_gcd((\result :> integer), (\at(x1,Old) :> integer),
+                          (\at(x2,Old) :> integer)));
+{  
+   (var uint32 y1);
+   
+   (var uint32 y2);
+   
+   (var uint32 tmp);
+   
+   {  (_C_4 : (y1 = x1));
+      (_C_5 : (y2 = x2));
+      (_C_6 : (tmp = (0 :> uint32)));
+      (if (_C_9 : (y1 > y2)) then 
+      {  (_C_7 : (y1 = x2));
+         (_C_8 : (y2 = x1))
+      } else ());
+      
+      {  
+         (assert for default: (_C_10 : (jessie : ((y1 :> integer) ==
+                                                   \integer_min((x1 :> integer),
+                                                                (x2 :> integer))))));
+         ()
+      };
+      
+      {  
+         (assert for default: (_C_11 : (jessie : ((y2 :> integer) ==
+                                                   \integer_max((x1 :> integer),
+                                                                (x2 :> integer))))));
+         ()
+      };
+      
+      loop 
+      behavior default:
+        invariant (_C_16 : ((_C_17 : (0 <= (y1 :> integer))) &&
+                             (_C_18 : (y1 <= y2))));
+      behavior default:
+        invariant (_C_15 : ((y2 :> integer) > 0));
+      behavior default:
+        invariant (_C_14 : (((y1 :> integer) > 0) ==>
+                             (gcd((x1 :> integer), (x2 :> integer)) ==
+                               gcd((y1 :> integer), (y2 :> integer)))));
+      behavior default:
+        invariant (_C_13 : (((y1 :> integer) == 0) ==>
+                             (gcd((x1 :> integer), (x2 :> integer)) ==
+                               (y2 :> integer))));
+      variant (_C_12 : y1);
+      while (true)
+      {  
+         {  (if (_C_19 : (y1 != (0 :> uint32))) then () else 
+            (goto while_0_break));
+            
+            {  (_C_20 : (tmp = y1));
+               (_C_23 : (y1 = (_C_22 : ((_C_21 : (y2 % y1)) :> uint32))));
+               (_C_24 : (y2 = tmp))
+            }
+         }
+      };
+      (while_0_break : ());
+      
+      (return y2)
+   }
+}
+
+uint32 gcd_rec(uint32 x1_1, uint32 x2_1)
+  requires (_C_39 : ((x1_1 :> integer) > 0));
+  decreases (_C_40 : x2_1);
+behavior default:
+  assigns \nothing;
+  ensures (_C_36 : ((_C_37 : is_gcd((\result :> integer),
+                                    (\at(x1_1,Old) :> integer),
+                                    (\at(x2_1,Old) :> integer))) &&
+                     (_C_38 : ((\result :> integer) ==
+                                gcd((\at(x1_1,Old) :> integer),
+                                    (\at(x2_1,Old) :> integer))))));
+{  
+   (var uint32 tmp_0);
+   
+   (var uint32 __retres);
+   
+   {  (if (_C_30 : (x2_1 == (0 :> uint32))) then 
+      {  (_C_29 : (__retres = x1_1));
+         
+         (goto return_label)
+      } else ());
+      (_C_34 : (tmp_0 = (_C_33 : gcd_rec(x2_1,
+                                         (_C_32 : ((_C_31 : (x1_1 % x2_1)) :> uint32))))));
+      (_C_35 : (__retres = tmp_0));
+      (return_label : 
+      (return __retres))
+   }
+}
+
+uint32 gcd_raw(uint32 x1_0, uint32 x2_0)
+  requires (_C_71 : ((_C_72 : ((x1_0 :> integer) > 0)) &&
+                      (_C_73 : ((x2_0 :> integer) > 0))));
+behavior default:
+  assigns \nothing;
+  ensures (_C_70 : is_gcd((\result :> integer), (\at(x1_0,Old) :> integer),
+                          (\at(x2_0,Old) :> integer)));
+{  
+   (var uint32 min);
+   
+   (var uint32 tmp_1);
+   
+   (var uint32 gcd_0);
+   
+   (var uint32 i);
+   
+   {  (if (_C_43 : (x1_0 > x2_0)) then (_C_42 : (tmp_1 = x2_0)) else 
+      (_C_41 : (tmp_1 = x1_0)));
+      (_C_44 : (min = tmp_1));
+      
+      {  
+         (assert for default: (_C_45 : (jessie : ((min :> integer) ==
+                                                   \integer_min((x1_0 :> integer),
+                                                                (x2_0 :> integer))))));
+         ()
+      };
+      (_C_46 : (gcd_0 = (1 :> uint32)));
+      
+      {  (_C_47 : (i = (2 :> uint32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_56 : ((_C_57 : (2 <= (i :> integer))) &&
+                                (_C_58 : ((i :> integer) <=
+                                           ((min :> integer) + 1)))));
+         behavior default:
+           invariant (_C_53 : ((_C_54 : (1 <= (gcd_0 :> integer))) &&
+                                (_C_55 : (gcd_0 < i))));
+         behavior default:
+           invariant (_C_52 : is_divisor((gcd_0 :> integer),
+                                         (x1_0 :> integer)));
+         behavior default:
+           invariant (_C_51 : is_divisor((gcd_0 :> integer),
+                                         (x2_0 :> integer)));
+         behavior default:
+           invariant (_C_50 : (\forall integer j_0;
+                                (((((0 <= j_0) && (j_0 < (i :> integer))) &&
+                                    is_divisor(j_0, (x1_0 :> integer))) &&
+                                   is_divisor(j_0, (x2_0 :> integer))) ==>
+                                  (j_0 <= (gcd_0 :> integer)))));
+         behavior default:
+           invariant (_C_49 : ((gcd_0 :> integer) <=
+                                gcd((x1_0 :> integer), (x2_0 :> integer))));
+         behavior default:
+           
+           assigns gcd_0;
+         variant (_C_48 : ((min :> integer) - (i :> integer)));
+         while (true)
+         {  
+            {  (if (_C_59 : (i <= min)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_66 : ((_C_65 : ((_C_64 : (x1_0 % i)) :> uint32)) ==
+                                 (0 :> uint32))) then (if (_C_63 : ((_C_62 : (
+                                                                    (_C_61 : 
+                                                                    (x2_0 %
+                                                                    i)) :> uint32)) ==
+                                                                    (0 :> uint32))) then 
+                                                      (_C_60 : (gcd_0 = i)) else ()) else ())
+               };
+               (_C_69 : (i = (_C_68 : ((_C_67 : (i + (1 :> uint32))) :> uint32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      (return gcd_0)
+   }
+}
