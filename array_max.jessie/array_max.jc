@@ -1,0 +1,102 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+int32 max_in_array(intP[..] p, int32 n_1)
+  requires ((_C_35 : (n_1 > (0 :> int32))) &&
+             (_C_36 : \at((if (\at(0,Here) <=
+                                \at(((n_1 :> integer) - 1),Here)) then 
+                          (((\offset_min(\at(p,Here)) <= \at(0,Here)) &&
+                             (\offset_max(\at(p,Here)) >=
+                               \at(((n_1 :> integer) - 1),Here))) &&
+                            (\forall integer __framac_tmp1;
+                              (((\at(0,Here) <= __framac_tmp1) &&
+                                 (__framac_tmp1 <=
+                                   \at(((n_1 :> integer) - 1),Here))) ==>
+                                true))) else true),Here)));
+behavior default:
+  assigns \nothing;
+  ensures (_C_30 : (((_C_32 : ((0 :> int32) <= \result)) &&
+                      (_C_33 : (\result < \at(n_1,Old)))) &&
+                     (_C_34 : (\forall int32 i_1;
+                                ((((0 :> int32) <= i_1) &&
+                                   (i_1 < \at(n_1,Old))) ==>
+                                  ((\at(p,Old) + (\result :> integer)).intM >=
+                                    (\at(p,Old) + (i_1 :> integer)).intM))))));
+{  
+   (var int32 max_idx);
+   
+   (var int32 max);
+   
+   (var int32 i);
+   
+   {  (_C_1 : (max_idx = (0 :> int32)));
+      (_C_4 : (max = (_C_3 : (_C_2 : (p + max_idx)).intM)));
+      
+      {  (_C_5 : (i = (0 :> int32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_16 : ((_C_17 : ((0 :> int32) <= i)) &&
+                                (_C_18 : (i <= n_1))));
+         behavior default:
+           invariant (_C_13 : ((_C_14 : ((0 :> int32) <= max_idx)) &&
+                                (_C_15 : (max_idx < n_1))));
+         behavior default:
+           invariant (_C_10 : ((_C_11 : ((0 :> int32) <= max_idx)) &&
+                                (_C_12 : (max_idx <= i))));
+         behavior default:
+           invariant (_C_9 : (max == (p + (max_idx :> integer)).intM));
+         behavior default:
+           invariant (_C_8 : (\forall int32 j_0;
+                               ((((0 :> int32) <= j_0) && (j_0 < i)) ==>
+                                 ((p + (max_idx :> integer)).intM >=
+                                   (p + (j_0 :> integer)).intM))));
+         behavior default:
+           invariant (_C_7 : (\forall int32 j_1;
+                               ((((0 :> int32) <= j_1) && (j_1 < i)) ==>
+                                 (max >= (p + (j_1 :> integer)).intM))));
+         variant (_C_6 : ((n_1 :> integer) - (i :> integer)));
+         while (true)
+         {  
+            {  (if (_C_19 : (i < n_1)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_26 : (max < (_C_25 : (_C_24 : (p + i)).intM))) then 
+                  {  (_C_20 : (max_idx = i));
+                     (_C_23 : (max = (_C_22 : (_C_21 : (p + i)).intM)))
+                  } else ())
+               };
+               (_C_29 : (i = (_C_28 : ((_C_27 : (i + (1 :> int32))) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      (return max_idx)
+   }
+}
