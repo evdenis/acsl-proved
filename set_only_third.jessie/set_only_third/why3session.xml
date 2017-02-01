@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../set_only_third.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,14 +316,46 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_set_only_third_safety" sum="c78cb6343cf88da04a8e283e734d808e" expanded="true">
+<theory name="Function_set_only_third_safety" sum="92e6310a5c5d1a632f40c5b2dc85ea1f" expanded="true">
  <goal name="WP_parameter set_only_third" expl="Function set_only_third, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.13" steps="452"/></proof>
+ <proof prover="0"><result status="valid" time="0.15" steps="452"/></proof>
  </goal>
 </theory>
-<theory name="Function_set_only_third_behaviors" sum="166cd44ec5ad5f39d77cd173b9d9ba58" expanded="true">
+<theory name="Function_set_only_third_behaviors" sum="a4d8d2c6c9eec709210139521d66f5da" expanded="true">
  <goal name="WP_parameter set_only_third_ensures_default" expl="Function set_only_third, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="4.10" steps="4410"/></proof>
+ <transf name="split_goal_wp" expanded="true">
+  <goal name="WP_parameter set_only_third_ensures_default.1" expl="1. loop invariant init">
+  <proof prover="0"><result status="valid" time="0.03" steps="61"/></proof>
+  </goal>
+  <goal name="WP_parameter set_only_third_ensures_default.2" expl="2. loop invariant preservation">
+  <proof prover="0"><result status="valid" time="1.28" steps="2068"/></proof>
+  </goal>
+  <goal name="WP_parameter set_only_third_ensures_default.3" expl="3. loop invariant preservation" expanded="true">
+  <transf name="split_goal_wp" expanded="true">
+   <goal name="WP_parameter set_only_third_ensures_default.3.1" expl="1. Function set_only_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.02" steps="20"/></proof>
+   </goal>
+   <goal name="WP_parameter set_only_third_ensures_default.3.2" expl="2. Function set_only_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="20"/></proof>
+   </goal>
+   <goal name="WP_parameter set_only_third_ensures_default.3.3" expl="3. Function set_only_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.04" steps="52"/></proof>
+   </goal>
+   <goal name="WP_parameter set_only_third_ensures_default.3.4" expl="4. Function set_only_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.21" steps="285"/></proof>
+   </goal>
+   <goal name="WP_parameter set_only_third_ensures_default.3.5" expl="5. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.06" steps="182"/></proof>
+   </goal>
+   <goal name="WP_parameter set_only_third_ensures_default.3.6" expl="6. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.02" steps="19"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter set_only_third_ensures_default.4" expl="4. Postcondition">
+  <proof prover="0"><result status="valid" time="0.04" steps="74"/></proof>
+  </goal>
+ </transf>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

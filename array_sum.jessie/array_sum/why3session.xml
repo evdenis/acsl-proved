@@ -2,7 +2,8 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="CVC4" version="1.4" timelimit="3" steplimit="0" memlimit="2000"/>
+<prover id="1" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../array_sum.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -312,26 +313,28 @@
 </theory>
 <theory name="Root_unsigned_intP" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Axiomatic_Array_Sum" sum="8e1773b4eeba2941512d4995fd00c79b" expanded="true">
+<theory name="Axiomatic_Array_Sum" sum="66099251aaf47718963bcbd34400b99c" expanded="true">
  <goal name="Array_sum_lower_bound" expl="Lemma array_sum_lower_bound" expanded="true">
- <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ <proof prover="0"><result status="unknown" time="3.00"/></proof>
+ <proof prover="1"><result status="unknown" time="0.02"/></proof>
  </goal>
  <goal name="Array_sum_increases" expl="Lemma array_sum_increases" expanded="true">
- <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ <proof prover="0"><result status="unknown" time="3.00"/></proof>
+ <proof prover="1"><result status="unknown" time="0.02"/></proof>
  </goal>
 </theory>
 <theory name="Struct_unsigned_intP" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_array_sum_0_safety" sum="839f130960d8ac01a5a0707b27c3e95e" expanded="true">
+<theory name="Function_array_sum_0_safety" sum="4240095449f425f09f55821a244ead20" expanded="true">
  <goal name="WP_parameter array_sum_0" expl="Function array_sum, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.10" steps="173"/></proof>
+ <proof prover="1"><result status="valid" time="0.10" steps="173"/></proof>
  </goal>
 </theory>
-<theory name="Function_array_sum_0_behaviors" sum="c6b4f6ee228a9db53e0bcfc4efba23f4" expanded="true">
+<theory name="Function_array_sum_0_behaviors" sum="f2162c7cb5bb7c4e5a68aa45464f515c" expanded="true">
  <goal name="WP_parameter array_sum_ensures_default" expl="Function array_sum, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.07" steps="222"/></proof>
+ <proof prover="1"><result status="valid" time="0.08" steps="222"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

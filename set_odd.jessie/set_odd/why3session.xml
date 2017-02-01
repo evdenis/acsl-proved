@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../set_odd.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,14 +316,14 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_set_odd_safety" sum="569f8faafae38c3b4221e1812417cf56" expanded="true">
+<theory name="Function_set_odd_safety" sum="a697e91be584d40029e8b6ce7d3365ef" expanded="true">
  <goal name="WP_parameter set_odd" expl="Function set_odd, safety" expanded="true">
  <proof prover="0"><result status="valid" time="0.14" steps="453"/></proof>
  </goal>
 </theory>
-<theory name="Function_set_odd_behaviors" sum="e584e729d4f0214825a91f5bd8cd5ac0" expanded="true">
+<theory name="Function_set_odd_behaviors" sum="ff4c498f830229aeac5b29bfad6ff658" expanded="true">
  <goal name="WP_parameter set_odd_ensures_default" expl="Function set_odd, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="2.37" steps="3228"/></proof>
+ <proof prover="0"><result status="valid" time="2.29" steps="3228"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

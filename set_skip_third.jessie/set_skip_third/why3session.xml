@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../set_skip_third.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,22 +316,60 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_set_skip_third_safety" sum="da756eeb40f183b119281a10f82261db" expanded="true">
+<theory name="Function_set_skip_third_safety" sum="bd13b10581edc165fa3009943c84690e" expanded="true">
  <goal name="WP_parameter set_skip_third" expl="Function set_skip_third, safety" expanded="true">
- <proof prover="0"><result status="valid" time="1.10" steps="1788"/></proof>
+ <proof prover="0"><result status="valid" time="1.17" steps="1786"/></proof>
  </goal>
 </theory>
-<theory name="Function_set_skip_third_behaviors" sum="36b8cdfb93d8ed0bf05c3b3f0c82a48f" expanded="true">
+<theory name="Function_set_skip_third_behaviors" sum="8906b65e24b5cb4d18a704cc8ad91eb0" expanded="true">
  <goal name="WP_parameter set_skip_third_ensures_default" expl="Function set_skip_third, default behavior" expanded="true">
  <transf name="split_goal_wp" expanded="true">
   <goal name="WP_parameter set_skip_third_ensures_default.1" expl="1. loop invariant init">
-  <proof prover="0"><result status="valid" time="0.03" steps="80"/></proof>
+  <proof prover="0"><result status="valid" time="0.04" steps="80"/></proof>
   </goal>
-  <goal name="WP_parameter set_skip_third_ensures_default.2" expl="2. loop invariant preservation">
-  <proof prover="0"><result status="valid" time="4.25" steps="3867"/></proof>
+  <goal name="WP_parameter set_skip_third_ensures_default.2" expl="2. loop invariant preservation" expanded="true">
+  <transf name="split_goal_wp" expanded="true">
+   <goal name="WP_parameter set_skip_third_ensures_default.2.1" expl="1. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.02" steps="25"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.2.2" expl="2. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="25"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.2.3" expl="3. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.04" steps="41"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.2.4" expl="4. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.10" steps="114"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.2.5" expl="5. Assigns clause">
+   <proof prover="0"><result status="valid" time="1.41" steps="1967"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.2.6" expl="6. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.33" steps="310"/></proof>
+   </goal>
+  </transf>
   </goal>
-  <goal name="WP_parameter set_skip_third_ensures_default.3" expl="3. loop invariant preservation">
-  <proof prover="0"><result status="valid" time="3.81" steps="4056"/></proof>
+  <goal name="WP_parameter set_skip_third_ensures_default.3" expl="3. loop invariant preservation" expanded="true">
+  <transf name="split_goal_wp" expanded="true">
+   <goal name="WP_parameter set_skip_third_ensures_default.3.1" expl="1. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.02" steps="21"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.3.2" expl="2. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="21"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.3.3" expl="3. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="34"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.3.4" expl="4. Function set_skip_third, default behavior">
+   <proof prover="0"><result status="valid" time="0.17" steps="274"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.3.5" expl="5. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.08" steps="197"/></proof>
+   </goal>
+   <goal name="WP_parameter set_skip_third_ensures_default.3.6" expl="6. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.03" steps="20"/></proof>
+   </goal>
+  </transf>
   </goal>
   <goal name="WP_parameter set_skip_third_ensures_default.4" expl="4. Postcondition">
   <proof prover="0"><result status="valid" time="0.04" steps="80"/></proof>

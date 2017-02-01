@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.30" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../lower_bound.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,16 +316,16 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_lower_bound_safety" sum="a05e9accd29484167e7bc6ac026f4d87" expanded="true">
- <goal name="WP_parameter lower_bound" expl="Function lower_bound, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.58" steps="634"/></proof>
+<theory name="Function_lower_bound_safety" sum="a05e9accd29484167e7bc6ac026f4d87">
+ <goal name="WP_parameter lower_bound" expl="Function lower_bound, safety">
+ <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.59" steps="634"/></proof>
  </goal>
 </theory>
-<theory name="Function_lower_bound_behaviors" sum="93323f4bf5c2e959ac1f6e0d68900add" expanded="true">
+<theory name="Function_lower_bound_behaviors" sum="93323f4bf5c2e959ac1f6e0d68900add">
  <goal name="WP_parameter lower_bound_ensures_default" expl="Function lower_bound, default behavior">
  <transf name="split_goal_wp">
   <goal name="WP_parameter lower_bound_ensures_default.1" expl="1. loop invariant init">
-  <proof prover="0"><result status="valid" time="0.02" steps="33"/></proof>
+  <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.03" steps="33"/></proof>
   </goal>
   <goal name="WP_parameter lower_bound_ensures_default.2" expl="2. Assertion in line 24">
   <transf name="inline_all">
@@ -339,7 +339,7 @@
   </transf>
   </goal>
   <goal name="WP_parameter lower_bound_ensures_default.3" expl="3. loop invariant preservation">
-  <proof prover="0"><result status="valid" time="0.97" steps="1603"/></proof>
+  <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="1.06" steps="1603"/></proof>
   </goal>
   <goal name="WP_parameter lower_bound_ensures_default.4" expl="4. loop invariant preservation">
   <transf name="split_goal_wp">
@@ -369,23 +369,23 @@
   </transf>
   </goal>
   <goal name="WP_parameter lower_bound_ensures_default.5" expl="5. Ensures clause (Postcondition)">
-  <proof prover="0"><result status="valid" time="0.05" steps="103"/></proof>
+  <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.05" steps="103"/></proof>
   </goal>
  </transf>
  </goal>
 </theory>
-<theory name="Function_lower_bound_raw_safety" sum="a51624d58da2bc9b25e4a3afcefc25ee" expanded="true">
+<theory name="Function_lower_bound_raw_safety" sum="a51624d58da2bc9b25e4a3afcefc25ee">
  <goal name="WP_parameter lower_bound_raw" expl="Function lower_bound_raw, safety">
- <proof prover="0"><result status="valid" time="0.03" steps="41"/></proof>
+ <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.03" steps="41"/></proof>
  </goal>
 </theory>
-<theory name="Function_lower_bound_raw_behaviors" sum="894fa76734e63ef393cf9f45ce473361" expanded="true">
+<theory name="Function_lower_bound_raw_behaviors" sum="894fa76734e63ef393cf9f45ce473361">
  <goal name="WP_parameter lower_bound_raw_ensures_default" expl="Function lower_bound_raw, default behavior">
  <transf name="split_goal_wp">
   <goal name="WP_parameter lower_bound_raw_ensures_default.1" expl="1. loop invariant init">
   <transf name="split_goal_wp">
    <goal name="WP_parameter lower_bound_raw_ensures_default.1.1" expl="1. Function lower_bound_raw, default behavior">
-   <proof prover="0"><result status="valid" time="0.01" steps="5"/></proof>
+   <proof prover="0"><result status="valid" time="0.02" steps="5"/></proof>
    </goal>
    <goal name="WP_parameter lower_bound_raw_ensures_default.1.2" expl="2. Function lower_bound_raw, default behavior">
    <proof prover="0"><result status="valid" time="0.02" steps="11"/></proof>
@@ -407,7 +407,7 @@
   </transf>
   </goal>
   <goal name="WP_parameter lower_bound_raw_ensures_default.2" expl="2. Ensures clause (Postcondition)">
-  <proof prover="0"><result status="valid" time="0.04" steps="111"/></proof>
+  <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.04" steps="111"/></proof>
   </goal>
   <goal name="WP_parameter lower_bound_raw_ensures_default.3" expl="3. loop invariant preservation">
   <transf name="split_goal_wp">
@@ -418,14 +418,14 @@
    <proof prover="0"><result status="valid" time="0.03" steps="17"/></proof>
    </goal>
    <goal name="WP_parameter lower_bound_raw_ensures_default.3.3" expl="3. Function lower_bound_raw, default behavior">
-   <proof prover="0"><result status="valid" time="0.02" steps="27"/></proof>
+   <proof prover="0"><result status="valid" time="0.03" steps="27"/></proof>
    </goal>
    <goal name="WP_parameter lower_bound_raw_ensures_default.3.4" expl="4. Function lower_bound_raw, default behavior">
    <transf name="inline_all">
     <goal name="WP_parameter lower_bound_raw_ensures_default.3.4.1" expl="1. Function lower_bound_raw, default behavior">
     <transf name="remove_triggers">
      <goal name="WP_parameter lower_bound_raw_ensures_default.3.4.1.1" expl="1. Function lower_bound_raw, default behavior">
-     <proof prover="0"><result status="valid" time="0.02" steps="29"/></proof>
+     <proof prover="0"><result status="valid" time="0.03" steps="29"/></proof>
      </goal>
     </transf>
     </goal>
@@ -434,7 +434,7 @@
   </transf>
   </goal>
   <goal name="WP_parameter lower_bound_raw_ensures_default.4" expl="4. Ensures clause (Postcondition)">
-  <proof prover="0"><result status="valid" time="0.03" steps="48"/></proof>
+  <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.02" steps="48"/></proof>
   </goal>
  </transf>
  </goal>

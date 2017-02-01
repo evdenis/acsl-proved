@@ -1918,7 +1918,7 @@ module Safe_uint32_of_Safe_int64
   
 end
 
-module Function_bsearch_safety
+module Function_spec_bsearch_safety
 
   use enum.Uint32 
   
@@ -1966,11 +1966,11 @@ module Function_bsearch_safety
   
   use why3.Bool.Bool 
   
-  let bsearch
-  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 42#
-  "expl:Function bsearch, safety" =
+  let spec_bsearch
+  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 47#
+  "expl:Function spec_bsearch, safety" =
   fun
-   (a : (pointer voidP)) (n_1 : Uint32.t) (key : Int32.t)
+   (a : (pointer voidP)) (n_9 : Uint32.t) (key : Int32.t)
    (voidP_a_2_alloc_table : (alloc_table voidP)) (voidP_a_2_tag_table :
    (tag_table voidP)) (intP_intM_a_2 : (memory voidP Int32.t)) 
    requires {
@@ -1983,20 +1983,20 @@ module Function_bsearch_safety
    /\
    (#"binary_search.jc" 68 12 894#
    ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 5 13 31#
-    (if ((<=) (0) (Int.(-) (Uint32.to_int n_1) (1))) then
+    (if ((<=) (0) (Int.(-) (Uint32.to_int n_9) (1))) then
      (((<=) (offset_min voidP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max voidP_a_2_alloc_table a)
-      (Int.(-) (Uint32.to_int n_1) (1)))
+      (Int.(-) (Uint32.to_int n_9) (1)))
      /\
      (forall __framac_tmp1 : int.
       ((((<=) (0) __framac_tmp1) /\
-       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_1) (1)))) ->
+       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_9) (1)))) ->
        ((=) true true))))) else ((=) true true)))
    /\
    (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 6 13 66#
    (forall i_6 : int.
     (forall j_0 : int.
-     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_1)))) ->
+     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_9)))) ->
       (Int32.(<=) (select intP_intM_a_2 (shift a i_6))
       (select intP_intM_a_2 (shift a j_0)))))))))) }
    ensures { ("expl:Postcondition" true) }  ->
@@ -2026,7 +2026,7 @@ module Function_bsearch_safety
          (let _jessie_29 =
          (Safe_int64.(-) 
           (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 21 17 24#
-          "expl:Integer cast" (Safe_int64_of_Safe_uint32.cast  n_1 ))
+          "expl:Integer cast" (Safe_int64_of_Safe_uint32.cast  n_9 ))
           (#"binary_search.jc" 127 42 54# "expl:Integer cast"
           (Safe_int64.of_int (1))) ) in
          begin
@@ -2041,12 +2041,12 @@ module Function_bsearch_safety
              (Int.(-) (Int64.to_int !right) (Uint32.to_int !left))) }
           begin
           any unit
-          requires { true } reads { a, key, n_1 }
+          requires { true } reads { a, key, n_9 }
           ensures {
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 27 22 97#
              (forall i_2 : int.
               ((((<=) (0) i_2) /\
-               (((<) i_2 (Uint32.to_int n_1)) /\
+               (((<) i_2 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_2)) key))) ->
                ((Int32.(<=)
                 (select intP_intM_a_2 (shift a (Uint32.to_int !left))) key)
@@ -2057,13 +2057,13 @@ module Function_bsearch_safety
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 26 22 89#
              (forall i_1 : int.
               ((((<=) (0) i_1) /\
-               (((<) i_1 (Uint32.to_int n_1)) /\
+               (((<) i_1 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_1)) key))) ->
                (((<=) (Uint32.to_int !left) i_1) /\
                ((<=) i_1 (Int64.to_int !right))))))
             /\
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 24 22 31#
-             ((<) (Int64.to_int !right) (Uint32.to_int n_1)))
+             ((<) (Int64.to_int !right) (Uint32.to_int n_9)))
             /\
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 23 22 31#
             ((<=) (0) (Uint32.to_int !left)))))) } ;
@@ -2202,7 +2202,7 @@ module Unsafe_uint32_of_Unsafe_int64
   
 end
 
-module Function_bsearch_behaviors
+module Function_spec_bsearch_behaviors
 
   use Unsafe_uint32_of_Unsafe_int64 
   
@@ -2250,17 +2250,17 @@ module Function_bsearch_behaviors
   
   use why3.Bool.Bool 
   
-  let bsearch_ensures_EXISTS
-  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 42#
-  "expl:Function bsearch, behavior EXISTS" =
+  let spec_bsearch_ensures_EXISTS
+  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 47#
+  "expl:Function spec_bsearch, behavior EXISTS" =
   fun
-   (a : (pointer voidP)) (n_1 : Uint32.t) (key : Int32.t)
+   (a : (pointer voidP)) (n_9 : Uint32.t) (key : Int32.t)
    (voidP_a_2_alloc_table : (alloc_table voidP)) (voidP_a_2_tag_table :
    (tag_table voidP)) (intP_intM_a_2 : (memory voidP Int32.t)) 
    requires {
    ((exists i_3 : int.
      (((<=) (0) i_3) /\
-     (((<) i_3 (Uint32.to_int n_1)) /\
+     (((<) i_3 (Uint32.to_int n_9)) /\
      (Int32.(=) (select intP_intM_a_2 (shift a i_3)) key))))
    /\
    (((allocated voidP_a_2_alloc_table a) ->
@@ -2272,20 +2272,20 @@ module Function_bsearch_behaviors
    /\
    (#"binary_search.jc" 68 12 894#
    ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 5 13 31#
-    (if ((<=) (0) (Int.(-) (Uint32.to_int n_1) (1))) then
+    (if ((<=) (0) (Int.(-) (Uint32.to_int n_9) (1))) then
      (((<=) (offset_min voidP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max voidP_a_2_alloc_table a)
-      (Int.(-) (Uint32.to_int n_1) (1)))
+      (Int.(-) (Uint32.to_int n_9) (1)))
      /\
      (forall __framac_tmp1 : int.
       ((((<=) (0) __framac_tmp1) /\
-       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_1) (1)))) ->
+       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_9) (1)))) ->
        ((=) true true))))) else ((=) true true)))
    /\
    (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 6 13 66#
    (forall i_6 : int.
     (forall j_0 : int.
-     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_1)))) ->
+     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_9)))) ->
       (Int32.(<=) (select intP_intM_a_2 (shift a i_6))
       (select intP_intM_a_2 (shift a j_0))))))))))) }
    ensures {
@@ -2298,7 +2298,7 @@ module Function_bsearch_behaviors
       "expl:Ensures clause"
       (exists i_4 : int.
        (((<=) (0) i_4) /\
-       (((<) i_4 (Uint32.to_int n_1)) /\ ((=) result (shift a i_4))))))
+       (((<) i_4 (Uint32.to_int n_9)) /\ ((=) result (shift a i_4))))))
      /\
      (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 14 15 32#
      "expl:Ensures clause" (Int32.(=) (select intP_intM_a_2 result) key))))))
@@ -2323,7 +2323,7 @@ module Function_bsearch_behaviors
         (right :=
          (Unsafe_int64.(-) 
           (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 21 17 24#
-          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_1 ))
+          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_9 ))
           (#"binary_search.jc" 127 42 54# "expl:Integer cast"
           (Unsafe_int64.of_int (1))) ));
          'Loop_3:
@@ -2331,12 +2331,12 @@ module Function_bsearch_behaviors
          invariant { (#"binary_search.jc" 129 6 2234# true) } 
           begin
           any unit
-          requires { true } reads { a, key, n_1 }
+          requires { true } reads { a, key, n_9 }
           ensures {
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 27 22 97#
              (forall i_2 : int.
               ((((<=) (0) i_2) /\
-               (((<) i_2 (Uint32.to_int n_1)) /\
+               (((<) i_2 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_2)) key))) ->
                ((Int32.(<=)
                 (select intP_intM_a_2 (shift a (Uint32.to_int !left))) key)
@@ -2347,13 +2347,13 @@ module Function_bsearch_behaviors
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 26 22 89#
              (forall i_1 : int.
               ((((<=) (0) i_1) /\
-               (((<) i_1 (Uint32.to_int n_1)) /\
+               (((<) i_1 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_1)) key))) ->
                (((<=) (Uint32.to_int !left) i_1) /\
                ((<=) i_1 (Int64.to_int !right))))))
             /\
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 24 22 31#
-             ((<) (Int64.to_int !right) (Uint32.to_int n_1)))
+             ((<) (Int64.to_int !right) (Uint32.to_int n_9)))
             /\
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 23 22 31#
             ((<=) (0) (Uint32.to_int !left)))))) } ;
@@ -2421,16 +2421,16 @@ module Function_bsearch_behaviors
       'Return_label: begin (return := !__retres); (raise Return) end end))));
      absurd  end with Return -> !return end)
   
-  let bsearch_ensures_NOT_EXISTS
-  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 42#
-  "expl:Function bsearch, behavior NOT_EXISTS" =
+  let spec_bsearch_ensures_NOT_EXISTS
+  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 47#
+  "expl:Function spec_bsearch, behavior NOT_EXISTS" =
   fun
-   (a : (pointer voidP)) (n_1 : Uint32.t) (key : Int32.t)
+   (a : (pointer voidP)) (n_9 : Uint32.t) (key : Int32.t)
    (voidP_a_2_alloc_table : (alloc_table voidP)) (voidP_a_2_tag_table :
    (tag_table voidP)) (intP_intM_a_2 : (memory voidP Int32.t)) 
    requires {
    ((forall i_5 : int.
-     ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_1))) ->
+     ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_9))) ->
       (Int32.(<>) (select intP_intM_a_2 (shift a i_5)) key)))
    /\
    (((allocated voidP_a_2_alloc_table a) ->
@@ -2442,20 +2442,20 @@ module Function_bsearch_behaviors
    /\
    (#"binary_search.jc" 68 12 894#
    ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 5 13 31#
-    (if ((<=) (0) (Int.(-) (Uint32.to_int n_1) (1))) then
+    (if ((<=) (0) (Int.(-) (Uint32.to_int n_9) (1))) then
      (((<=) (offset_min voidP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max voidP_a_2_alloc_table a)
-      (Int.(-) (Uint32.to_int n_1) (1)))
+      (Int.(-) (Uint32.to_int n_9) (1)))
      /\
      (forall __framac_tmp1 : int.
       ((((<=) (0) __framac_tmp1) /\
-       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_1) (1)))) ->
+       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_9) (1)))) ->
        ((=) true true))))) else ((=) true true)))
    /\
    (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 6 13 66#
    (forall i_6 : int.
     (forall j_0 : int.
-     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_1)))) ->
+     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_9)))) ->
       (Int32.(<=) (select intP_intM_a_2 (shift a i_6))
       (select intP_intM_a_2 (shift a j_0))))))))))) }
    ensures {
@@ -2482,7 +2482,7 @@ module Function_bsearch_behaviors
         (right :=
          (Unsafe_int64.(-) 
           (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 21 17 24#
-          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_1 ))
+          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_9 ))
           (#"binary_search.jc" 127 42 54# "expl:Integer cast"
           (Unsafe_int64.of_int (1))) ));
          'Loop_2:
@@ -2490,12 +2490,12 @@ module Function_bsearch_behaviors
          invariant { (#"binary_search.jc" 129 6 2234# true) } 
           begin
           any unit
-          requires { true } reads { a, key, n_1 }
+          requires { true } reads { a, key, n_9 }
           ensures {
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 27 22 97#
              (forall i_2 : int.
               ((((<=) (0) i_2) /\
-               (((<) i_2 (Uint32.to_int n_1)) /\
+               (((<) i_2 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_2)) key))) ->
                ((Int32.(<=)
                 (select intP_intM_a_2 (shift a (Uint32.to_int !left))) key)
@@ -2506,13 +2506,13 @@ module Function_bsearch_behaviors
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 26 22 89#
              (forall i_1 : int.
               ((((<=) (0) i_1) /\
-               (((<) i_1 (Uint32.to_int n_1)) /\
+               (((<) i_1 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_1)) key))) ->
                (((<=) (Uint32.to_int !left) i_1) /\
                ((<=) i_1 (Int64.to_int !right))))))
             /\
             ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 24 22 31#
-             ((<) (Int64.to_int !right) (Uint32.to_int n_1)))
+             ((<) (Int64.to_int !right) (Uint32.to_int n_9)))
             /\
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 23 22 31#
             ((<=) (0) (Uint32.to_int !left)))))) } ;
@@ -2580,11 +2580,11 @@ module Function_bsearch_behaviors
       'Return_label: begin (return := !__retres); (raise Return) end end))));
      absurd  end with Return -> !return end)
   
-  let bsearch_ensures_default
-  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 42#
-  "expl:Function bsearch, default behavior" =
+  let spec_bsearch_ensures_default
+  #"/home/work/workspace/education/acsl-exam/./binary_search.c" 18 4 47#
+  "expl:Function spec_bsearch, default behavior" =
   fun
-   (a : (pointer voidP)) (n_1 : Uint32.t) (key : Int32.t)
+   (a : (pointer voidP)) (n_9 : Uint32.t) (key : Int32.t)
    (voidP_a_2_alloc_table : (alloc_table voidP)) (voidP_a_2_tag_table :
    (tag_table voidP)) (intP_intM_a_2 : (memory voidP Int32.t)) 
    requires {
@@ -2597,20 +2597,20 @@ module Function_bsearch_behaviors
    /\
    (#"binary_search.jc" 68 12 894#
    ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 5 13 31#
-    (if ((<=) (0) (Int.(-) (Uint32.to_int n_1) (1))) then
+    (if ((<=) (0) (Int.(-) (Uint32.to_int n_9) (1))) then
      (((<=) (offset_min voidP_a_2_alloc_table a) (0)) /\
      (((>=) (offset_max voidP_a_2_alloc_table a)
-      (Int.(-) (Uint32.to_int n_1) (1)))
+      (Int.(-) (Uint32.to_int n_9) (1)))
      /\
      (forall __framac_tmp1 : int.
       ((((<=) (0) __framac_tmp1) /\
-       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_1) (1)))) ->
+       ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_9) (1)))) ->
        ((=) true true))))) else ((=) true true)))
    /\
    (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 6 13 66#
    (forall i_6 : int.
     (forall j_0 : int.
-     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_1)))) ->
+     ((((<=) (0) i_6) /\ (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_9)))) ->
       (Int32.(<=) (select intP_intM_a_2 (shift a i_6))
       (select intP_intM_a_2 (shift a j_0)))))))))) }
    ensures { ("expl:Postcondition" ("expl:Ensures clause" true)) } diverges 
@@ -2623,22 +2623,22 @@ module Function_bsearch_behaviors
     (#"binary_search.jc" 101 10 506# "expl:Behavior disjointness check"
     (not
     ((forall i_5_0 : int.
-      ((((<=) (0) i_5_0) /\ ((<) i_5_0 (Uint32.to_int n_1))) ->
+      ((((<=) (0) i_5_0) /\ ((<) i_5_0 (Uint32.to_int n_9))) ->
        (Int32.(<>) (select intP_intM_a_2 (shift a i_5_0)) key)))
     /\
     (exists i_3_0 : int.
      (((<=) (0) i_3_0) /\
-     (((<) i_3_0 (Uint32.to_int n_1)) /\
+     (((<) i_3_0 (Uint32.to_int n_9)) /\
      (Int32.(=) (select intP_intM_a_2 (shift a i_3_0)) key))))))) });
      (check {
      (#"binary_search.jc" 110 10 404# "expl:Behavior completeness check"
      ((exists i_3_1 : int.
        (((<=) (0) i_3_1) /\
-       (((<) i_3_1 (Uint32.to_int n_1)) /\
+       (((<) i_3_1 (Uint32.to_int n_9)) /\
        (Int32.(=) (select intP_intM_a_2 (shift a i_3_1)) key))))
      \/
      (forall i_5_1 : int.
-      ((((<=) (0) i_5_1) /\ ((<) i_5_1 (Uint32.to_int n_1))) ->
+      ((((<=) (0) i_5_1) /\ ((<) i_5_1 (Uint32.to_int n_9))) ->
        (Int32.(<>) (select intP_intM_a_2 (shift a i_5_1)) key))))) });
      (let left = ref (Unsafe_uint32.any_  () ) in
      (let right = ref (Unsafe_int64.any_  () ) in
@@ -2655,7 +2655,7 @@ module Function_bsearch_behaviors
         (right :=
          (Unsafe_int64.(-) 
           (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 21 17 24#
-          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_1 ))
+          "expl:Integer cast" (Unsafe_int64_of_Unsafe_uint32.cast  n_9 ))
           (#"binary_search.jc" 127 42 54# "expl:Integer cast"
           (Unsafe_int64.of_int (1))) ));
          'Loop_1:
@@ -2665,12 +2665,12 @@ module Function_bsearch_behaviors
               ((<=) (0) (Uint32.to_int !left)))
              &&
              ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 24 22 31#
-              ((<) (Int64.to_int !right) (Uint32.to_int n_1)))
+              ((<) (Int64.to_int !right) (Uint32.to_int n_9)))
              &&
              ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 26 22 89#
               (forall i_1 : int.
                ((((<=) (0) i_1) /\
-                (((<) i_1 (Uint32.to_int n_1)) /\
+                (((<) i_1 (Uint32.to_int n_9)) /\
                 (Int32.(=) (select intP_intM_a_2 (shift a i_1)) key))) ->
                 (((<=) (Uint32.to_int !left) i_1) /\
                 ((<=) i_1 (Int64.to_int !right))))))
@@ -2678,7 +2678,7 @@ module Function_bsearch_behaviors
              (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 27 22 97#
              (forall i_2 : int.
               ((((<=) (0) i_2) /\
-               (((<) i_2 (Uint32.to_int n_1)) /\
+               (((<) i_2 (Uint32.to_int n_9)) /\
                (Int32.(=) (select intP_intM_a_2 (shift a i_2)) key))) ->
                ((Int32.(<=)
                 (select intP_intM_a_2 (shift a (Uint32.to_int !left))) key)
@@ -8417,7 +8417,7 @@ theory Axiomatic_Jessie_memory_reinterpretation_predicates
   
 end
 
-module Function_bsearch
+module Function_spec_bsearch
 
   use enum.Uint32 
   
@@ -8443,9 +8443,9 @@ module Function_bsearch
   
   use why3.Bool.Bool 
   
-  val bsearch
+  val spec_bsearch
   (a : (pointer voidP)) 
-   (n_1 : Uint32.t) 
+   (n_9 : Uint32.t) 
     (key : Int32.t) 
      (voidP_a_2_alloc_table : (alloc_table voidP)) 
       (voidP_a_2_tag_table : (tag_table voidP)) 
@@ -8461,7 +8461,7 @@ module Function_bsearch
           /\
           (((exists i_3 : int.
              (((<=) (0) i_3) /\
-             (((<) i_3 (Uint32.to_int n_1)) /\
+             (((<) i_3 (Uint32.to_int n_9)) /\
              (Int32.(=) (select intP_intM_a_2 (shift a i_3)) key)))) ->
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 13 15 66#
             "expl:Ensures clause"
@@ -8471,21 +8471,21 @@ module Function_bsearch
              "expl:Ensures clause"
              (exists i_4 : int.
               (((<=) (0) i_4) /\
-              (((<) i_4 (Uint32.to_int n_1)) /\ ((=) result (shift a i_4))))))
+              (((<) i_4 (Uint32.to_int n_9)) /\ ((=) result (shift a i_4))))))
             /\
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 14 15 32#
             "expl:Ensures clause"
             (Int32.(=) (select intP_intM_a_2 result) key))))))
           /\
           ((forall i_5 : int.
-            ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_1))) ->
+            ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_9))) ->
              (Int32.(<>) (select intP_intM_a_2 (shift a i_5)) key))) ->
            (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 10 15 31#
            "expl:Ensures clause" ((=) result null))))) }
   
 end
 
-module Function_bsearch_safe
+module Function_spec_bsearch_safe
 
   use enum.Uint32 
   
@@ -8511,9 +8511,9 @@ module Function_bsearch_safe
   
   use why3.Bool.Bool 
   
-  val bsearch
+  val spec_bsearch
   (a : (pointer voidP)) 
-   (n_1 : Uint32.t) 
+   (n_9 : Uint32.t) 
     (key : Int32.t) 
      (voidP_a_2_alloc_table : (alloc_table voidP)) 
       (voidP_a_2_tag_table : (tag_table voidP)) 
@@ -8523,14 +8523,14 @@ module Function_bsearch_safe
           (#"binary_search.jc" 68 12 894# "expl:Requires clause"
           ((#"/home/work/workspace/education/acsl-exam/./binary_search.c" 5 13 31#
            "expl:Requires clause"
-           (if ((<=) (0) (Int.(-) (Uint32.to_int n_1) (1))) then
+           (if ((<=) (0) (Int.(-) (Uint32.to_int n_9) (1))) then
             (((<=) (offset_min voidP_a_2_alloc_table a) (0)) /\
             (((>=) (offset_max voidP_a_2_alloc_table a)
-             (Int.(-) (Uint32.to_int n_1) (1)))
+             (Int.(-) (Uint32.to_int n_9) (1)))
             /\
             (forall __framac_tmp1 : int.
              ((((<=) (0) __framac_tmp1) /\
-              ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_1) (1)))) ->
+              ((<=) __framac_tmp1 (Int.(-) (Uint32.to_int n_9) (1)))) ->
               ((=) true true))))) else ((=) true true)))
           /\
           (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 6 13 66#
@@ -8538,7 +8538,7 @@ module Function_bsearch_safe
           (forall i_6 : int.
            (forall j_0 : int.
             ((((<=) (0) i_6) /\
-             (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_1)))) ->
+             (((<) i_6 j_0) /\ ((<) j_0 (Uint32.to_int n_9)))) ->
              (Int32.(<=) (select intP_intM_a_2 (shift a i_6))
              (select intP_intM_a_2 (shift a j_0)))))))))) }
         ensures {
@@ -8551,7 +8551,7 @@ module Function_bsearch_safe
           /\
           (((exists i_3 : int.
              (((<=) (0) i_3) /\
-             (((<) i_3 (Uint32.to_int n_1)) /\
+             (((<) i_3 (Uint32.to_int n_9)) /\
              (Int32.(=) (select intP_intM_a_2 (shift a i_3)) key)))) ->
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 13 15 66#
             "expl:Ensures clause"
@@ -8561,14 +8561,14 @@ module Function_bsearch_safe
              "expl:Ensures clause"
              (exists i_4 : int.
               (((<=) (0) i_4) /\
-              (((<) i_4 (Uint32.to_int n_1)) /\ ((=) result (shift a i_4))))))
+              (((<) i_4 (Uint32.to_int n_9)) /\ ((=) result (shift a i_4))))))
             /\
             (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 14 15 32#
             "expl:Ensures clause"
             (Int32.(=) (select intP_intM_a_2 result) key))))))
           /\
           ((forall i_5 : int.
-            ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_1))) ->
+            ((((<=) (0) i_5) /\ ((<) i_5 (Uint32.to_int n_9))) ->
              (Int32.(<>) (select intP_intM_a_2 (shift a i_5)) key))) ->
            (#"/home/work/workspace/education/acsl-exam/./binary_search.c" 10 15 31#
            "expl:Ensures clause" ((=) result null))))) }

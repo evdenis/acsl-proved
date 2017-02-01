@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../arrays_average.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,14 +316,14 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_arrays_average_safety" sum="efccb8f50e6f7e7def5e70073db61e0d" expanded="true">
+<theory name="Function_arrays_average_safety" sum="56bb2dba54c3e3831185f560da34a5e6" expanded="true">
  <goal name="WP_parameter arrays_average" expl="Function arrays_average, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.42" steps="1000"/></proof>
+ <proof prover="0"><result status="valid" time="0.46" steps="1000"/></proof>
  </goal>
 </theory>
-<theory name="Function_arrays_average_behaviors" sum="b39514a8d712b2b328f7cca3a03382ab" expanded="true">
+<theory name="Function_arrays_average_behaviors" sum="00a62657243968faafb979f64fde720c" expanded="true">
  <goal name="WP_parameter arrays_average_ensures_default" expl="Function arrays_average, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="1.33" steps="1014"/></proof>
+ <proof prover="0"><result status="valid" time="1.34" steps="1014"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

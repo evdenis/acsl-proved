@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
 <file name="../sign.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -313,13 +313,13 @@
 </theory>
 <theory name="Function_spec_sign_behaviors" sum="8a5e6f889f231d2888b8aef155766bab" expanded="true">
  <goal name="WP_parameter spec_sign_ensures_default" expl="Function spec_sign, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.05" steps="306"/></proof>
+ <proof prover="0"><result status="valid" time="0.06" steps="306"/></proof>
  </goal>
  <goal name="WP_parameter spec_sign_ensures_negative" expl="Function spec_sign, behavior negative" expanded="true">
  <proof prover="0"><result status="valid" time="0.03" steps="150"/></proof>
  </goal>
  <goal name="WP_parameter spec_sign_ensures_positive" expl="Function spec_sign, behavior positive" expanded="true">
- <proof prover="0"><result status="valid" time="0.02" steps="109"/></proof>
+ <proof prover="0"><result status="valid" time="0.03" steps="109"/></proof>
  </goal>
  <goal name="WP_parameter spec_sign_ensures_zero" expl="Function spec_sign, behavior zero" expanded="true">
  <proof prover="0"><result status="valid" time="0.03" steps="151"/></proof>

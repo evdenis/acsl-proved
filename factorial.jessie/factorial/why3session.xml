@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
 <file name="../factorial.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -308,7 +308,6 @@
 </theory>
 <theory name="Axiomatic_Factorial" sum="5496dde149a40e0696cdb18ccceffa36" expanded="true">
  <goal name="Non_negative" expl="Lemma non_negative" expanded="true">
- <proof prover="0"><result status="valid" time="0.00" steps="5"/></proof>
  </goal>
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

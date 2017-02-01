@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../set_odd_even_skip.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,14 +316,52 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_set_odd_even_skip_safety" sum="048453f4b479dda1604d28db3fe4a872" expanded="true">
+<theory name="Function_set_odd_even_skip_safety" sum="826c3b38b5e22717ffdfeb0683fb2f14" expanded="true">
  <goal name="WP_parameter set_odd_even_skip" expl="Function set_odd_even_skip, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.15" steps="282"/></proof>
+ <proof prover="0"><result status="valid" time="0.16" steps="282"/></proof>
  </goal>
 </theory>
-<theory name="Function_set_odd_even_skip_behaviors" sum="27b9aab812bff74a9697164247ede75e" expanded="true">
+<theory name="Function_set_odd_even_skip_behaviors" sum="5b801264a4af567367c9051cf0e52e28" expanded="true">
  <goal name="WP_parameter set_odd_even_skip_ensures_default" expl="Function set_odd_even_skip, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="4.67" steps="5095"/></proof>
+ <transf name="split_goal_wp" expanded="true">
+  <goal name="WP_parameter set_odd_even_skip_ensures_default.1" expl="1. loop invariant init">
+  <proof prover="0"><result status="valid" time="0.03" steps="24"/></proof>
+  </goal>
+  <goal name="WP_parameter set_odd_even_skip_ensures_default.2" expl="2. loop invariant preservation">
+  <proof prover="0"><result status="valid" time="1.33" steps="2252"/></proof>
+  </goal>
+  <goal name="WP_parameter set_odd_even_skip_ensures_default.3" expl="3. loop invariant preservation">
+  <proof prover="0"><result status="valid" time="2.46" steps="3935"/></proof>
+  </goal>
+  <goal name="WP_parameter set_odd_even_skip_ensures_default.4" expl="4. loop invariant preservation" expanded="true">
+  <transf name="split_goal_wp" expanded="true">
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.1" expl="1. Function set_odd_even_skip, default behavior">
+   <proof prover="0"><result status="valid" time="0.02" steps="26"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.2" expl="2. Function set_odd_even_skip, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="27"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.3" expl="3. Function set_odd_even_skip, default behavior">
+   <proof prover="0"><result status="valid" time="0.10" steps="117"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.4" expl="4. Function set_odd_even_skip, default behavior">
+   <proof prover="0"><result status="valid" time="0.10" steps="119"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.5" expl="5. Function set_odd_even_skip, default behavior">
+   <proof prover="0"><result status="valid" time="0.08" steps="101"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.6" expl="6. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.34" steps="540"/></proof>
+   </goal>
+   <goal name="WP_parameter set_odd_even_skip_ensures_default.4.7" expl="7. Assigns clause">
+   <proof prover="0"><result status="valid" time="0.19" steps="195"/></proof>
+   </goal>
+  </transf>
+  </goal>
+  <goal name="WP_parameter set_odd_even_skip_ensures_default.5" expl="5. Postcondition">
+  <proof prover="0"><result status="valid" time="0.07" steps="199"/></proof>
+  </goal>
+ </transf>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
 <file name="../distance_abs.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -317,7 +317,7 @@
 </theory>
 <theory name="Function_distance_abs_behaviors" sum="c18b86079a0c3bfd4a6a16fd10004204" expanded="true">
  <goal name="WP_parameter distance_abs_ensures_default" expl="Function distance_abs, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.37" steps="252"/></proof>
+ <proof prover="0"><result status="valid" time="0.34" steps="252"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

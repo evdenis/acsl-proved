@@ -2,8 +2,9 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
-<prover id="1" name="Z3" version="4.4.1" timelimit="5" memlimit="8000"/>
+<prover id="0" name="CVC4" version="1.4" timelimit="5" steplimit="0" memlimit="8000"/>
+<prover id="1" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
+<prover id="2" name="Z3" version="4.5.0" timelimit="5" steplimit="0" memlimit="8000"/>
 <file name="../fib_rec.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -307,141 +308,157 @@
 </theory>
 <theory name="Root_unsigned_charP_unsafe" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Axiomatic_Power" sum="15d78a671a3db44a664e6e6e6c0e9689" expanded="true">
- <goal name="Power_alt_step" expl="Lemma power_alt_step" expanded="true">
- <proof prover="0"><result status="valid" time="0.00" steps="3"/></proof>
+<theory name="Axiomatic_Power" sum="15d78a671a3db44a664e6e6e6c0e9689">
+ <goal name="Power_alt_step" expl="Lemma power_alt_step">
+ <proof prover="1"><result status="valid" time="0.00" steps="3"/></proof>
  </goal>
- <goal name="Power_one" expl="Lemma power_one" expanded="true">
- <proof prover="0"><result status="valid" time="0.00" steps="4"/></proof>
+ <goal name="Power_one" expl="Lemma power_one">
+ <proof prover="1"><result status="valid" time="0.01" steps="4"/></proof>
  </goal>
- <goal name="Power_sum" expl="Lemma power_sum" expanded="true">
- <proof prover="0"><result status="timeout" time="4.96"/></proof>
+ <goal name="Power_sum" expl="Lemma power_sum">
+ <proof prover="0"><result status="unknown" time="5.05"/></proof>
+ <proof prover="1"><result status="timeout" time="4.95"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Power_mult_1" expl="Lemma power_mult_1" expanded="true">
- <proof prover="0"><result status="timeout" time="4.97"/></proof>
+ <goal name="Power_mult_1" expl="Lemma power_mult_1">
+ <proof prover="0"><result status="unknown" time="5.03"/></proof>
+ <proof prover="1"><result status="timeout" time="4.96"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Power_mult_2" expl="Lemma power_mult_2" expanded="true">
- <proof prover="0"><result status="timeout" time="4.97"/></proof>
+ <goal name="Power_mult_2" expl="Lemma power_mult_2">
+ <proof prover="0"><result status="unknown" time="5.02"/></proof>
+ <proof prover="1"><result status="timeout" time="4.96"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Power_non_negative" expl="Lemma power_non_negative" expanded="true">
- <proof prover="0"><result status="valid" time="0.03" steps="13"/></proof>
+ <goal name="Power_non_negative" expl="Lemma power_non_negative">
+ <proof prover="1"><result status="valid" time="0.03" steps="13"/></proof>
  </goal>
- <goal name="Power_monotonic" expl="Lemma power_monotonic" expanded="true">
- <proof prover="0"><result status="timeout" time="4.97"/></proof>
+ <goal name="Power_monotonic" expl="Lemma power_monotonic">
+ <proof prover="0"><result status="timeout" time="5.00"/></proof>
+ <proof prover="1"><result status="timeout" time="4.96"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
 </theory>
-<theory name="Axiomatic_Fib" sum="b2f3d743765df8e73549afbaaecdaf2b" expanded="true">
- <goal name="Fib_non_negative" expl="Lemma fib_non_negative" expanded="true">
- <proof prover="0"><result status="unknown" time="0.01"/></proof>
+<theory name="Axiomatic_Fib" sum="b2f3d743765df8e73549afbaaecdaf2b">
+ <goal name="Fib_non_negative" expl="Lemma fib_non_negative">
+ <proof prover="0"><result status="unknown" time="4.96"/></proof>
+ <proof prover="1"><result status="unknown" time="0.01"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Fib_non_negative_increasing" expl="Lemma fib_non_negative_increasing" expanded="true">
- <proof prover="0"><result status="unknown" time="0.02"/></proof>
+ <goal name="Fib_non_negative_increasing" expl="Lemma fib_non_negative_increasing">
+ <proof prover="0"><result status="unknown" time="5.06"/></proof>
+ <proof prover="1"><result status="unknown" time="0.01"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Fib_negative_positive_1" expl="Lemma fib_negative_positive_1" expanded="true">
- <proof prover="0"><result status="timeout" time="4.97"/></proof>
+ <goal name="Fib_negative_positive_1" expl="Lemma fib_negative_positive_1">
+ <proof prover="0"><result status="unknown" time="5.30"/></proof>
+ <proof prover="1"><result status="timeout" time="4.97"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
- <goal name="Fib_negative_positive_2" expl="Lemma fib_negative_positive_2" expanded="true">
- <proof prover="0"><result status="timeout" time="4.99"/></proof>
+ <goal name="Fib_negative_positive_2" expl="Lemma fib_negative_positive_2">
+ <proof prover="0"><result status="timeout" time="5.00"/></proof>
+ <proof prover="1"><result status="timeout" time="4.95"/></proof>
+ <proof prover="2"><result status="timeout" time="5.00"/></proof>
  </goal>
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
 <theory name="Function_fib_rec_safe" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_fib_rec_safety" sum="e0e779f08ad308abe85d680cacf201cf" expanded="true">
- <goal name="WP_parameter fib_rec" expl="Function fib_rec, safety" expanded="true">
- <transf name="split_goal_wp" expanded="true">
+<theory name="Function_fib_rec_safety" sum="e0e779f08ad308abe85d680cacf201cf">
+ <goal name="WP_parameter fib_rec" expl="Function fib_rec, safety">
+ <transf name="split_goal_wp">
   <goal name="WP_parameter fib_rec.1" expl="1. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="6"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="6"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.2" expl="2. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="11"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="11"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.3" expl="3. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="16"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="16"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.4" expl="4. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="14"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="14"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.5" expl="5. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="14"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="14"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.6" expl="6. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="17"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="17"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.7" expl="7. integer overflow">
-  <proof prover="0"><result status="valid" time="0.01" steps="40"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="40"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.8" expl="8. check">
-  <proof prover="0"><result status="valid" time="0.01" steps="31"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="31"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.9" expl="9. Precondition for fib_rec (Requires clause. Internal)">
-  <proof prover="0"><result status="valid" time="0.01" steps="30"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="30"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.10" expl="10. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="33"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="33"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.11" expl="11. integer overflow">
-  <proof prover="0"><result status="valid" time="0.01" steps="37"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="37"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.12" expl="12. check">
-  <proof prover="0"><result status="valid" time="0.02" steps="64"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="64"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.13" expl="13. Precondition for fib_rec (Requires clause. Internal)">
-  <proof prover="0"><result status="valid" time="0.02" steps="83"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="83"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.14" expl="14. integer overflow">
-  <proof prover="0"><result status="valid" time="0.15" steps="297"/></proof>
+  <proof prover="1"><result status="valid" time="0.19" steps="297"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.15" expl="15. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="24"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="24"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.16" expl="16. integer overflow">
-  <proof prover="0"><result status="valid" time="0.01" steps="38"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="38"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.17" expl="17. check">
-  <proof prover="0"><result status="valid" time="0.03" steps="64"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="64"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.18" expl="18. Precondition for fib_rec (Requires clause. Internal)">
-  <proof prover="1"><result status="valid" time="0.10"/></proof>
+  <proof prover="0"><result status="valid" time="0.30"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.19" expl="19. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.01" steps="25"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="25"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.20" expl="20. integer overflow">
-  <proof prover="0"><result status="valid" time="0.02" steps="56"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="56"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.21" expl="21. check">
-  <proof prover="0"><result status="valid" time="0.04" steps="68"/></proof>
+  <proof prover="1"><result status="valid" time="0.04" steps="68"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.22" expl="22. Precondition for fib_rec (Requires clause. Internal)">
-  <proof prover="1"><result status="valid" time="0.07"/></proof>
+  <proof prover="0"><result status="valid" time="0.66"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec.23" expl="23. integer overflow">
-  <proof prover="0"><result status="valid" time="0.07" steps="152"/></proof>
+  <proof prover="1"><result status="valid" time="0.08" steps="152"/></proof>
   </goal>
  </transf>
  </goal>
 </theory>
 <theory name="Function_fib_rec" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_fib_rec_behaviors" sum="ca1bedde6c3ff0a11aed60af28981b8c" expanded="true">
- <goal name="WP_parameter fib_rec_ensures_default" expl="Function fib_rec, default behavior" expanded="true">
- <transf name="split_goal_wp" expanded="true">
+<theory name="Function_fib_rec_behaviors" sum="ca1bedde6c3ff0a11aed60af28981b8c">
+ <goal name="WP_parameter fib_rec_ensures_default" expl="Function fib_rec, default behavior">
+ <transf name="split_goal_wp">
   <goal name="WP_parameter fib_rec_ensures_default.1" expl="1. Postcondition (Ensures clause)">
-  <proof prover="0"><result status="valid" time="0.01" steps="9"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="9"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec_ensures_default.2" expl="2. Postcondition (Ensures clause)">
-  <proof prover="0"><result status="valid" time="0.01" steps="11"/></proof>
+  <proof prover="1"><result status="valid" time="0.01" steps="11"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec_ensures_default.3" expl="3. Postcondition (Ensures clause)">
-  <proof prover="1"><result status="valid" time="0.04"/></proof>
+  <proof prover="0"><result status="valid" time="0.06"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec_ensures_default.4" expl="4. Postcondition (Ensures clause)">
-  <proof prover="0"><result status="valid" time="0.02" steps="52"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="52"/></proof>
   </goal>
   <goal name="WP_parameter fib_rec_ensures_default.5" expl="5. Postcondition (Ensures clause)">
-  <proof prover="0"><result status="valid" time="0.02" steps="52"/></proof>
+  <proof prover="1"><result status="valid" time="0.02" steps="52"/></proof>
   </goal>
  </transf>
  </goal>

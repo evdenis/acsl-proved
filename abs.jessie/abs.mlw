@@ -1672,11 +1672,11 @@ module Function_spec_abs2_safety
   
   use why3.Bool.Bool 
   
-  let spec_abs2 #"/home/work/workspace/education/acsl-exam/abs.c" 21 4 20#
+  let spec_abs2 #"/home/work/workspace/education/acsl-exam/./abs.c" 21 4 20#
   "expl:Function spec_abs2, safety" =
   fun (a : Int32.t) 
    requires {
-   (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+   (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
    ((<) (Int.(-_) (2147483648)) (Int32.to_int a))) }
    ensures { ("expl:Postcondition" true) }  ->
    'Init:
@@ -1687,7 +1687,7 @@ module Function_spec_abs2_safety
      (let abs = ref (Safe_int32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 25 7 12#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 25 7 12#
      (Safe_int32.(<)  a
       (#"abs.jc" 52 23 35# "expl:Integer cast" (Safe_int32.of_int (0))) ))
      then
@@ -1695,14 +1695,14 @@ module Function_spec_abs2_safety
        (let _jessie_14 = (Safe_int32.(-_)  a ) in
        begin
        (assert {
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 26 6 14#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 26 6 14#
        "expl:Pointer index bounds" true) }); _jessie_14 end))
      else
       (abs :=
        (let _jessie_13 = a in
        begin
        (assert {
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 28 6 13#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 28 6 13#
        "expl:Pointer index bounds" true) }); _jessie_13 end)));
       begin
       (return :=
@@ -1729,15 +1729,15 @@ module Function_spec_abs2_behaviors
   use why3.Bool.Bool 
   
   let spec_abs2_ensures_default
-  #"/home/work/workspace/education/acsl-exam/abs.c" 21 4 20#
+  #"/home/work/workspace/education/acsl-exam/./abs.c" 21 4 20#
   "expl:Function spec_abs2, default behavior" =
   fun (a : Int32.t) 
    requires {
-   (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+   (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
    ((<) (Int.(-_) (2147483648)) (Int32.to_int a))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 7 12 24#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 7 12 24#
      "expl:Ensures clause"
      (Int32.(>=) result (#"abs.jc" 27 30 42# "expl:Integer cast"
      (Int32.of_int (0)))))) }  ->
@@ -1782,7 +1782,7 @@ module Function_spec_abs2_behaviors
      (let abs = ref (Unsafe_int32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 25 7 12#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 25 7 12#
      (Unsafe_int32.(<)  a
       (#"abs.jc" 52 23 35# "expl:Integer cast" (Unsafe_int32.of_int (0))) ))
      then (abs := (Unsafe_int32.(-_)  a )) else (abs := a));
@@ -1790,18 +1790,18 @@ module Function_spec_abs2_behaviors
     Return -> !return end)
   
   let spec_abs2_ensures_negative
-  #"/home/work/workspace/education/acsl-exam/abs.c" 21 4 20#
+  #"/home/work/workspace/education/acsl-exam/./abs.c" 21 4 20#
   "expl:Function spec_abs2, behavior negative" =
   fun (a : Int32.t) 
    requires {
    ((Int32.(<) a (#"abs.jc" 36 15 27# "expl:Integer cast" (Int32.of_int
     (0))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+   (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
    ((<) (Int.(-_) (2147483648)) (Int32.to_int a)))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 17 15 28#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 17 15 28#
      "expl:Ensures clause"
      ((=) (Int32.to_int result) (Int.(-_) (Int32.to_int a))))) }  ->
    'Init:
@@ -1812,7 +1812,7 @@ module Function_spec_abs2_behaviors
      (let abs = ref (Unsafe_int32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 25 7 12#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 25 7 12#
      (Unsafe_int32.(<)  a
       (#"abs.jc" 52 23 35# "expl:Integer cast" (Unsafe_int32.of_int (0))) ))
      then (abs := (Unsafe_int32.(-_)  a )) else (abs := a));
@@ -1820,18 +1820,18 @@ module Function_spec_abs2_behaviors
     Return -> !return end)
   
   let spec_abs2_ensures_positive
-  #"/home/work/workspace/education/acsl-exam/abs.c" 21 4 20#
+  #"/home/work/workspace/education/acsl-exam/./abs.c" 21 4 20#
   "expl:Function spec_abs2, behavior positive" =
   fun (a : Int32.t) 
    requires {
    ((Int32.(>) a (#"abs.jc" 29 15 27# "expl:Integer cast" (Int32.of_int
     (0))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+   (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
    ((<) (Int.(-_) (2147483648)) (Int32.to_int a)))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 10 15 27#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 10 15 27#
      "expl:Ensures clause" (Int32.(=) result a))) }  ->
    'Init:
    (let return = ref (Unsafe_int32.any_  () ) in
@@ -1841,7 +1841,7 @@ module Function_spec_abs2_behaviors
      (let abs = ref (Unsafe_int32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 25 7 12#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 25 7 12#
      (Unsafe_int32.(<)  a
       (#"abs.jc" 52 23 35# "expl:Integer cast" (Unsafe_int32.of_int (0))) ))
      then (abs := (Unsafe_int32.(-_)  a )) else (abs := a));
@@ -1849,27 +1849,27 @@ module Function_spec_abs2_behaviors
     Return -> !return end)
   
   let spec_abs2_ensures_zero
-  #"/home/work/workspace/education/acsl-exam/abs.c" 21 4 20#
+  #"/home/work/workspace/education/acsl-exam/./abs.c" 21 4 20#
   "expl:Function spec_abs2, behavior zero" =
   fun (a : Int32.t) 
    requires {
    ((Int32.(=) a (#"abs.jc" 32 16 28# "expl:Integer cast" (Int32.of_int
     (0))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+   (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
    ((<) (Int.(-_) (2147483648)) (Int32.to_int a)))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
      "expl:Ensures clause"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
      "expl:Ensures clause"
-     ((#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+     ((#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
       "expl:Ensures clause"
       (Int32.(=) result (#"abs.jc" 33 39 51# "expl:Integer cast"
       (Int32.of_int (0)))))
      /\
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 14 15 27#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 14 15 27#
      "expl:Ensures clause" (Int32.(=) result a)))))) }  ->
    'Init:
    (let return = ref (Unsafe_int32.any_  () ) in
@@ -1879,7 +1879,7 @@ module Function_spec_abs2_behaviors
      (let abs = ref (Unsafe_int32.any_  () ) in
      begin
      (if
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 25 7 12#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 25 7 12#
      (Unsafe_int32.(<)  a
       (#"abs.jc" 52 23 35# "expl:Integer cast" (Unsafe_int32.of_int (0))) ))
      then (abs := (Unsafe_int32.(-_)  a )) else (abs := a));
@@ -7514,30 +7514,30 @@ module Function_spec_abs2
    ensures {
      (((Int32.(<) a (#"abs.jc" 36 15 27# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 17 15 28#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 17 15 28#
        "expl:Ensures clause"
        ((=) (Int32.to_int result) (Int.(-_) (Int32.to_int a)))))
      /\
      (((Int32.(=) a (#"abs.jc" 32 16 28# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
        "expl:Ensures clause"
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
        "expl:Ensures clause"
-       ((#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       ((#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
         "expl:Ensures clause"
         (Int32.(=) result (#"abs.jc" 33 39 51# "expl:Integer cast"
         (Int32.of_int (0)))))
        /\
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 14 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 14 15 27#
        "expl:Ensures clause" (Int32.(=) result a))))))
      /\
      (((Int32.(>) a (#"abs.jc" 29 15 27# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 10 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 10 15 27#
        "expl:Ensures clause" (Int32.(=) result a)))
      /\
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 7 12 24#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 7 12 24#
      "expl:Ensures clause"
      (Int32.(>=) result (#"abs.jc" 27 30 42# "expl:Integer cast"
      (Int32.of_int (0)))))))) }
@@ -7556,36 +7556,36 @@ module Function_spec_abs2_safe
   (a : Int32.t) : Int32.t
    requires {
      ("expl:Internal"
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 5 13 28#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 5 13 28#
      "expl:Requires clause" ((<) (Int.(-_) (2147483648)) (Int32.to_int a))))
      }
    ensures {
      (((Int32.(<) a (#"abs.jc" 36 15 27# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 17 15 28#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 17 15 28#
        "expl:Ensures clause"
        ((=) (Int32.to_int result) (Int.(-_) (Int32.to_int a)))))
      /\
      (((Int32.(=) a (#"abs.jc" 32 16 28# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
        "expl:Ensures clause"
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
        "expl:Ensures clause"
-       ((#"/home/work/workspace/education/acsl-exam/abs.c" 13 15 27#
+       ((#"/home/work/workspace/education/acsl-exam/./abs.c" 13 15 27#
         "expl:Ensures clause"
         (Int32.(=) result (#"abs.jc" 33 39 51# "expl:Integer cast"
         (Int32.of_int (0)))))
        /\
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 14 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 14 15 27#
        "expl:Ensures clause" (Int32.(=) result a))))))
      /\
      (((Int32.(>) a (#"abs.jc" 29 15 27# "expl:Integer cast" (Int32.of_int
        (0)))) ->
-       (#"/home/work/workspace/education/acsl-exam/abs.c" 10 15 27#
+       (#"/home/work/workspace/education/acsl-exam/./abs.c" 10 15 27#
        "expl:Ensures clause" (Int32.(=) result a)))
      /\
-     (#"/home/work/workspace/education/acsl-exam/abs.c" 7 12 24#
+     (#"/home/work/workspace/education/acsl-exam/./abs.c" 7 12 24#
      "expl:Ensures clause"
      (Int32.(>=) result (#"abs.jc" 27 30 42# "expl:Integer cast"
      (Int32.of_int (0)))))))) }

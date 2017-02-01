@@ -2,8 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" steplimit="1" memlimit="8000"/>
-<prover id="1" name="Alt-Ergo" version="1.01" alternative="-Em" timelimit="5" steplimit="1" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../binary_search.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -317,142 +316,90 @@
 </theory>
 <theory name="Safe_uint32_of_Safe_int64" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_bsearch_safety" sum="cd5a1b97cfb5768b89ba045724ef2327" expanded="true">
- <goal name="WP_parameter bsearch" expl="Function bsearch, safety" expanded="true">
- <transf name="split_goal_wp" expanded="true">
-  <goal name="WP_parameter bsearch.1" expl="1. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.02" steps="5"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.2" expl="2. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.02" steps="10"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.3" expl="3. integer overflow">
-  <proof prover="0"><result status="valid" time="0.02" steps="41"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.4" expl="4. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.02" steps="27"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.5" expl="5. integer overflow">
-  <proof prover="0"><result status="valid" time="0.02" steps="32"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.6" expl="6. division by zero">
-  <proof prover="0"><result status="valid" time="0.02" steps="25"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.7" expl="7. integer overflow">
-  <proof prover="0"><result status="valid" time="0.03" steps="45"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.8" expl="8. integer overflow">
-  <proof prover="0"><result status="valid" time="0.04" steps="66"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.9" expl="9. Integer cast (precondition)">
-  <proof prover="0"><result status="valid" time="0.21" steps="173"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.10" expl="10. Pointer dereference (Dereference by offset. Validity)">
-  <proof prover="0"><result status="valid" time="0.04" steps="82"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.11" expl="11. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.03" steps="55"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.12" expl="12. integer overflow">
-  <proof prover="0"><result status="valid" time="0.37" steps="369"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.13" expl="13. loop variant decrease">
-  <proof prover="0"><result status="valid" time="0.06" steps="139"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.14" expl="14. Pointer dereference (Dereference by offset. Validity)">
-  <proof prover="0"><result status="valid" time="0.03" steps="38"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.15" expl="15. Integer cast (integer overflow)">
-  <proof prover="0"><result status="valid" time="0.03" steps="40"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.16" expl="16. integer overflow">
-  <proof prover="0"><result status="valid" time="0.03" steps="59"/></proof>
-  </goal>
-  <goal name="WP_parameter bsearch.17" expl="17. loop variant decrease">
-  <proof prover="0"><result status="valid" time="0.09" steps="193"/></proof>
-  </goal>
- </transf>
+<theory name="Function_spec_bsearch_safety" sum="bcc97ed5dd3a54d2c3ba2687b1d6f294" expanded="true">
+ <goal name="WP_parameter spec_bsearch" expl="Function spec_bsearch, safety" expanded="true">
+ <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.48" steps="831"/></proof>
  </goal>
 </theory>
 <theory name="Unsafe_int64_of_Unsafe_uint32" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
 <theory name="Unsafe_uint32_of_Unsafe_int64" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_bsearch_behaviors" sum="780c92d64844c012fef468c9d40f4aab" expanded="true">
- <goal name="WP_parameter bsearch_ensures_EXISTS" expl="Function bsearch, behavior EXISTS" expanded="true">
- <proof prover="0"><result status="valid" time="0.10" steps="128"/></proof>
+<theory name="Function_spec_bsearch_behaviors" sum="371814967fe80f39a1d1098c279d9c8d" expanded="true">
+ <goal name="WP_parameter spec_bsearch_ensures_EXISTS" expl="Function spec_bsearch, behavior EXISTS" expanded="true">
+ <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.10" steps="187"/></proof>
  </goal>
- <goal name="WP_parameter bsearch_ensures_NOT_EXISTS" expl="Function bsearch, behavior NOT_EXISTS" expanded="true">
- <proof prover="0"><result status="valid" time="0.06" steps="69"/></proof>
+ <goal name="WP_parameter spec_bsearch_ensures_NOT_EXISTS" expl="Function spec_bsearch, behavior NOT_EXISTS" expanded="true">
+ <proof prover="0" timelimit="5" memlimit="8000"><result status="valid" time="0.05" steps="71"/></proof>
  </goal>
- <goal name="WP_parameter bsearch_ensures_default" expl="Function bsearch, default behavior" expanded="true">
+ <goal name="WP_parameter spec_bsearch_ensures_default" expl="Function spec_bsearch, default behavior" expanded="true">
  <transf name="split_goal_wp" expanded="true">
-  <goal name="WP_parameter bsearch_ensures_default.1" expl="1. Behavior disjointness check">
+  <goal name="WP_parameter spec_bsearch_ensures_default.1" expl="1. Behavior disjointness check">
   <proof prover="0"><result status="valid" time="0.02" steps="13"/></proof>
   </goal>
-  <goal name="WP_parameter bsearch_ensures_default.2" expl="2. Behavior completeness check">
+  <goal name="WP_parameter spec_bsearch_ensures_default.2" expl="2. Behavior completeness check">
   <proof prover="0"><result status="valid" time="0.02" steps="13"/></proof>
   </goal>
-  <goal name="WP_parameter bsearch_ensures_default.3" expl="3. loop invariant init">
-  <proof prover="0"><result status="valid" time="0.03" steps="76"/></proof>
+  <goal name="WP_parameter spec_bsearch_ensures_default.3" expl="3. loop invariant init">
+  <proof prover="0"><result status="valid" time="0.10" steps="270"/></proof>
   </goal>
-  <goal name="WP_parameter bsearch_ensures_default.4" expl="4. loop invariant preservation" expanded="true">
+  <goal name="WP_parameter spec_bsearch_ensures_default.4" expl="4. loop invariant preservation" expanded="true">
   <transf name="split_goal_wp" expanded="true">
-   <goal name="WP_parameter bsearch_ensures_default.4.1" expl="1. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.03" steps="40"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.1" expl="1. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="38"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.4.2" expl="2. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.03" steps="31"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.2" expl="2. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="32"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.4.3" expl="3. Function bsearch, default behavior" expanded="true">
-   <transf name="inline_goal" expanded="true">
-    <goal name="WP_parameter bsearch_ensures_default.4.3.1" expl="1. Function bsearch, default behavior" expanded="true">
-    <transf name="inline_goal" expanded="true">
-     <goal name="WP_parameter bsearch_ensures_default.4.3.1.1" expl="1. Function bsearch, default behavior">
-     <proof prover="1"><result status="valid" time="0.07" steps="78"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.3" expl="3. Function spec_bsearch, default behavior" expanded="true">
+   <transf name="inline_all" expanded="true">
+    <goal name="WP_parameter spec_bsearch_ensures_default.4.3.1" expl="1. Function spec_bsearch, default behavior" expanded="true">
+    <transf name="remove_triggers" expanded="true">
+     <goal name="WP_parameter spec_bsearch_ensures_default.4.3.1.1" expl="1. Function spec_bsearch, default behavior">
+     <proof prover="0"><result status="valid" time="0.06" steps="96"/></proof>
      </goal>
     </transf>
     </goal>
    </transf>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.4.4" expl="4. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.03" steps="67"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.4" expl="4. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.05" steps="68"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.4.5" expl="5. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.08" steps="114"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.5" expl="5. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.07" steps="88"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.4.6" expl="6. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.04" steps="87"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.4.6" expl="6. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.06" steps="88"/></proof>
    </goal>
   </transf>
   </goal>
-  <goal name="WP_parameter bsearch_ensures_default.5" expl="5. loop invariant preservation" expanded="true">
+  <goal name="WP_parameter spec_bsearch_ensures_default.5" expl="5. loop invariant preservation" expanded="true">
   <transf name="split_goal_wp" expanded="true">
-   <goal name="WP_parameter bsearch_ensures_default.5.1" expl="1. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.03" steps="33"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.1" expl="1. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.03" steps="34"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.5.2" expl="2. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.05" steps="80"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.2" expl="2. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.35" steps="491"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.5.3" expl="3. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.04" steps="71"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.3" expl="3. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.05" steps="72"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.5.4" expl="4. Function bsearch, default behavior" expanded="true">
-   <transf name="inline_goal" expanded="true">
-    <goal name="WP_parameter bsearch_ensures_default.5.4.1" expl="1. Function bsearch, default behavior" expanded="true">
-    <transf name="inline_goal" expanded="true">
-     <goal name="WP_parameter bsearch_ensures_default.5.4.1.1" expl="1. Function bsearch, default behavior">
-     <proof prover="0"><result status="valid" time="0.09" steps="83"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.4" expl="4. Function spec_bsearch, default behavior" expanded="true">
+   <transf name="inline_all" expanded="true">
+    <goal name="WP_parameter spec_bsearch_ensures_default.5.4.1" expl="1. Function spec_bsearch, default behavior" expanded="true">
+    <transf name="remove_triggers" expanded="true">
+     <goal name="WP_parameter spec_bsearch_ensures_default.5.4.1.1" expl="1. Function spec_bsearch, default behavior">
+     <proof prover="0"><result status="valid" time="0.04" steps="97"/></proof>
      </goal>
     </transf>
     </goal>
    </transf>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.5.5" expl="5. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.04" steps="91"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.5" expl="5. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.06" steps="92"/></proof>
    </goal>
-   <goal name="WP_parameter bsearch_ensures_default.5.6" expl="6. Function bsearch, default behavior">
-   <proof prover="0"><result status="valid" time="0.08" steps="118"/></proof>
+   <goal name="WP_parameter spec_bsearch_ensures_default.5.6" expl="6. Function spec_bsearch, default behavior">
+   <proof prover="0"><result status="valid" time="0.07" steps="92"/></proof>
    </goal>
   </transf>
   </goal>
@@ -925,9 +872,9 @@
 </theory>
 <theory name="Axiomatic_Jessie_memory_reinterpretation_predicates" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_bsearch" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+<theory name="Function_spec_bsearch" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_bsearch_safe" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
+<theory name="Function_spec_bsearch_safe" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
 </file>
 </why3session>

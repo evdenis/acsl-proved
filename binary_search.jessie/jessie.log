@@ -1,4 +1,4 @@
-WHYLIB is not set, using /home/work/.opam/infer-4.02.3/lib/jessie as default
+WHYLIB is not set, using /home/work/.opam/4.02.3/lib/jessie as default
 Parsing
 Normalization
 Typing logic labels
@@ -62,12 +62,12 @@ complement_to_uint8
 Call graph: has 1 components
 ******************************
 Component 0:
- bsearch calls: 
+ spec_bsearch calls: 
 
 Adding invariants
 Computation of regions
-Separation: treating function bsearch
-Separation: treating function bsearch
+Separation: treating function spec_bsearch
+Separation: treating function spec_bsearch
 Computation of effects
 Effects: doing one iteration
 Effects: fixpoint reached
@@ -182,7 +182,7 @@ Effects: doing one iteration...
 Effects: doing one iteration...
 Effects: doing one iteration...
 Effects: fixpoint reached
-Effects for function bsearch:
+Effects for function spec_bsearch:
  reads:  alloc_table: (a_2 : alloc-root "voidP") at (Here)
          tag_table: (a_2 : voidP) at (Here)
          memories: (a_2 : mem-field "intM") at (Here)
@@ -191,7 +191,7 @@ Effects for function bsearch:
          globals: 
          locals: __retres at (Here), m at (Here), right at (Here),
                  left at (Here), \result at (Here), key at (Here),
-                 n_1 at (Here), a at (Here)
+                 n_9 at (Here), a at (Here)
 
  writes:  alloc_table: 
           tag_table: 
@@ -1016,6 +1016,6 @@ Axiomatic Jessie_memory_reinterpretation_predicates
 Axiomatic Padding
 Translate lemmas
 Translate functions
-Pre-treatement Function bsearch
-Function bsearch
+Pre-treatement Function spec_bsearch
+Function spec_bsearch
 Produce makefile

@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../palindrome.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,23 +316,23 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_palindrome_safety" sum="77f34907fbff39dfd10e43381cfd97ca" expanded="true">
+<theory name="Function_palindrome_safety" sum="a5f1af3d83e8fb6929190629947f4696" expanded="true">
  <goal name="WP_parameter palindrome" expl="Function palindrome, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.10" steps="238"/></proof>
+ <proof prover="0"><result status="valid" time="0.13" steps="238"/></proof>
  </goal>
 </theory>
-<theory name="Function_palindrome_behaviors" sum="fe534d5d4ece295467ec87bedb54ae94" expanded="true">
+<theory name="Function_palindrome_behaviors" sum="abe17e2eaa61e02dde8775a24402547d" expanded="true">
  <goal name="WP_parameter palindrome_ensures_default" expl="Function palindrome, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.97" steps="1467"/></proof>
+ <proof prover="0"><result status="valid" time="0.96" steps="1467"/></proof>
  </goal>
  <goal name="WP_parameter palindrome_ensures_nil" expl="Function palindrome, behavior nil" expanded="true">
- <proof prover="0"><result status="valid" time="0.05" steps="147"/></proof>
+ <proof prover="0"><result status="valid" time="0.06" steps="147"/></proof>
  </goal>
  <goal name="WP_parameter palindrome_ensures_non_palindrome" expl="Function palindrome, behavior non_palindrome" expanded="true">
- <proof prover="0"><result status="valid" time="0.19" steps="264"/></proof>
+ <proof prover="0"><result status="valid" time="0.20" steps="264"/></proof>
  </goal>
  <goal name="WP_parameter palindrome_ensures_palindrome" expl="Function palindrome, behavior palindrome" expanded="true">
- <proof prover="0"><result status="valid" time="0.31" steps="218"/></proof>
+ <proof prover="0"><result status="valid" time="0.36" steps="218"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

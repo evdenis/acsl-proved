@@ -82,6 +82,13 @@ line = 34
 begin = 9
 end = 21
 
+[spec_bsearch]
+name = "Function spec_bsearch"
+file = "/home/work/workspace/education/acsl-exam/./binary_search.c"
+line = 18
+begin = 4
+end = 47
+
 [_C_22]
 file = "/home/work/workspace/education/acsl-exam/./binary_search.c"
 line = 38
@@ -123,13 +130,6 @@ file = "/home/work/workspace/education/acsl-exam/./binary_search.c"
 line = 31
 begin = 19
 end = 44
-
-[bsearch]
-name = "Function bsearch"
-file = "/home/work/workspace/education/acsl-exam/./binary_search.c"
-line = 18
-begin = 4
-end = 42
 
 [_C_38]
 file = "/home/work/workspace/education/acsl-exam/./binary_search.c"

@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../reverse.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -316,14 +316,14 @@
 </theory>
 <theory name="Exceptions" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
-<theory name="Function_reverse_safety" sum="615488e52a71b5cdf8708c34432ac4c2" expanded="true">
+<theory name="Function_reverse_safety" sum="e709df88f7c4557fafdb56e07bd42164" expanded="true">
  <goal name="WP_parameter reverse" expl="Function reverse, safety" expanded="true">
  <proof prover="0"><result status="valid" time="0.06" steps="294"/></proof>
  </goal>
 </theory>
-<theory name="Function_reverse_behaviors" sum="e94851ac85ffaa7da493d037838a08f5" expanded="true">
+<theory name="Function_reverse_behaviors" sum="49a31639e7e53b479eabfe356cf01d11" expanded="true">
  <goal name="WP_parameter reverse_ensures_default" expl="Function reverse, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.74" steps="1447"/></proof>
+ <proof prover="0"><result status="valid" time="0.73" steps="1496"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

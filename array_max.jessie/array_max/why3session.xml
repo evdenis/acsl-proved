@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.30" timelimit="1" steplimit="0" memlimit="1000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../array_max.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -318,12 +318,12 @@
 </theory>
 <theory name="Function_max_in_array_safety" sum="6712939008277892e4eacae00497a8ae" expanded="true">
  <goal name="WP_parameter max_in_array" expl="Function max_in_array, safety" expanded="true">
- <proof prover="0"><result status="valid" time="0.14" steps="433"/></proof>
+ <proof prover="0"><result status="valid" time="0.15" steps="433"/></proof>
  </goal>
 </theory>
 <theory name="Function_max_in_array_behaviors" sum="78b69452f1ff3391a72fe3d15432d095" expanded="true">
  <goal name="WP_parameter max_in_array_ensures_default" expl="Function max_in_array, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="0.95" steps="1302"/></proof>
+ <proof prover="0"><result status="valid" time="0.97" steps="1302"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

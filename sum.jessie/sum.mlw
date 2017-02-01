@@ -1666,35 +1666,35 @@ theory Axiomatic_Sum
   
   function sum int int : int
   
-  axiom Sum_init #"/home/work/workspace/education/acsl-exam/./sum.c" 5 7 76#
+  axiom Sum_init #"/home/work/workspace/education/acsl-exam/sum.c" 5 7 76#
   "expl:Axiom sum_init" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 5 7 76#
+  (#"/home/work/workspace/education/acsl-exam/sum.c" 5 7 76#
   (forall a_0_0 : int.
    (forall b_0_0 : int.
     ((((>=) a_0_0 (0)) /\ (((>=) b_0_0 (0)) /\ ((<=) b_0_0 a_0_0))) ->
      ((=) (sum a_0_0 b_0_0) a_0_0)))))
   
   axiom Sum_step_dec
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 8 7 91#
+  #"/home/work/workspace/education/acsl-exam/sum.c" 8 7 91#
   "expl:Axiom sum_step_dec" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 8 7 91#
+  (#"/home/work/workspace/education/acsl-exam/sum.c" 8 7 91#
   (forall a_1 : int.
    (forall b_1 : int.
     ((((>=) a_1 (0)) /\ (((>=) b_1 (0)) /\ ((>) b_1 a_1))) ->
      ((=) (sum a_1 b_1) (Int.(+) (sum a_1 (Int.(-) b_1 (1))) b_1))))))
   
   lemma Sum_lower_bound
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 11 7 64#
+  #"/home/work/workspace/education/acsl-exam/sum.c" 11 7 64#
   "expl:Lemma sum_lower_bound" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 11 7 64#
+  (#"/home/work/workspace/education/acsl-exam/sum.c" 11 7 64#
   (forall a_2 : int.
    (forall b_2 : int.
     ((((>=) a_2 (0)) /\ ((>=) b_2 (0))) -> ((>=) (sum a_2 b_2) a_2)))))
   
   lemma Sum_increases
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 14 7 101#
+  #"/home/work/workspace/education/acsl-exam/sum.c" 14 7 101#
   "expl:Lemma sum_increases" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 14 7 101#
+  (#"/home/work/workspace/education/acsl-exam/sum.c" 14 7 101#
   (forall i_1 : int.
    (forall a_3 : int.
     (forall b_3 : int.
@@ -1737,25 +1737,25 @@ module Function_sum_0_safety
   
   use why3.Bool.Bool 
   
-  let sum_0 #"/home/work/workspace/education/acsl-exam/./sum.c" 26 4 21#
+  let sum_0 #"/home/work/workspace/education/acsl-exam/sum.c" 26 4 21#
   "expl:Function sum, safety" =
   fun (a_0 : Int32.t) (b_0 : Int32.t) 
    requires {
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 20 13 18#
     (Int32.(<) a_0 b_0))
    /\
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 13 19#
     (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
     (0)))))
    /\
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 23 29#
     (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
     (0)))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
+   (#"/home/work/workspace/education/acsl-exam/sum.c" 22 13 30#
    ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767))))))))) }
    ensures { ("expl:Postcondition" true) }  ->
    'Init:
@@ -1770,7 +1770,7 @@ module Function_sum_0_safety
       (let _jessie_12 = a_0 in
       begin
       (assert {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 29 3 6#
+      (#"/home/work/workspace/education/acsl-exam/sum.c" 29 3 6#
       "expl:Pointer index bounds" true) }); _jessie_12 end));
       begin
       (i :=
@@ -1780,34 +1780,34 @@ module Function_sum_0_safety
        in
        begin
        (assert {
-       (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 7 16#
+       (#"/home/work/workspace/education/acsl-exam/sum.c" 36 7 16#
        "expl:Pointer index bounds" true) }); _jessie_9 end));
        'Loop_2:
        loop
        invariant { (#"sum.jc" 72 6 699# true) }
          variant {
-           (#"/home/work/workspace/education/acsl-exam/./sum.c" 34 20 25#
+           (#"/home/work/workspace/education/acsl-exam/sum.c" 34 20 25#
            (Int.(-) (Int32.to_int b_0) (Int32.to_int !i))) }
         begin
         any unit
         requires { true } reads { a_0, b_0 }
         ensures {
-          ((#"/home/work/workspace/education/acsl-exam/./sum.c" 32 22 42#
+          ((#"/home/work/workspace/education/acsl-exam/sum.c" 32 22 42#
            ((=) (Int32.to_int !sum_0_0)
            (sum (Int32.to_int a_0) (Int.(-) (Int32.to_int !i) (1)))))
           /\
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-          ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 27#
+          (#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 36#
+          (#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 36#
+          ((#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 27#
            (Int32.(<) a_0 !i))
           /\
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 26 36#
+          (#"/home/work/workspace/education/acsl-exam/sum.c" 31 26 36#
           ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int b_0) (1)))))))) } ;
          try
           begin
           begin
           (if
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 18 24#
+          (#"/home/work/workspace/education/acsl-exam/sum.c" 36 18 24#
           (Safe_int32.(<=)  !i b_0 )) then ()
           else (raise (Goto_while_0_break_exc ())));
            begin
@@ -1815,7 +1815,7 @@ module Function_sum_0_safety
             (let _jessie_10 = (Safe_int32.(+)  !sum_0_0 !i ) in
             begin
             (assert {
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 37 6 14#
+            (#"/home/work/workspace/education/acsl-exam/sum.c" 37 6 14#
             "expl:Pointer index bounds" true) }); _jessie_10 end));
             (i :=
              (let _jessie_11 =
@@ -1824,7 +1824,7 @@ module Function_sum_0_safety
               (Safe_int32.of_int (1))) ) in
              begin
              (assert {
-             (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 26 29#
+             (#"/home/work/workspace/education/acsl-exam/sum.c" 36 26 29#
              "expl:Pointer index bounds" true) }); _jessie_11 end)) end end;
            (raise (Loop_continue_exc ())) end with Loop_continue_exc
           _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
@@ -1862,29 +1862,29 @@ module Function_sum_0_behaviors
   use why3.Bool.Bool 
   
   let sum_ensures_default
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 26 4 21#
+  #"/home/work/workspace/education/acsl-exam/sum.c" 26 4 21#
   "expl:Function sum, default behavior" =
   fun (a_0 : Int32.t) (b_0 : Int32.t) 
    requires {
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 20 13 18#
     (Int32.(<) a_0 b_0))
    /\
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 13 19#
     (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
     (0)))))
    /\
    (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
+   ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 23 29#
     (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
     (0)))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
+   (#"/home/work/workspace/education/acsl-exam/sum.c" 22 13 30#
    ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767))))))))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
+     (#"/home/work/workspace/education/acsl-exam/sum.c" 24 12 32#
      "expl:Ensures clause"
      ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0)))))
      } diverges  ->
@@ -1904,15 +1904,15 @@ module Function_sum_0_behaviors
        'Loop_1:
        loop
        invariant
-         { ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-            ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 27#
+         { ((#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 36#
+            (#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 36#
+            ((#"/home/work/workspace/education/acsl-exam/sum.c" 31 22 27#
              (Int32.(<) a_0 !i))
             /\
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 26 36#
+            (#"/home/work/workspace/education/acsl-exam/sum.c" 31 26 36#
             ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int b_0) (1)))))))
            &&
-           (#"/home/work/workspace/education/acsl-exam/./sum.c" 32 22 42#
+           (#"/home/work/workspace/education/acsl-exam/sum.c" 32 22 42#
            ((=) (Int32.to_int !sum_0_0)
            (sum (Int32.to_int a_0) (Int.(-) (Int32.to_int !i) (1)))))) } 
          
@@ -1922,7 +1922,7 @@ module Function_sum_0_behaviors
           begin
           begin
           (if
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 18 24#
+          (#"/home/work/workspace/education/acsl-exam/sum.c" 36 18 24#
           (Unsafe_int32.(<=)  !i b_0 )) then ()
           else (raise (Goto_while_0_break_exc ())));
            begin
@@ -7556,7 +7556,7 @@ module Function_sum_0
    (b_0 : Int32.t) : Int32.t
     requires { true }
     ensures {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
+      (#"/home/work/workspace/education/acsl-exam/sum.c" 24 12 32#
       "expl:Ensures clause"
       ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0))))
       }
@@ -7579,26 +7579,26 @@ module Function_sum_0_safe
     requires {
       ("expl:Internal"
       (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
+      ((#"/home/work/workspace/education/acsl-exam/sum.c" 20 13 18#
        "expl:Requires clause" (Int32.(<) a_0 b_0))
       /\
       (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
+      ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 13 19#
        "expl:Requires clause"
        (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
        (0)))))
       /\
       (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
+      ((#"/home/work/workspace/education/acsl-exam/sum.c" 21 23 29#
        "expl:Requires clause"
        (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
        (0)))))
       /\
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
+      (#"/home/work/workspace/education/acsl-exam/sum.c" 22 13 30#
       "expl:Requires clause"
       ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767)))))))))) }
     ensures {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
+      (#"/home/work/workspace/education/acsl-exam/sum.c" 24 12 32#
       "expl:Ensures clause"
       ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0))))
       }

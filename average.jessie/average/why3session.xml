@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="0" name="Alt-Ergo" version="1.01" timelimit="5" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../average.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -310,12 +310,12 @@
 </theory>
 <theory name="Function_average_safety" sum="7b3c617f34cf58f75401292758671cae" expanded="true">
  <goal name="WP_parameter average" expl="Function average, safety" expanded="true">
- <proof prover="0"><result status="valid" time="1.27" steps="1725"/></proof>
+ <proof prover="0"><result status="valid" time="1.21" steps="1725"/></proof>
  </goal>
 </theory>
 <theory name="Function_average_behaviors" sum="8da055e88f917429079bde2550fac3fa" expanded="true">
  <goal name="WP_parameter average_ensures_default" expl="Function average, default behavior" expanded="true">
- <proof prover="0"><result status="valid" time="2.75" steps="1304"/></proof>
+ <proof prover="0"><result status="valid" time="2.22" steps="1077"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

@@ -2,7 +2,7 @@
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v5//EN"
 "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
-<prover id="1" name="Alt-Ergo" version="1.30" timelimit="5" steplimit="0" memlimit="8000"/>
+<prover id="0" name="Alt-Ergo" version="1.30" timelimit="3" steplimit="0" memlimit="2000"/>
 <file name="../max_min.mlw" expanded="true">
 <theory name="Axiomatic_Padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">
 </theory>
@@ -324,21 +324,21 @@
 </theory>
 <theory name="Function_max_min_safety" sum="f1f71fa19be2a5184db1b3df441d1ffd" expanded="true">
  <goal name="WP_parameter max_min" expl="Function max_min, safety" expanded="true">
- <proof prover="1"><result status="valid" time="0.10" steps="260"/></proof>
+ <proof prover="0"><result status="valid" time="0.10" steps="260"/></proof>
  </goal>
 </theory>
 <theory name="Function_max_min_behaviors" sum="8a5f189a3aebec06e046aa0204139b5f" expanded="true">
  <goal name="WP_parameter max_min_ensures_default" expl="Function max_min, default behavior" expanded="true">
- <proof prover="1"><result status="valid" time="1.68" steps="2769"/></proof>
+ <proof prover="0"><result status="valid" time="1.72" steps="2769"/></proof>
  </goal>
  <goal name="WP_parameter max_min_ensures_one_size" expl="Function max_min, behavior one_size" expanded="true">
- <proof prover="1"><result status="valid" time="0.07" steps="139"/></proof>
+ <proof prover="0"><result status="valid" time="0.06" steps="139"/></proof>
  </goal>
  <goal name="WP_parameter max_min_ensures_size" expl="Function max_min, behavior size" expanded="true">
- <proof prover="1"><result status="valid" time="0.17" steps="575"/></proof>
+ <proof prover="0"><result status="valid" time="0.16" steps="575"/></proof>
  </goal>
  <goal name="WP_parameter max_min_ensures_zero_size" expl="Function max_min, behavior zero_size" expanded="true">
- <proof prover="1"><result status="valid" time="0.02" steps="12"/></proof>
+ <proof prover="0"><result status="valid" time="0.02" steps="12"/></proof>
  </goal>
 </theory>
 <theory name="Logic_type_padding" sum="d41d8cd98f00b204e9800998ecf8427e" expanded="true">

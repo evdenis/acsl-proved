@@ -2,7 +2,7 @@
 
 TIMEOUT ?= 10
 
-WHYLIB ?= /home/work/.opam/infer-4.02.3/lib/jessie
+WHYLIB ?= /home/work/.opam/4.02.3/lib/jessie
 
 USERWHYTHREEOPT=
 
