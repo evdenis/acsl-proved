@@ -1,0 +1,167 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+tag int_xP = {
+  intP[..] int_xM: 64;
+}
+
+type int_xP = [int_xP]
+
+unit max_max_simplified(intP[..] a, uint32 size_2, int_xP[..] max1,
+                        int_xP[..] max2)
+  requires ((_C_56 : \at((if (\at(0,Here) <=
+                               \at(((size_2 :> integer) - 1),Here)) then 
+                         (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                            (\offset_max(\at(a,Here)) >=
+                              \at(((size_2 :> integer) - 1),Here))) &&
+                           (\forall integer __framac_tmp1;
+                             (((\at(0,Here) <= __framac_tmp1) &&
+                                (__framac_tmp1 <=
+                                  \at(((size_2 :> integer) - 1),Here))) ==>
+                               true))) else true),Here)) &&
+             ((_C_57 : ((_C_58 : \at((((\offset_min(\at(max1,Here)) <=
+                                         \at(0,Here)) &&
+                                        (\offset_max(\at(max1,Here)) >=
+                                          \at(0,Here))) &&
+                                       true),Here)) &&
+                         (_C_59 : \at((((\offset_min(\at(max2,Here)) <=
+                                          \at(0,Here)) &&
+                                         (\offset_max(\at(max2,Here)) >=
+                                           \at(0,Here))) &&
+                                        true),Here)))) &&
+               (_C_60 : ((size_2 :> integer) > 2))));
+behavior default:
+  assigns max1.int_xM,
+  max2.int_xM;
+  ensures (_C_51 : ((_C_52 : (\exists integer i_1;
+                               (\exists integer j_4;
+                                 (((((((0 <= i_1) &&
+                                        (i_1 < (\at(size_2,Old) :> integer))) &&
+                                       (0 <= j_4)) &&
+                                      (j_4 < (\at(size_2,Old) :> integer))) &&
+                                     (i_1 != j_4)) &&
+                                    ((\at(a,Old) + i_1) ==
+                                      \at(max1,Old).int_xM)) &&
+                                   ((\at(a,Old) + j_4) ==
+                                     \at(max2,Old).int_xM))))) &&
+                     ((_C_54 : (\forall integer i_2;
+                                 (((0 <= i_2) &&
+                                    (i_2 < (\at(size_2,Old) :> integer))) ==>
+                                   ((\at(a,Old) + i_2).intM <=
+                                     \at(max1,Old).int_xM.intM)))) &&
+                       (_C_55 : (! (\exists integer i_3;
+                                     (\exists integer j_5;
+                                       ((((((((0 <= i_3) &&
+                                               (i_3 <
+                                                 (\at(size_2,Old) :> integer))) &&
+                                              (0 <= j_5)) &&
+                                             (j_5 <
+                                               (\at(size_2,Old) :> integer))) &&
+                                            (i_3 != j_5)) &&
+                                           ((\at(a,Old) + i_3).intM >
+                                             \at(max2,Old).int_xM.intM)) &&
+                                          ((\at(a,Old) + j_5).intM >
+                                            \at(max2,Old).int_xM.intM)) &&
+                                         ((\at(a,Old) + i_3).intM >
+                                           (\at(a,Old) + j_5).intM)))))))));
+{  
+   (var uint32 i);
+   
+   (var uint32 x);
+   
+   (var uint32 y);
+   
+   {  (if (_C_11 : ((_C_10 : (_C_9 : (a + (0 :> int32))).intM) >
+                     (_C_8 : (_C_7 : (a + (1 :> int32))).intM))) then 
+      {  (_C_4 : (x = (0 :> uint32)));
+         (_C_5 : (y = (1 :> uint32)));
+         (if (_C_6 : ((y :> uint32) != (0 :> uint32))) then () else ())
+      } else 
+      {  (_C_1 : (x = (1 :> uint32)));
+         (_C_2 : (y = (0 :> uint32)));
+         (if (_C_3 : ((y :> uint32) != (0 :> uint32))) then () else ())
+      });
+      (_C_14 : ((_C_13 : max1.int_xM) = (_C_12 : (a + x))));
+      (_C_17 : ((_C_16 : max2.int_xM) = (_C_15 : (a + y))));
+      (_C_18 : (i = (2 :> uint32)));
+      
+      loop 
+      behavior default:
+        invariant (_C_25 : ((_C_26 : (2 <= (i :> integer))) &&
+                             (_C_27 : (i <= size_2))));
+      behavior default:
+        invariant (_C_24 : (\exists integer j_0;
+                             (((0 <= j_0) && (j_0 < (i :> integer))) &&
+                               ((a + j_0) == max1.int_xM))));
+      behavior default:
+        invariant (_C_23 : (\exists integer j_1;
+                             (((0 <= j_1) && (j_1 < (i :> integer))) &&
+                               ((a + j_1) == max2.int_xM))));
+      behavior default:
+        invariant (_C_22 : (max1.int_xM != max2.int_xM));
+      behavior default:
+        invariant (_C_21 : (\forall integer j_2;
+                             (((0 <= j_2) && (j_2 < (i :> integer))) ==>
+                               ((a + j_2).intM <= max1.int_xM.intM))));
+      behavior default:
+        invariant (_C_20 : (! (\exists integer j_3;
+                                (\exists integer k_1;
+                                  ((((((((0 <= j_3) &&
+                                          (j_3 < (i :> integer))) &&
+                                         (0 <= k_1)) &&
+                                        (k_1 < (i :> integer))) &&
+                                       (j_3 != k_1)) &&
+                                      ((a + j_3).intM > max2.int_xM.intM)) &&
+                                     ((a + k_1).intM > max2.int_xM.intM)) &&
+                                    ((a + k_1).intM > (a + j_3).intM))))));
+      behavior default:
+        
+        assigns max1.int_xM,
+        max2.int_xM;
+      variant (_C_19 : ((size_2 :> integer) - (i :> integer)));
+      while (true)
+      {  
+         {  (if (_C_28 : (i < size_2)) then () else 
+            (goto while_0_break));
+            
+            {  (if (_C_47 : ((_C_46 : (_C_45 : (a + i)).intM) >
+                              (_C_44 : (_C_43 : max1.int_xM).intM))) then 
+               {  (_C_39 : ((_C_38 : max2.int_xM) = (_C_37 : max1.int_xM)));
+                  (_C_42 : ((_C_41 : max1.int_xM) = (_C_40 : (a + i))))
+               } else (if (_C_36 : ((_C_35 : (_C_34 : (a + i)).intM) >
+                                     (_C_33 : (_C_32 : max2.int_xM).intM))) then 
+                      (_C_31 : ((_C_30 : max2.int_xM) = (_C_29 : (a + i)))) else ()))
+            };
+            (_C_50 : (i = (_C_49 : ((_C_48 : (i + (1 :> uint32))) :> uint32))))
+         }
+      };
+      (while_0_break : ());
+      
+      (return ())
+   }
+}
