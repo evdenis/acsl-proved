@@ -32,6 +32,26 @@ void swap(int *a, int *b);
 }
 */
 
+/*@
+  logic integer
+    Count{L}(int* a, integer n, int v) = Count{L}(a, 0, n, v);
+
+  lemma CountEmpty:
+    \forall int *a, v, integer n;
+      n <= 0  ==>  Count(a, n, v) == 0;
+
+  lemma CountOneHit:
+    \forall int *a, v, integer n;
+      a[n] == v  ==>  Count(a, n + 1, v) == Count(a, n, v) + 1;
+
+  lemma CountOneMiss:
+    \forall int *a, v, integer n;
+      a[n] != v  ==>  Count(a, n + 1, v) == Count(a, n, v);
+
+  lemma CountRead{L1,L2}:
+    \forall int *a, v, integer n;
+      Unchanged{L1,L2}(a, n)  ==>  Count{L1}(a, n, v) == Count{L2}(a, n, v);
+*/
 
 /*@
    predicate Unchanged{K,L}(int* a, integer first, integer last) =
@@ -46,6 +66,29 @@ void swap(int *a, int *b);
       MultisetUnchanged{L1,L2}(a, 0, n);
 */
 
+
+/*@
+  lemma
+    UnchangedImpliesMultisetUnchanged{L1,L2}:
+      \forall int *a, integer k, n;
+        Unchanged{L1,L2}(a, k, n) ==>
+        MultisetUnchanged{L1,L2}(a, k, n);
+
+  lemma
+    MultisetUnchangedUnion{L1,L2}:
+      \forall int *a, integer k, n;
+        0 <= k <= n                        ==>
+        MultisetUnchanged{L1,L2}(a, 0, k)  ==>
+        MultisetUnchanged{L1,L2}(a, k, n)  ==>
+        MultisetUnchanged{L1,L2}(a, 0, n); 
+
+  lemma
+    MultisetUnchangedTransitive{L1,L2,L3}:
+      \forall int *a, integer n;
+        MultisetUnchanged{L1,L2}(a, n)  ==>
+        MultisetUnchanged{L2,L3}(a, n)  ==>
+        MultisetUnchanged{L1,L3}(a, n);
+*/
 
 /*@ requires \valid(a + (0..n-1));
     assigns a[0..n-1];
