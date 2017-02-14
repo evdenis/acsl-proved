@@ -26,3 +26,17 @@ int max_in_array(int *p, int n)
 
 	return max_idx;
 }
+
+#ifdef OUT_OF_TASK
+
+#include <stdio.h> 
+
+int main(int argc, char **argv)
+{
+   int max[] = {1, 2, 3, 4, 5, -1, -10, 6, 32, 101};
+   int res = max_in_array(max, sizeof(max)/sizeof(int));
+   printf("max: %d\n", max[res]);
+   return 0;
+}
+
+#endif
