@@ -1,0 +1,114 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+axiomatic Sum35 {
+
+  logic integer sum35(integer b)
+   
+  axiom sum35_negative :
+  (_C_1 : (\forall integer i_1;
+            ((i_1 <= 0) ==> (sum35(i_1) == 0))))
+   
+  axiom sum35_iter1 :
+  (_C_2 : (\forall integer b_0;
+            ((((b_0 >= 0) && (((b_0 + 1) % 3) != 0)) &&
+               (((b_0 + 1) % 5) != 0)) ==>
+              (sum35((b_0 + 1)) == sum35(b_0)))))
+   
+  axiom sum35_iter2 :
+  (_C_3 : (\forall integer b_1;
+            (((b_1 >= 0) &&
+               ((((b_1 + 1) % 3) == 0) || (((b_1 + 1) % 5) == 0))) ==>
+              (sum35((b_1 + 1)) == (sum35(b_1) + (b_1 + 1))))))
+   
+  lemma sum35_lower_bound :
+  (_C_4 : (\forall integer bound;
+            ((bound >= 0) ==> (sum35(0) >= 0))))
+   
+  lemma sum35_increases :
+  (_C_5 : (\forall integer b1;
+            (\forall integer b2;
+              (((0 <= b1) && (b1 <= b2)) ==> (sum35(b1) <= sum35(b2))))))
+  
+}
+
+uint32 calc(uint32 bound)
+  requires (_C_27 : ((bound :> integer) <= 10));
+behavior default:
+  assigns \nothing;
+  ensures (_C_26 : ((\result :> integer) ==
+                     sum35(((\at(bound,Old) :> integer) - 1))));
+{  
+   (var uint32 sum);
+   
+   (var uint32 i);
+   
+   {  (_C_6 : (sum = (0 :> uint32)));
+      
+      {  (_C_7 : (i = (1 :> uint32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_12 : (((bound :> integer) != 0) ==>
+                                ((1 <= (i :> integer)) && (i <= bound))));
+         behavior default:
+           invariant (_C_11 : (((bound :> integer) == 0) ==>
+                                (((i :> integer) == 1) &&
+                                  ((sum :> integer) == 0))));
+         behavior default:
+           invariant (_C_10 : ((sum :> integer) <= 4294967295));
+         behavior default:
+           invariant (_C_9 : ((sum :> integer) ==
+                               sum35(((i :> integer) - 1))));
+         behavior default:
+           
+           assigns i,
+           sum;
+         variant (_C_8 : ((bound :> integer) - (i :> integer)));
+         while (true)
+         {  
+            {  (if (_C_13 : (i < bound)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_19 : (! (((_C_18 : ((_C_17 : (i % (3 :> uint32))) :> uint32)) :> uint32) !=
+                                    (0 :> uint32)))) then 
+                  (goto _LOR) else (if (_C_16 : (! (((_C_15 : ((_C_14 : 
+                                                               (i %
+                                                                 (5 :> uint32))) :> uint32)) :> uint32) !=
+                                                     (0 :> uint32)))) then 
+                                   (goto _LOR) else ()));
+                  
+                  (goto _LOR_0);
+                  (_LOR : (_LOR : (_C_22 : (sum = (_C_21 : ((_C_20 : 
+                                                            (sum +
+                                                              i)) :> uint32))))));
+                  (_LOR_0 : ())
+               };
+               (_C_25 : (i = (_C_24 : ((_C_23 : (i + (1 :> uint32))) :> uint32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      (return sum)
+   }
+}

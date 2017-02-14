@@ -1,0 +1,132 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+unit max_min_in_array_odd_even(intP[..] a, int32 size_2, intP[..] max,
+                               intP[..] min)
+  requires ((_C_48 : (size_2 >= (2 :> int32))) &&
+             ((_C_49 : \at((if (\at(0,Here) <=
+                                 \at(((size_2 :> integer) - 1),Here)) then 
+                           (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                              (\offset_max(\at(a,Here)) >=
+                                \at(((size_2 :> integer) - 1),Here))) &&
+                             (\forall integer __framac_tmp1;
+                               (((\at(0,Here) <= __framac_tmp1) &&
+                                  (__framac_tmp1 <=
+                                    \at(((size_2 :> integer) - 1),Here))) ==>
+                                 true))) else true),Here)) &&
+               ((_C_50 : \at((((\offset_min(\at(max,Here)) <= \at(0,Here)) &&
+                                (\offset_max(\at(max,Here)) >= \at(0,Here))) &&
+                               true),Here)) &&
+                 ((_C_51 : \at((((\offset_min(\at(min,Here)) <= \at(0,Here)) &&
+                                  (\offset_max(\at(min,Here)) >= \at(0,Here))) &&
+                                 true),Here)) &&
+                   (_C_52 : (max != min))))));
+behavior default:
+  assigns max.intM,
+  min.intM;
+  ensures (_C_39 : (((_C_41 : ((0 :> int32) <= \at(max,Old).intM)) &&
+                      (_C_42 : (\at(max,Old).intM < \at(size_2,Old)))) &&
+                     ((_C_44 : ((0 :> int32) <= \at(min,Old).intM)) &&
+                       (_C_45 : (\at(min,Old).intM < \at(size_2,Old))))));
+behavior max:
+  ensures (_C_46 : (\forall integer i_2;
+                     ((((0 <= i_2) && (i_2 < (\at(size_2,Old) :> integer))) &&
+                        ((i_2 % 2) == 0)) ==>
+                       ((\at(a,Old) + i_2).intM <=
+                         (\at(a,Old) + (\at(max,Old).intM :> integer)).intM))));
+behavior min:
+  ensures (_C_47 : (\forall integer i_1;
+                     ((((0 <= i_1) && (i_1 < (\at(size_2,Old) :> integer))) &&
+                        ((i_1 % 2) == 1)) ==>
+                       ((\at(a,Old) + (\at(min,Old).intM :> integer)).intM <=
+                         (\at(a,Old) + i_1).intM))));
+{  
+   (var int32 mx);
+   
+   (var int32 mn);
+   
+   (var int32 i);
+   
+   {  (_C_1 : (mx = (0 :> int32)));
+      (_C_2 : (mn = (1 :> int32)));
+      
+      {  (_C_3 : (i = (2 :> int32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_13 : ((_C_14 : ((2 :> int32) <= i)) &&
+                                (_C_15 : (i <= size_2))));
+         behavior default:
+           invariant (_C_10 : ((_C_11 : ((0 :> int32) <= mx)) &&
+                                (_C_12 : (mx < size_2))));
+         behavior default:
+           invariant (_C_7 : ((_C_8 : ((1 :> int32) <= mn)) &&
+                               (_C_9 : (mn < size_2))));
+         behavior max:
+           invariant (_C_6 : (\forall integer j_0;
+                               ((((0 <= j_0) && (j_0 < (i :> integer))) &&
+                                  ((j_0 % 2) == 0)) ==>
+                                 ((a + j_0).intM <=
+                                   (a + (mx :> integer)).intM))));
+         behavior min:
+           invariant (_C_5 : (\forall integer j_1;
+                               ((((0 <= j_1) && (j_1 < (i :> integer))) &&
+                                  ((j_1 % 2) == 1)) ==>
+                                 ((a + (mn :> integer)).intM <=
+                                   (a + j_1).intM))));
+         variant (_C_4 : ((size_2 :> integer) - (i :> integer)));
+         while (true)
+         {  
+            {  (if (_C_16 : (i < size_2)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_31 : (((_C_30 : ((_C_29 : (i % (2 :> int32))) :> int32)) :> int32) !=
+                                 (0 :> int32))) then (if (_C_28 : ((_C_27 : 
+                                                                   (_C_26 : 
+                                                                   (a +
+                                                                    mn)).intM) >
+                                                                    (_C_25 : 
+                                                                    (_C_24 : 
+                                                                    (a +
+                                                                    i)).intM))) then 
+                                                     (_C_23 : (mn = i)) else ()) else 
+                  (if (_C_22 : ((_C_21 : (_C_20 : (a + mx)).intM) <
+                                 (_C_19 : (_C_18 : (a + i)).intM))) then 
+                  (_C_17 : (mx = i)) else ()))
+               };
+               (_C_34 : (i = (_C_33 : ((_C_32 : (i + (1 :> int32))) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      (_C_36 : ((_C_35 : max.intM) = mx));
+      (_C_38 : ((_C_37 : min.intM) = mn));
+      
+      (return ())
+   }
+}

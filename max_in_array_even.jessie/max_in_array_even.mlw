@@ -1658,50 +1658,138 @@ module Root_unsigned_charP_unsafe
   
 end
 
-theory Axiomatic_Sum
+module Root_intP_safe
 
+  use why3.Bool.Bool 
+  
+end
+
+module Root_intP_unsafe
+
+  use why3.Bool.Bool 
+  
+end
+
+theory Root_intP
+
+  use why3.Bool.Bool 
+  
+  type intP 
+  
+end
+
+theory Struct_intP
+
+  use import Root_intP 
+  
+  use import ref.Ref 
+  
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_tag_table 
+  
+  use import core.Jessie_tag_id 
+  
+  use import core.Jessie_tag 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_allocable 
+  
+  use import core.Jessie_alloc_table 
+  
+  use import core.Jessie_alloc 
+  
   use import int.Int 
   
   use why3.Bool.Bool 
   
-  function sum int int : int
+  function intP_tag  : (tag_id intP)
   
-  axiom Sum_init #"/home/work/workspace/education/acsl-exam/./sum.c" 5 7 76#
-  "expl:Axiom sum_init" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 5 7 76#
-  (forall a_0_0 : int.
-   (forall b_0_0 : int.
-    ((((>=) a_0_0 (0)) /\ (((>=) b_0_0 (0)) /\ ((<=) b_0_0 a_0_0))) ->
-     ((=) (sum a_0_0 b_0_0) a_0_0)))))
+  axiom IntP_parenttag_bottom :
+  (parenttag intP_tag bottom_tag)
   
-  axiom Sum_step_dec
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 8 7 91#
-  "expl:Axiom sum_step_dec" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 8 7 91#
-  (forall a_1 : int.
-   (forall b_1 : int.
-    ((((>=) a_1 (0)) /\ (((>=) b_1 (0)) /\ ((>) b_1 a_1))) ->
-     ((=) (sum a_1 b_1) (Int.(+) (sum a_1 (Int.(-) b_1 (1))) b_1))))))
+  axiom IntP_is_final :
+  (forall intP_tag_table : (tag_table intP).
+   (forall p : (pointer intP).
+    ((instanceof intP_tag_table p intP_tag) ->
+     ((=) (typeof intP_tag_table p) intP_tag))))
   
-  lemma Sum_lower_bound
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 11 7 64#
-  "expl:Lemma sum_lower_bound" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 11 7 64#
-  (forall a_2 : int.
-   (forall b_2 : int.
-    ((((>=) a_2 (0)) /\ ((>=) b_2 (0))) -> ((>=) (sum a_2 b_2) a_2)))))
+  predicate frame_tag_struct_intP (p : (pointer intP)) (old_intP_tag_table :
+  (tag_table intP)) (intP_tag_table : (tag_table intP))
+  =
+     ((tag_extends old_intP_tag_table intP_tag_table) /\
+     (alloc_tag_block old_intP_tag_table intP_tag_table p))
   
-  lemma Sum_increases
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 14 7 101#
-  "expl:Lemma sum_increases" :
-  (#"/home/work/workspace/education/acsl-exam/./sum.c" 14 7 101#
-  (forall i_1 : int.
-   (forall a_3 : int.
-    (forall b_3 : int.
-     ((((>=) a_3 (0)) /\
-      (((>=) b_3 (0)) /\
-      (((>) b_3 a_3) /\ (((<=) a_3 i_1) /\ ((<=) i_1 b_3))))) ->
-      ((<=) (sum a_3 i_1) (sum a_3 b_3)))))))
+  predicate frame_free_struct_intP (p : (pointer intP)) (old_intP_alloc_table
+  : (alloc_table intP)) (intP_alloc_table : (alloc_table intP))
+  =
+     ((free_extends old_intP_alloc_table intP_alloc_table) /\
+     (free_block old_intP_alloc_table intP_alloc_table p))
+  
+  predicate frame_alloc_struct_intP (p : (pointer intP)) (n : int)
+  (old_intP_alloc_table : (alloc_table intP)) (intP_alloc_table :
+  (alloc_table intP))
+  =
+     ((alloc_extends old_intP_alloc_table intP_alloc_table) /\
+     (alloc_block old_intP_alloc_table intP_alloc_table p n))
+  
+  predicate fresh_tag_struct_intP (p : (pointer intP)) (intP_tag_table :
+  (tag_table intP)) = (tag_fresh intP_tag_table p)
+  
+  predicate fresh_alloc_struct_intP (p : (pointer intP)) (intP_alloc_table :
+  (alloc_table intP)) = (alloc_fresh intP_alloc_table p)
+  
+  predicate container_of_singleton_struct_intP (p : (pointer intP))
+  (intP_tag_table : (tag_table intP)) = true
+  
+  predicate container_of_struct_intP (p : (pointer intP)) (l : int) (r : int)
+  (intP_tag_table : (tag_table intP)) = true
+  
+  predicate typeof_singleton_struct_intP (p : (pointer intP)) (intP_tag_table
+  : (tag_table intP)) = ((=) (typeof intP_tag_table p) intP_tag)
+  
+  predicate typeof_struct_intP (p : (pointer intP)) (l : int) (r : int)
+  (intP_tag_table : (tag_table intP))
+  =
+     (((=) (typeof intP_tag_table p) intP_tag) /\
+     (forall i : int.
+      ((((<=) l i) /\ ((<) i r)) ->
+       ((=) (typeof intP_tag_table (shift p i)) intP_tag))))
+  
+  predicate instanceof_singleton_struct_intP (p : (pointer intP))
+  (intP_tag_table : (tag_table intP))
+  = (instanceof intP_tag_table p intP_tag)
+  
+  predicate instanceof_struct_intP (p : (pointer intP)) (l : int) (r : int)
+  (intP_tag_table : (tag_table intP))
+  =
+     ((instanceof intP_tag_table p intP_tag) /\
+     (forall i : int.
+      ((((<=) l i) /\ ((<) i r)) ->
+       (instanceof intP_tag_table (shift p i) intP_tag))))
+  
+  predicate right_valid_struct_intP (p : (pointer intP)) (b : int)
+  (intP_alloc_table : (alloc_table intP))
+  = ((>=) (offset_max intP_alloc_table p) b)
+  
+  predicate left_valid_struct_intP (p : (pointer intP)) (a : int)
+  (intP_alloc_table : (alloc_table intP))
+  = ((<=) (offset_min intP_alloc_table p) a)
+  
+  predicate valid_struct_intP (p : (pointer intP)) (a : int) (b : int)
+  (intP_alloc_table : (alloc_table intP))
+  =
+     (((<=) (offset_min intP_alloc_table p) a) /\
+     ((>=) (offset_max intP_alloc_table p) b))
+  
+  predicate strict_valid_struct_intP (p : (pointer intP)) (a : int) (b : int)
+  (intP_alloc_table : (alloc_table intP))
+  =
+     (((=) (offset_min intP_alloc_table p) a) /\
+     ((=) (offset_max intP_alloc_table p) b))
+  
+  axiom IntP_int : ((=) (int_of_tag intP_tag) (4))
   
 end
 
@@ -1719,13 +1807,31 @@ module Exceptions
   
 end
 
-module Function_sum_0_safety
+module Function_max_in_array_even_safety
 
+  use import Struct_intP 
+  
   use Safe_int32 
+  
+  use import Root_intP 
   
   use import ref.Ref 
   
+  use import core.Jessie_tag_table_type 
+  
   use import core.Jessie_return 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_memory 
+  
+  use import core.Jessie_allocable 
+  
+  use import core.Jessie_alloc_table 
+  
+  use import core.Jessie_acc_safe 
+  
+  use import core.Jessie_acc_offset_safe 
   
   use enum.Int32 
   
@@ -1733,123 +1839,210 @@ module Function_sum_0_safety
   
   use import Exceptions 
   
-  use import Axiomatic_Sum 
+  use int.ComputerDivision 
   
   use why3.Bool.Bool 
   
-  let sum_0 #"/home/work/workspace/education/acsl-exam/./sum.c" 26 4 21#
-  "expl:Function sum, safety" =
-  fun (a_0 : Int32.t) (b_0 : Int32.t) 
+  let max_in_array_even
+  #"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 18 4 39#
+  "expl:Function max_in_array_even, safety" =
+  fun
+   (a : (pointer intP)) (size_2 : Int32.t) (intP_a_2_alloc_table :
+   (alloc_table intP)) (intP_a_2_tag_table : (tag_table intP)) (intP_intM_a_2
+   : (memory intP Int32.t)) 
    requires {
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
-    (Int32.(<) a_0 b_0))
+   (((allocated intP_a_2_alloc_table a) ->
+     (((=) (typeof intP_a_2_tag_table a) intP_tag) /\
+     (forall i : int.
+      ((((<=) (offset_min intP_a_2_alloc_table a) i) /\
+       ((<) i (offset_max intP_a_2_alloc_table a))) ->
+       ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
-    (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
-    (0)))))
+   (#"max_in_array_even.jc" 30 12 774#
+   ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 11 13 21#
+    (Int32.(>) size_2 (#"max_in_array_even.jc" 30 31 43# "expl:Integer cast"
+    (Int32.of_int (0)))))
    /\
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
-    (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
-    (0)))))
+   (#"max_in_array_even.jc" 30 12 774#
+   ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 12 13 35#
+    ((<=) (Int32.to_int size_2) (Int.(-) (2147483647) (1))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
-   ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767))))))))) }
+   (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 13 13 38#
+   (if ((<=) (0) (Int.(-) (Int32.to_int size_2) (1))) then
+    (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
+    (((>=) (offset_max intP_a_2_alloc_table a)
+     (Int.(-) (Int32.to_int size_2) (1)))
+    /\
+    (forall __framac_tmp1 : int.
+     ((((<=) (0) __framac_tmp1) /\
+      ((<=) __framac_tmp1 (Int.(-) (Int32.to_int size_2) (1)))) ->
+      ((=) true true))))) else ((=) true true)))))))) }
    ensures { ("expl:Postcondition" true) }  ->
    'Init:
    (let return = ref (Safe_int32.any_  () ) in
    try
     begin
+    (let j = ref (Safe_int32.any_  () ) in
+    (let max = ref (Safe_int32.any_  () ) in
     (let i = ref (Safe_int32.any_  () ) in
-    (let sum_0_0 = ref (Safe_int32.any_  () ) in
-    try
+    begin
+    (j :=
+     (let _jessie_11 =
+     (#"max_in_array_even.jc" 59 19 31# "expl:Integer cast"
+     (Safe_int32.of_int (0))) in
      begin
-     (sum_0_0 :=
-      (let _jessie_12 = a_0 in
+     (assert {
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 20 3 6#
+     "expl:Pointer index bounds" true) }); _jessie_11 end));
+     begin
+     (max :=
+      (let _jessie_12 =
+      (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 21 13 17#
+      "expl:Pointer dereference"
+      (acc  intP_a_2_alloc_table intP_intM_a_2 a )) in
       begin
       (assert {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 29 3 6#
+      (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 21 3 6#
       "expl:Pointer index bounds" true) }); _jessie_12 end));
-      begin
-      (i :=
-       (let _jessie_9 =
-       (Safe_int32.(+)  a_0
-        (#"sum.jc" 70 41 53# "expl:Integer cast" (Safe_int32.of_int (1))) )
-       in
+      try
        begin
-       (assert {
-       (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 7 16#
-       "expl:Pointer index bounds" true) }); _jessie_9 end));
-       'Loop_2:
-       loop
-       invariant { (#"sum.jc" 72 6 699# true) }
-         variant {
-           (#"/home/work/workspace/education/acsl-exam/./sum.c" 34 20 25#
-           (Int.(-) (Int32.to_int b_0) (Int32.to_int !i))) }
+       (i :=
+        (let _jessie_13 =
+        (#"max_in_array_even.jc" 62 22 34# "expl:Integer cast"
+        (Safe_int32.of_int (2))) in
         begin
-        any unit
-        requires { true } reads { a_0, b_0 }
-        ensures {
-          ((#"/home/work/workspace/education/acsl-exam/./sum.c" 32 22 42#
-           ((=) (Int32.to_int !sum_0_0)
-           (sum (Int32.to_int a_0) (Int.(-) (Int32.to_int !i) (1)))))
-          /\
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-          ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 27#
-           (Int32.(<) a_0 !i))
-          /\
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 26 36#
-          ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int b_0) (1)))))))) } ;
-         try
-          begin
-          begin
-          (if
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 18 24#
-          (Safe_int32.(<=)  !i b_0 )) then ()
-          else (raise (Goto_while_0_break_exc ())));
+        (assert {
+        (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 30 7 10#
+        "expl:Pointer index bounds" true) }); _jessie_13 end));
+        'Loop_2:
+        loop
+        invariant { (#"max_in_array_even.jc" 64 9 1471# true) }
+          variant {
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 28 20 28#
+            (Int.(-) (Int32.to_int size_2) (Int32.to_int !i))) }
+         begin
+         any unit
+         requires { true } reads { a, size_2 }
+         ensures {
+           ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 27 22 85#
+            (forall k_1 : int.
+             ((((<=) (0) k_1) /\
+              (((<) k_1 (Int32.to_int !i)) /\
+              ((=) (ComputerDivision.mod k_1 (2)) (0)))) ->
+              (Int32.(<=) (select intP_intM_a_2 (shift a k_1)) !max))))
+           /\
+           ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 26 22 33#
+            (Int32.(=) !max
+            (select intP_intM_a_2 (shift a (Int32.to_int !j)))))
+           /\
+           ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 46#
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 46#
+            ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 32#
+             ((=) (ComputerDivision.mod (Int32.to_int !i) (2)) (0)))
+            /\
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 36 46#
+            ((=) (ComputerDivision.mod (Int32.to_int !j) (2)) (0))))))
+           /\
+           ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 32#
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 32#
+            ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 28#
+             (Int32.(<=) (#"max_in_array_even.jc" 70 41 53#
+             "expl:Integer cast" (Int32.of_int (0))) !j))
+            /\
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 27 32#
+            (Int32.(<) !j !i)))))
+           /\
+           (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 40#
+           (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 40#
+           ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 28#
+            (Int32.(<=) (#"max_in_array_even.jc" 66 41 53#
+            "expl:Integer cast" (Int32.of_int (2))) !i))
+           /\
+           (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 27 40#
+           ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int size_2) (1)))))))))))
+           } ;
+          try
            begin
-           (sum_0_0 :=
-            (let _jessie_10 = (Safe_int32.(+)  !sum_0_0 !i ) in
-            begin
-            (assert {
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 37 6 14#
-            "expl:Pointer index bounds" true) }); _jessie_10 end));
+           begin
+           (if
+           (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 30 18 26#
+           (Safe_int32.(<)  !i size_2 )) then ()
+           else (raise (Goto_while_0_break_exc ())));
+            (if
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 31 10 20#
+            (Safe_int32.(<)  !max
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 31 16 20#
+             "expl:Pointer dereference"
+             (acc_offset_typesafe  intP_a_2_alloc_table intP_intM_a_2 a
+              (Safe_int32.to_int  !i ) )) ))
+            then
+             begin
+             (j :=
+              (let _jessie_14 = !i in
+              begin
+              (assert {
+              (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 32 9 14#
+              "expl:Pointer index bounds" true) }); _jessie_14 end));
+              (max :=
+               (let _jessie_15 =
+               (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 33 15 19#
+               "expl:Pointer dereference"
+               (acc_offset_typesafe  intP_a_2_alloc_table intP_intM_a_2 a
+                (Safe_int32.to_int  !i ) )) in
+               begin
+               (assert {
+               (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 33 9 19#
+               "expl:Pointer index bounds" true) }); _jessie_15 end)) end
+            else ());
             (i :=
-             (let _jessie_11 =
+             (let _jessie_16 =
              (Safe_int32.(+)  !i
-              (#"sum.jc" 86 50 62# "expl:Integer cast"
-              (Safe_int32.of_int (1))) ) in
+              (#"max_in_array_even.jc" 93 53 65# "expl:Integer cast"
+              (Safe_int32.of_int (2))) ) in
              begin
              (assert {
-             (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 26 29#
-             "expl:Pointer index bounds" true) }); _jessie_11 end)) end end;
-           (raise (Loop_continue_exc ())) end with Loop_continue_exc
-          _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
-      end end with Goto_while_0_break_exc _jessie_1 ->
-     'While_0_break:
-     'While_0_break:
-     begin
-     ();
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 30 28 34#
+             "expl:Pointer index bounds" true) }); _jessie_16 end)) end;
+            (raise (Loop_continue_exc ())) end with Loop_continue_exc
+           _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
+       end with Goto_while_0_break_exc _jessie_1 ->
+       'While_0_break: 'While_0_break: () end;
       begin
       (return :=
-       (let _jessie_13 = !sum_0_0 in
+       (let _jessie_17 = !j in
        begin
-       (assert { (#"sum.jc" 91 7 19# "expl:Pointer index bounds" true) });
-        _jessie_13 end)); (raise Return) end end end)); absurd  end with
+       (assert {
+       (#"max_in_array_even.jc" 99 7 15# "expl:Pointer index bounds" true) });
+        _jessie_17 end)); (raise Return) end end end))); absurd  end with
     Return -> !return end)
   
 end
 
-module Function_sum_0_behaviors
+module Function_max_in_array_even_behaviors
 
   use Unsafe_int32 
   
+  use import Struct_intP 
+  
+  use import Root_intP 
+  
   use import ref.Ref 
   
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_shift_unsafe 
+  
   use import core.Jessie_return 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_memory 
+  
+  use import core.Jessie_allocable 
+  
+  use import core.Jessie_alloc_table 
+  
+  use import core.Jessie_acc_unsafe 
   
   use enum.Int32 
   
@@ -1857,87 +2050,167 @@ module Function_sum_0_behaviors
   
   use import Exceptions 
   
-  use import Axiomatic_Sum 
+  use int.ComputerDivision 
   
   use why3.Bool.Bool 
   
-  let sum_ensures_default
-  #"/home/work/workspace/education/acsl-exam/./sum.c" 26 4 21#
-  "expl:Function sum, default behavior" =
-  fun (a_0 : Int32.t) (b_0 : Int32.t) 
+  let max_in_array_even_ensures_default
+  #"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 18 4 39#
+  "expl:Function max_in_array_even, default behavior" =
+  fun
+   (a : (pointer intP)) (size_2 : Int32.t) (intP_a_2_alloc_table :
+   (alloc_table intP)) (intP_a_2_tag_table : (tag_table intP)) (intP_intM_a_2
+   : (memory intP Int32.t)) 
    requires {
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
-    (Int32.(<) a_0 b_0))
+   (((allocated intP_a_2_alloc_table a) ->
+     (((=) (typeof intP_a_2_tag_table a) intP_tag) /\
+     (forall i : int.
+      ((((<=) (offset_min intP_a_2_alloc_table a) i) /\
+       ((<) i (offset_max intP_a_2_alloc_table a))) ->
+       ((=) (typeof intP_a_2_tag_table (shift a i)) intP_tag)))))
    /\
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
-    (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
-    (0)))))
+   (#"max_in_array_even.jc" 30 12 774#
+   ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 11 13 21#
+    (Int32.(>) size_2 (#"max_in_array_even.jc" 30 31 43# "expl:Integer cast"
+    (Int32.of_int (0)))))
    /\
-   (#"sum.jc" 56 12 221#
-   ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
-    (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
-    (0)))))
+   (#"max_in_array_even.jc" 30 12 774#
+   ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 12 13 35#
+    ((<=) (Int32.to_int size_2) (Int.(-) (2147483647) (1))))
    /\
-   (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
-   ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767))))))))) }
+   (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 13 13 38#
+   (if ((<=) (0) (Int.(-) (Int32.to_int size_2) (1))) then
+    (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
+    (((>=) (offset_max intP_a_2_alloc_table a)
+     (Int.(-) (Int32.to_int size_2) (1)))
+    /\
+    (forall __framac_tmp1 : int.
+     ((((<=) (0) __framac_tmp1) /\
+      ((<=) __framac_tmp1 (Int.(-) (Int32.to_int size_2) (1)))) ->
+      ((=) true true))))) else ((=) true true)))))))) }
    ensures {
      ("expl:Postcondition"
-     (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
      "expl:Ensures clause"
-     ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0)))))
-     } diverges  ->
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 24#
+      "expl:Ensures clause"
+      (Int32.(<=) (#"max_in_array_even.jc" 43 31 43# "expl:Integer cast"
+      (Int32.of_int (0))) result))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 17 31#
+      "expl:Ensures clause" (Int32.(<) result size_2))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+     "expl:Ensures clause"
+     ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 15 12 28#
+      "expl:Ensures clause"
+      ((=) (ComputerDivision.mod (Int32.to_int result) (2)) (0)))
+     /\
+     (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 16 12 85#
+     "expl:Ensures clause"
+     (forall i_1 : int.
+      ((((<=) (0) i_1) /\
+       (((<) i_1 (Int32.to_int size_2)) /\
+       ((=) (ComputerDivision.mod i_1 (2)) (0)))) ->
+       (Int32.(<=) (select intP_intM_a_2 (shift a i_1))
+       (select intP_intM_a_2 (shift a (Int32.to_int result))))))))))))))) }
+   diverges  ->
    'Init:
    (let return = ref (Unsafe_int32.any_  () ) in
    try
     begin
+    (let j = ref (Unsafe_int32.any_  () ) in
+    (let max = ref (Unsafe_int32.any_  () ) in
     (let i = ref (Unsafe_int32.any_  () ) in
-    (let sum_0_0 = ref (Unsafe_int32.any_  () ) in
-    try
+    begin
+    (j :=
+     (#"max_in_array_even.jc" 59 19 31# "expl:Integer cast"
+     (Unsafe_int32.of_int (0))));
      begin
-     (sum_0_0 := a_0);
-      begin
-      (i :=
-       (Unsafe_int32.(+)  a_0
-        (#"sum.jc" 70 41 53# "expl:Integer cast" (Unsafe_int32.of_int (1))) ));
-       'Loop_1:
-       loop
-       invariant
-         { ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 36#
-            ((#"/home/work/workspace/education/acsl-exam/./sum.c" 31 22 27#
-             (Int32.(<) a_0 !i))
-            /\
-            (#"/home/work/workspace/education/acsl-exam/./sum.c" 31 26 36#
-            ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int b_0) (1)))))))
-           &&
-           (#"/home/work/workspace/education/acsl-exam/./sum.c" 32 22 42#
-           ((=) (Int32.to_int !sum_0_0)
-           (sum (Int32.to_int a_0) (Int.(-) (Int32.to_int !i) (1)))))) } 
-         
-        begin
-        any unit requires { true } ensures { true } ;
-         try
-          begin
-          begin
-          (if
-          (#"/home/work/workspace/education/acsl-exam/./sum.c" 36 18 24#
-          (Unsafe_int32.(<=)  !i b_0 )) then ()
-          else (raise (Goto_while_0_break_exc ())));
+     (max :=
+      (acc  intP_intM_a_2
+       (shift_  a
+        (Unsafe_int32.to_int 
+         (#"max_in_array_even.jc" 60 42 54# "expl:Integer cast"
+         (Unsafe_int32.of_int (0))) ) ) ));
+      try
+       begin
+       (i :=
+        (#"max_in_array_even.jc" 62 22 34# "expl:Integer cast"
+        (Unsafe_int32.of_int (2))));
+        'Loop_1:
+        loop
+        invariant
+          { ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 40#
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 40#
+             ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 22 28#
+              (Int32.(<=) (#"max_in_array_even.jc" 66 41 53#
+              "expl:Integer cast" (Int32.of_int (2))) !i))
+             /\
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 23 27 40#
+             ((<=) (Int32.to_int !i) (Int.(+) (Int32.to_int size_2) (1)))))))
+            &&
+            ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 32#
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 32#
+             ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 22 28#
+              (Int32.(<=) (#"max_in_array_even.jc" 70 41 53#
+              "expl:Integer cast" (Int32.of_int (0))) !j))
+             /\
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 24 27 32#
+             (Int32.(<) !j !i)))))
+            &&
+            ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 46#
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 46#
+             ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 22 32#
+              ((=) (ComputerDivision.mod (Int32.to_int !i) (2)) (0)))
+             /\
+             (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 25 36 46#
+             ((=) (ComputerDivision.mod (Int32.to_int !j) (2)) (0))))))
+            &&
+            ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 26 22 33#
+             (Int32.(=) !max
+             (select intP_intM_a_2 (shift a (Int32.to_int !j)))))
+            &&
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 27 22 85#
+            (forall k_1 : int.
+             ((((<=) (0) k_1) /\
+              (((<) k_1 (Int32.to_int !i)) /\
+              ((=) (ComputerDivision.mod k_1 (2)) (0)))) ->
+              (Int32.(<=) (select intP_intM_a_2 (shift a k_1)) !max)))))))) } 
+          
+         begin
+         any unit requires { true } ensures { true } ;
+          try
            begin
-           (sum_0_0 := (Unsafe_int32.(+)  !sum_0_0 !i ));
+           begin
+           (if
+           (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 30 18 26#
+           (Unsafe_int32.(<)  !i size_2 )) then ()
+           else (raise (Goto_while_0_break_exc ())));
+            (if
+            (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 31 10 20#
+            (Unsafe_int32.(<)  !max
+             (acc  intP_intM_a_2 (shift_  a (Unsafe_int32.to_int  !i ) ) ) ))
+            then
+             begin
+             (j := !i);
+              (max :=
+               (acc  intP_intM_a_2 (shift_  a (Unsafe_int32.to_int  !i ) ) ))
+             end else ());
             (i :=
              (Unsafe_int32.(+)  !i
-              (#"sum.jc" 86 50 62# "expl:Integer cast"
-              (Unsafe_int32.of_int (1))) )) end end;
-           (raise (Loop_continue_exc ())) end with Loop_continue_exc
-          _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
-      end end with Goto_while_0_break_exc _jessie_1 ->
-     'While_0_break:
-     'While_0_break:
-     begin (); begin (return := !sum_0_0); (raise Return) end end end));
-     absurd  end with Return -> !return end)
+              (#"max_in_array_even.jc" 93 53 65# "expl:Integer cast"
+              (Unsafe_int32.of_int (2))) )) end;
+            (raise (Loop_continue_exc ())) end with Loop_continue_exc
+           _jessie_3 -> () end end end; (raise (Goto_while_0_break_exc ()))
+       end with Goto_while_0_break_exc _jessie_1 ->
+       'While_0_break: 'While_0_break: () end;
+      begin (return := !j); (raise Return) end end end))); absurd  end with
+    Return -> !return end)
   
 end
 
@@ -2270,6 +2543,123 @@ module Struct_charP_safe
   
 end
 
+module Struct_intP_unsafe
+
+  use import Struct_intP 
+  
+  use import Root_intP 
+  
+  use import ref.Ref 
+  
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_allocable 
+  
+  use import core.Jessie_alloc_table 
+  
+  use import int.Int 
+  
+  use why3.Bool.Bool 
+  
+  val free_struct_intP
+  (p : (pointer intP)) 
+   (intP_alloc_table : ref (alloc_table intP)) : unit
+    requires {
+      (("expl:Deallocation" ((=) p null)) \/ (freeable !intP_alloc_table p))
+      }
+    writes { intP_alloc_table }
+    ensures {
+      ((((=) p null) /\ ((=) !intP_alloc_table (old !intP_alloc_table))) \/
+      ((frame_free_struct_intP p (old !intP_alloc_table) !intP_alloc_table)
+      /\ (fresh_alloc_struct_intP p !intP_alloc_table))) }
+  
+  val allocate_struct_intP_requires
+  (n : int) 
+   (intP_alloc_table : ref (alloc_table intP)) 
+    (intP_tag_table : ref (tag_table intP)) : (pointer intP)
+     requires { ((>=) n (0)) } writes { intP_alloc_table, intP_tag_table }
+     ensures {
+       ((strict_valid_struct_intP result (0) (Int.(-) n (1))
+        !intP_alloc_table)
+       /\
+       ((frame_alloc_struct_intP result n (old !intP_alloc_table)
+        !intP_alloc_table)
+       /\
+       ((frame_tag_struct_intP result (old !intP_tag_table) !intP_tag_table)
+       /\
+       ((fresh_alloc_struct_intP result (old !intP_alloc_table)) /\
+       ((fresh_tag_struct_intP result (old !intP_tag_table)) /\
+       ((typeof_struct_intP result (0) n !intP_tag_table) /\
+       (container_of_struct_intP result (0) n !intP_tag_table))))))) }
+  
+end
+
+module Struct_intP_safe
+
+  use import Struct_intP 
+  
+  use import Root_intP 
+  
+  use import ref.Ref 
+  
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_alloc_table 
+  
+  use int.Int 
+  
+  use why3.Bool.Bool 
+  
+  val safe_free_struct_intP
+  (p : (pointer intP)) 
+   (intP_alloc_table : ref (alloc_table intP)) : unit
+    requires { true } writes { intP_alloc_table }
+    ensures {
+      ((((=) p null) /\ ((=) !intP_alloc_table (old !intP_alloc_table))) \/
+      ((frame_free_struct_intP p (old !intP_alloc_table) !intP_alloc_table)
+      /\ (fresh_alloc_struct_intP p !intP_alloc_table))) }
+  
+  val allocate_struct_intP
+  (n : int) 
+   (intP_alloc_table : ref (alloc_table intP)) 
+    (intP_tag_table : ref (tag_table intP)) : (pointer intP)
+     requires { true } writes { intP_alloc_table, intP_tag_table }
+     ensures {
+       ((strict_valid_struct_intP result (0) (Int.(-) n (1))
+        !intP_alloc_table)
+       /\
+       ((frame_alloc_struct_intP result n (old !intP_alloc_table)
+        !intP_alloc_table)
+       /\
+       ((frame_tag_struct_intP result (old !intP_tag_table) !intP_tag_table)
+       /\
+       ((fresh_alloc_struct_intP result (old !intP_alloc_table)) /\
+       ((fresh_tag_struct_intP result (old !intP_tag_table)) /\
+       ((typeof_struct_intP result (0) n !intP_tag_table) /\
+       (container_of_struct_intP result (0) n !intP_tag_table))))))) }
+  
+  val allocate_singleton_struct_intP
+  (intP_alloc_table : ref (alloc_table intP)) 
+   (intP_tag_table : ref (tag_table intP)) : (pointer intP)
+    requires { true } writes { intP_alloc_table, intP_tag_table }
+    ensures {
+      ((strict_valid_struct_intP result (0) (0) !intP_alloc_table) /\
+      ((frame_alloc_struct_intP result (1) (old !intP_alloc_table)
+       !intP_alloc_table)
+      /\
+      ((frame_tag_struct_intP result (old !intP_tag_table) !intP_tag_table)
+      /\
+      ((fresh_alloc_struct_intP result (old !intP_alloc_table)) /\
+      ((fresh_tag_struct_intP result (old !intP_tag_table)) /\
+      ((typeof_singleton_struct_intP result !intP_tag_table) /\
+      (container_of_singleton_struct_intP result !intP_tag_table))))))) }
+  
+end
+
 theory Root_unsigned_charP
 
   use why3.Bool.Bool 
@@ -2403,7 +2793,7 @@ theory Struct_unsigned_charP
      (((=) (offset_min unsigned_charP_alloc_table p) a) /\
      ((=) (offset_max unsigned_charP_alloc_table p) b))
   
-  axiom Unsigned_charP_int : ((=) (int_of_tag unsigned_charP_tag) (4))
+  axiom Unsigned_charP_int : ((=) (int_of_tag unsigned_charP_tag) (5))
   
 end
 
@@ -7541,66 +7931,147 @@ module Unsafe_int32_of_Unsafe_int16
   
 end
 
-module Function_sum_0
+module Function_max_in_array_even
 
+  use import Root_intP 
+  
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_memory 
+  
+  use import core.Jessie_alloc_table 
+  
   use enum.Int32 
   
   use import int.Int 
   
-  use import Axiomatic_Sum 
+  use int.ComputerDivision 
   
   use why3.Bool.Bool 
   
-  val sum_0
-  (a_0 : Int32.t) 
-   (b_0 : Int32.t) : Int32.t
-    requires { true }
-    ensures {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
-      "expl:Ensures clause"
-      ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0))))
-      }
+  val max_in_array_even
+  (a : (pointer intP)) 
+   (size_2 : Int32.t) 
+    (intP_a_2_alloc_table : (alloc_table intP)) 
+     (intP_a_2_tag_table : (tag_table intP)) 
+      (intP_intM_a_2 : (memory intP Int32.t)) : Int32.t
+       requires { true }
+       ensures {
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 24#
+          "expl:Ensures clause"
+          (Int32.(<=) (#"max_in_array_even.jc" 43 31 43# "expl:Integer cast"
+          (Int32.of_int (0))) result))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 17 31#
+          "expl:Ensures clause" (Int32.(<) result size_2))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 15 12 28#
+          "expl:Ensures clause"
+          ((=) (ComputerDivision.mod (Int32.to_int result) (2)) (0)))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 16 12 85#
+         "expl:Ensures clause"
+         (forall i_1 : int.
+          ((((<=) (0) i_1) /\
+           (((<) i_1 (Int32.to_int size_2)) /\
+           ((=) (ComputerDivision.mod i_1 (2)) (0)))) ->
+           (Int32.(<=) (select intP_intM_a_2 (shift a i_1))
+           (select intP_intM_a_2 (shift a (Int32.to_int result))))))))))))))
+         }
   
 end
 
-module Function_sum_0_safe
+module Function_max_in_array_even_safe
 
+  use import Root_intP 
+  
+  use import ref.Ref 
+  
+  use import core.Jessie_tag_table_type 
+  
+  use import core.Jessie_pointer 
+  
+  use import core.Jessie_memory 
+  
+  use import core.Jessie_alloc_table 
+  
   use enum.Int32 
   
   use import int.Int 
   
-  use import Axiomatic_Sum 
+  use int.ComputerDivision 
   
   use why3.Bool.Bool 
   
-  val sum_0
-  (a_0 : Int32.t) 
-   (b_0 : Int32.t) : Int32.t
-    requires {
-      ("expl:Internal"
-      (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 20 13 18#
-       "expl:Requires clause" (Int32.(<) a_0 b_0))
-      /\
-      (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 13 19#
-       "expl:Requires clause"
-       (Int32.(>=) a_0 (#"sum.jc" 57 39 51# "expl:Integer cast" (Int32.of_int
-       (0)))))
-      /\
-      (#"sum.jc" 56 12 221# "expl:Requires clause"
-      ((#"/home/work/workspace/education/acsl-exam/./sum.c" 21 23 29#
-       "expl:Requires clause"
-       (Int32.(>=) b_0 (#"sum.jc" 58 40 52# "expl:Integer cast" (Int32.of_int
-       (0)))))
-      /\
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 22 13 30#
-      "expl:Requires clause"
-      ((<) (sum (Int32.to_int a_0) (Int32.to_int b_0)) (32767)))))))))) }
-    ensures {
-      (#"/home/work/workspace/education/acsl-exam/./sum.c" 24 12 32#
-      "expl:Ensures clause"
-      ((=) (Int32.to_int result) (sum (Int32.to_int a_0) (Int32.to_int b_0))))
-      }
+  val max_in_array_even
+  (a : (pointer intP)) 
+   (size_2 : Int32.t) 
+    (intP_a_2_alloc_table : (alloc_table intP)) 
+     (intP_a_2_tag_table : (tag_table intP)) 
+      (intP_intM_a_2 : (memory intP Int32.t)) : Int32.t
+       requires {
+         ("expl:Internal"
+         (#"max_in_array_even.jc" 30 12 774# "expl:Requires clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 11 13 21#
+          "expl:Requires clause"
+          (Int32.(>) size_2 (#"max_in_array_even.jc" 30 31 43#
+          "expl:Integer cast" (Int32.of_int (0)))))
+         /\
+         (#"max_in_array_even.jc" 30 12 774# "expl:Requires clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 12 13 35#
+          "expl:Requires clause"
+          ((<=) (Int32.to_int size_2) (Int.(-) (2147483647) (1))))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 13 13 38#
+         "expl:Requires clause"
+         (if ((<=) (0) (Int.(-) (Int32.to_int size_2) (1))) then
+          (((<=) (offset_min intP_a_2_alloc_table a) (0)) /\
+          (((>=) (offset_max intP_a_2_alloc_table a)
+           (Int.(-) (Int32.to_int size_2) (1)))
+          /\
+          (forall __framac_tmp1 : int.
+           ((((<=) (0) __framac_tmp1) /\
+            ((<=) __framac_tmp1 (Int.(-) (Int32.to_int size_2) (1)))) ->
+            ((=) true true))))) else ((=) true true)))))))) }
+       ensures {
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 24#
+          "expl:Ensures clause"
+          (Int32.(<=) (#"max_in_array_even.jc" 43 31 43# "expl:Integer cast"
+          (Int32.of_int (0))) result))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 17 31#
+          "expl:Ensures clause" (Int32.(<) result size_2))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 14 12 31#
+         "expl:Ensures clause"
+         ((#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 15 12 28#
+          "expl:Ensures clause"
+          ((=) (ComputerDivision.mod (Int32.to_int result) (2)) (0)))
+         /\
+         (#"/home/work/workspace/education/acsl-exam/./max_in_array_even.c" 16 12 85#
+         "expl:Ensures clause"
+         (forall i_1 : int.
+          ((((<=) (0) i_1) /\
+           (((<) i_1 (Int32.to_int size_2)) /\
+           ((=) (ComputerDivision.mod i_1 (2)) (0)))) ->
+           (Int32.(<=) (select intP_intM_a_2 (shift a i_1))
+           (select intP_intM_a_2 (shift a (Int32.to_int result))))))))))))))
+         }
   
 end

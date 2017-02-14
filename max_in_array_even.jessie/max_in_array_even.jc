@@ -1,0 +1,101 @@
+
+axiomatic Padding {
+
+  logic type padding
+  
+}
+
+tag voidP = {
+}
+
+type voidP = [voidP]
+
+tag charP = voidP with {
+  int8 charM: 8;
+}
+
+tag unsigned_charP = {
+  uint8 unsigned_charM: 8;
+}
+
+type unsigned_charP = [unsigned_charP]
+
+tag intP = {
+  int32 intM: 32;
+}
+
+type intP = [intP]
+
+int32 max_in_array_even(intP[..] a, int32 size_2)
+  requires ((_C_36 : (size_2 > (0 :> int32))) &&
+             ((_C_37 : ((size_2 :> integer) <= (2147483647 - 1))) &&
+               (_C_38 : \at((if (\at(0,Here) <=
+                                  \at(((size_2 :> integer) - 1),Here)) then 
+                            (((\offset_min(\at(a,Here)) <= \at(0,Here)) &&
+                               (\offset_max(\at(a,Here)) >=
+                                 \at(((size_2 :> integer) - 1),Here))) &&
+                              (\forall integer __framac_tmp1;
+                                (((\at(0,Here) <= __framac_tmp1) &&
+                                   (__framac_tmp1 <=
+                                     \at(((size_2 :> integer) - 1),Here))) ==>
+                                  true))) else true),Here))));
+behavior default:
+  ensures (_C_29 : (((_C_31 : ((0 :> int32) <= \result)) &&
+                      (_C_32 : (\result < \at(size_2,Old)))) &&
+                     ((_C_34 : (((\result :> integer) % 2) == 0)) &&
+                       (_C_35 : (\forall integer i_1;
+                                  ((((0 <= i_1) &&
+                                      (i_1 < (\at(size_2,Old) :> integer))) &&
+                                     ((i_1 % 2) == 0)) ==>
+                                    ((\at(a,Old) + i_1).intM <=
+                                      (\at(a,Old) + (\result :> integer)).intM)))))));
+{  
+   (var int32 j);
+   
+   (var int32 max);
+   
+   (var int32 i);
+   
+   {  (_C_1 : (j = (0 :> int32)));
+      (_C_4 : (max = (_C_3 : (_C_2 : (a + (0 :> int32))).intM)));
+      
+      {  (_C_5 : (i = (2 :> int32)));
+         
+         loop 
+         behavior default:
+           invariant (_C_15 : ((_C_16 : ((2 :> int32) <= i)) &&
+                                (_C_17 : ((i :> integer) <=
+                                           ((size_2 :> integer) + 1)))));
+         behavior default:
+           invariant (_C_12 : ((_C_13 : ((0 :> int32) <= j)) &&
+                                (_C_14 : (j < i))));
+         behavior default:
+           invariant (_C_9 : ((_C_10 : (((i :> integer) % 2) == 0)) &&
+                               (_C_11 : (((j :> integer) % 2) == 0))));
+         behavior default:
+           invariant (_C_8 : (max == (a + (j :> integer)).intM));
+         behavior default:
+           invariant (_C_7 : (\forall integer k_1;
+                               ((((0 <= k_1) && (k_1 < (i :> integer))) &&
+                                  ((k_1 % 2) == 0)) ==>
+                                 ((a + k_1).intM <= max))));
+         variant (_C_6 : ((size_2 :> integer) - (i :> integer)));
+         while (true)
+         {  
+            {  (if (_C_18 : (i < size_2)) then () else 
+               (goto while_0_break));
+               
+               {  (if (_C_25 : (max < (_C_24 : (_C_23 : (a + i)).intM))) then 
+                  {  (_C_19 : (j = i));
+                     (_C_22 : (max = (_C_21 : (_C_20 : (a + i)).intM)))
+                  } else ())
+               };
+               (_C_28 : (i = (_C_27 : ((_C_26 : (i + (2 :> int32))) :> int32))))
+            }
+         };
+         (while_0_break : ())
+      };
+      
+      (return j)
+   }
+}
